@@ -12,7 +12,7 @@ using RossiEventos;
 namespace RossiEventos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221204000331_Inicial")]
+    [Migration("20221204131740_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />
@@ -43,6 +43,11 @@ namespace RossiEventos.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("varchar");
 
+                    b.Property<string>("Contraseña")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar");
+
                     b.Property<string>("Cuit")
                         .IsRequired()
                         .HasMaxLength(13)
@@ -57,6 +62,9 @@ namespace RossiEventos.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar");
+
+                    b.Property<DateTime?>("FechaBaja")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("FechaInsercion")
                         .HasColumnType("datetime2");
@@ -75,6 +83,9 @@ namespace RossiEventos.Migrations
                         .HasColumnType("varchar");
 
                     b.Property<int>("NroDni")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Telefono")
                         .HasColumnType("int");
 
                     b.Property<int>("Tipo")

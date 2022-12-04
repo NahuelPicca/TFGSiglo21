@@ -1,10 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.VisualBasic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RossiEventos.Entidades
 {
     public class Usuario : Base, IPersona
     {
+        [Required]
+        public TipoUsuario Tipo { get; set; }
+
         [Required, StringLength(100), Column(TypeName ="varchar")]
         public string Nombre { get; set; }
 
@@ -22,7 +27,10 @@ namespace RossiEventos.Entidades
 
         [Required, StringLength(100), Column(TypeName = "varchar")]
         public string Direccion { get; set; }
-        
+
+        [Required]
+        public int Telefono { get; set; }
+
         [Required, StringLength(100), Column(TypeName = "varchar")]
         public string Localidad { get; set; }
 
@@ -32,7 +40,10 @@ namespace RossiEventos.Entidades
         [Required, StringLength(5), Column(TypeName = "varchar")]
         public string CodigoPostal { get; set; }
 
-        [Required]
-        public TipoUsuario Tipo { get; set; }
+        [Required, StringLength(20), Column(TypeName = "varchar")]
+        [PasswordPropertyText]
+        public string Contraseña { get; set; }
+
+        public DateTime? FechaBaja { get; set; }
     }
 }

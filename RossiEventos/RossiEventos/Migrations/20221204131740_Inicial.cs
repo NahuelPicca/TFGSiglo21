@@ -17,16 +17,19 @@ namespace RossiEventos.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Tipo = table.Column<int>(type: "int", nullable: false),
                     Nombre = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     Apellido = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     TipoDni = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false),
                     NroDni = table.Column<int>(type: "int", nullable: false),
                     Cuit = table.Column<string>(type: "varchar(13)", maxLength: 13, nullable: false),
                     Direccion = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
+                    Telefono = table.Column<int>(type: "int", nullable: false),
                     Localidad = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     CodigoPostal = table.Column<string>(type: "varchar(5)", maxLength: 5, nullable: false),
-                    Tipo = table.Column<int>(type: "int", nullable: false),
+                    Contraseña = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false),
+                    FechaBaja = table.Column<DateTime>(type: "datetime2", nullable: true),
                     FechaInsercion = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FechaModificacion = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UsuarioInserto = table.Column<string>(type: "varchar(100)", nullable: false)
