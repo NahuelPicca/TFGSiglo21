@@ -19,6 +19,7 @@ namespace RossiEventos
 
 
             //Creación de índices vía fluent api
+            //Usuario
             modelBuilder.Entity<Usuario>()
                         .HasIndex(u => u.NroDni)
                         .IsUnique();
@@ -26,8 +27,18 @@ namespace RossiEventos
             modelBuilder.Entity<Usuario>()
                         .HasIndex(u => u.Cuit)
                         .IsUnique();
+
+            //Transportista
+            modelBuilder.Entity<Transportista>()
+                        .HasIndex(u => u.NroDni)
+                        .IsUnique();
+
+            modelBuilder.Entity<Transportista>()
+                        .HasIndex(u => u.Cuit)
+                        .IsUnique();
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Transportista> Transportistas { get; set; }
     }
 }

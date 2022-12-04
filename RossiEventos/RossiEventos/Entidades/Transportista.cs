@@ -1,25 +1,23 @@
-﻿using Microsoft.VisualBasic;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RossiEventos.Interfaces;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace RossiEventos.Entidades
 {
-    public class Usuario : Base, IPersona
+    public class Transportista : Base, IPersona
     {
-        [Required]
-        public TipoUsuario Tipo { get; set; }
-
-        [Required, StringLength(100), Column(TypeName ="varchar")]
+        [Unicode(false)]
+        [Required, StringLength(100)]//, Column(TypeName = "varchar")]
         public string Nombre { get; set; }
 
         [Required, StringLength(100), Column(TypeName = "varchar")]
         public string Apellido { get; set; }
 
-       [Required, StringLength(10), Column(TypeName = "varchar")]
+        [Required, StringLength(10), Column(TypeName = "varchar")]
         public string TipoDni { get; set; }
-        
+
         [Required]
         public int NroDni { get; set; }
 
@@ -41,10 +39,12 @@ namespace RossiEventos.Entidades
         [Required, StringLength(5), Column(TypeName = "varchar")]
         public string CodigoPostal { get; set; }
 
-        [Required, StringLength(20), Column(TypeName = "varchar")]
-        [PasswordPropertyText]
-        public string Contraseña { get; set; }
+        [Required]
+        public DateTime FechaVencLicencia { get; set; }
 
-        public DateTime? FechaBaja { get; set; }
+        [Required, StringLength(50), Column(TypeName = "varchar")]
+        public string Licencia { get; set; }
+
+        public bool Habilitado { get; set; }
     }
 }

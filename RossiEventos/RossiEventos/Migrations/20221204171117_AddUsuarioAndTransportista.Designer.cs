@@ -12,8 +12,8 @@ using RossiEventos;
 namespace RossiEventos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221204131740_Inicial")]
-    partial class Inicial
+    [Migration("20221204171117_AddUsuarioAndTransportista")]
+    partial class AddUsuarioAndTransportista
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,93 @@ namespace RossiEventos.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("RossiEventos.Entidades.Transportista", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("CodigoPostal")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("Cuit")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.Property<DateTime>("FechaInsercion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaModificacion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaVencLicencia")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Habilitado")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Licencia")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("Localidad")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<int>("NroDni")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Telefono")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TipoDni")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("UsuarioInserto")
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Cuit")
+                        .IsUnique();
+
+                    b.HasIndex("NroDni")
+                        .IsUnique();
+
+                    b.ToTable("Transportistas");
+                });
 
             modelBuilder.Entity("RossiEventos.Entidades.Usuario", b =>
                 {
