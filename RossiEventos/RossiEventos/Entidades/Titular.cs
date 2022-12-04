@@ -37,5 +37,7 @@ namespace RossiEventos.Entidades
         [Required, StringLength(5), Column(TypeName = "varchar")]
         public string CodigoPostal { get; set; }
 
+        public ICollection<Vehiculo> Vehiculos { get; set;} = new HashSet<Vehiculo>();
+
     }
 }

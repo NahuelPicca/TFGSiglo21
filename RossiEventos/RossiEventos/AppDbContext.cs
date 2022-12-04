@@ -45,6 +45,15 @@ namespace RossiEventos
             modelBuilder.Entity<Titular>()
                         .HasIndex(u => u.Cuit)
                         .IsUnique();
+
+            //Vehiculos
+            modelBuilder.Entity<Vehiculo>()
+                        .HasIndex(u => u.Patente)
+                        .IsUnique();
+
+            modelBuilder.Entity<Vehiculo>()
+                        .HasIndex(u => u.NroPoliza)
+                        .IsUnique();
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
