@@ -6,34 +6,15 @@ namespace RossiEventos.Interfaces
 {
     public interface IPersona
     {
-        //[Required, StringLength(100), Column(TypeName = "varchar")]
-        public string Nombre { get; set; }
-
-        //[Required, StringLength(100), Column(TypeName = "varchar")]
-        public string Apellido { get; set; }
-
-        //[Required, StringLength(10), Column(TypeName = "varchar")]
-        public string TipoDni { get; set; }
-
-        //[Required]
-        public int NroDni { get; set; }
-
-        //[Required, StringLength(13), Column(TypeName = "varchar")]
-        public string Cuit { get; set; }
-
-        //[Required, StringLength(100), Column(TypeName = "varchar")]
-        public string Direccion { get; set; }
-        
-        //[Required]
-        public int Telefono { get; set; }
-
-        //[Required, StringLength(100), Column(TypeName = "varchar")]
-        public string Localidad { get; set; }
-
-        //[Required, StringLength(100), Column(TypeName = "varchar")]
-        public string Email { get; set; }
-
-        //[Required, StringLength(5), Column(TypeName = "varchar")]
-        public string CodigoPostal { get; set; }
+        string Nombre { get; set; }
+        string Apellido { get; set; }
+        string TipoDni { get; set; }
+        int NroDni { get; set; }
+        string Cuit { get; set; }
+        string Direccion { get; set; }
+        int Telefono { get; set; }
+        string Localidad { get; set; }
+        string Email { get; set; }
+        string CodigoPostal { get; set; }
     }
 }

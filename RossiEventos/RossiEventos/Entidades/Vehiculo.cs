@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using RossiEventos.Interfaces;
 
 namespace RossiEventos.Entidades
 {
-    public class Vehiculo : Base
+    public class Vehiculo : Base, IVehiculo
     {
         [Required, StringLength(7), Column(TypeName = "varchar")]
         public string Patente { get; set; }
