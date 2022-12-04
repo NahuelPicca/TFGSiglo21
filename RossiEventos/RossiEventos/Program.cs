@@ -1,6 +1,13 @@
+using Microsoft.EntityFrameworkCore;
+using RossiEventos;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var provider = builder.Services.BuildServiceProvider();
+var configuration = provider.GetRequiredService<IConfiguration>();
+builder.Services.AddDbContext<AppDbContext>(opt =>
+            opt.UseSqlServer(configuration.GetConnectionString("RossiEventoDb")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

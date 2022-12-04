@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RossiEventos.Entidades
 {
@@ -8,6 +9,8 @@ namespace RossiEventos.Entidades
         public int Id { get; set; }
         public DateTime FechaInsercion { get; set; } = DateTime.Now;
         public DateTime FechaModificacion { get; set; } = new DateTime(1990, 01, 01);
-        public string NombreUsuario { get; set; } = "";
+        
+        [Column(TypeName ="varchar(100)")]
+        public string UsuarioInserto { get; set; } = "";
     }
 }

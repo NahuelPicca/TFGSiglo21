@@ -6,6 +6,6 @@
         public DateTime FechaInsercion { get; set; }
 
         public DateTime FechaModificacion { get; set; }
-        public string NombreUsuario { get; set; }//Nombre del usuario
+        public string UsuarioInserto { get; set; }//Nombre del usuario
     }
 }
