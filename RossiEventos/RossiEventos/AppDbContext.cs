@@ -36,9 +36,20 @@ namespace RossiEventos
             modelBuilder.Entity<Transportista>()
                         .HasIndex(u => u.Cuit)
                         .IsUnique();
+
+            //Titular
+            modelBuilder.Entity<Titular>()
+                        .HasIndex(u => u.NroDni)
+                        .IsUnique();
+
+            modelBuilder.Entity<Titular>()
+                        .HasIndex(u => u.Cuit)
+                        .IsUnique();
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Transportista> Transportistas { get; set; }
+        public DbSet<Titular> Titulares { get; set; }
+        
     }
 }
