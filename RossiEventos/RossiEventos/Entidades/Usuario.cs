@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualBasic;
+using RossiEventos.Interfaces;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
