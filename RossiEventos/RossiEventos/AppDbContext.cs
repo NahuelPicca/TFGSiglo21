@@ -54,8 +54,13 @@ namespace RossiEventos
             modelBuilder.Entity<Vehiculo>()
                         .HasIndex(u => u.NroPoliza)
                         .IsUnique();
+            //Calidad
+            modelBuilder.Entity<Calidad>()
+                       .HasIndex(u => u.Codigo)
+                       .IsUnique();
             //FIN Creación de Índices
 
+            //INICIO ForeingKeys
             modelBuilder.Entity<AsignacionVehicTransp>()
                         .HasOne(pt => pt.Vehiculo)
                         .WithMany(p => p.AsignacionVehicTrans)
@@ -67,11 +72,13 @@ namespace RossiEventos
                         .WithMany(t => t.AsignacionVehicTrans)
                         .HasForeignKey(pt => pt.TransportitaId)
                         .OnDelete(DeleteBehavior.Restrict);
+            //FIN ForeingKeys
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Transportista> Transportistas { get; set; }
         public DbSet<Titular> Titulares { get; set; }
-        
+        public DbSet<Calidad> Calidad { get; set; }
+
     }
 }
