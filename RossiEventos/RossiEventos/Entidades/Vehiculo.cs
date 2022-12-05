@@ -25,5 +25,8 @@ namespace RossiEventos.Entidades
 
         [Required]
         public bool Habilitado { get; set; }
+
+        public ICollection<AsignacionVehicTransp> AsignacionVehicTrans { get; set; }
+            = new HashSet<AsignacionVehicTransp>();
     }
 }

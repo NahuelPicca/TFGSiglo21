@@ -29,8 +29,8 @@ namespace RossiEventos.Entidades
         [Required, StringLength(100), Column(TypeName = "varchar")]
         public string Direccion { get; set; }
 
-        [Required]
-        public int Telefono { get; set; }
+        [Required, StringLength(25), Column(TypeName = "varchar")]
+        public string Telefono { get; set; }
 
         [Required, StringLength(100), Column(TypeName = "varchar")]
         public string Localidad { get; set; }

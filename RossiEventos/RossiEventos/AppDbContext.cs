@@ -17,7 +17,7 @@ namespace RossiEventos
             // If you keep this convention then the generated tables will have pluralized names.
             //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-
+            //INICIO Creación de Índices
             //Creación de índices vía fluent api
             //Usuario
             modelBuilder.Entity<Usuario>()
@@ -54,6 +54,19 @@ namespace RossiEventos
             modelBuilder.Entity<Vehiculo>()
                         .HasIndex(u => u.NroPoliza)
                         .IsUnique();
+            //FIN Creación de Índices
+
+            modelBuilder.Entity<AsignacionVehicTransp>()
+                        .HasOne(pt => pt.Vehiculo)
+                        .WithMany(p => p.AsignacionVehicTrans)
+                        .HasForeignKey(pt => pt.VehiculoId)
+                        .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<AsignacionVehicTransp>()
+                        .HasOne(pt => pt.Transportista)
+                        .WithMany(t => t.AsignacionVehicTrans)
+                        .HasForeignKey(pt => pt.TransportitaId)
+                        .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<Usuario> Usuarios { get; set; }

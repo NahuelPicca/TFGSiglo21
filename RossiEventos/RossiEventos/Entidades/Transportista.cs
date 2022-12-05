@@ -27,8 +27,8 @@ namespace RossiEventos.Entidades
         [Required, StringLength(100), Column(TypeName = "varchar")]
         public string Direccion { get; set; }
 
-        [Required]
-        public int Telefono { get; set; }
+        [Required, StringLength(25), Column(TypeName = "varchar")]
+        public string Telefono { get; set; }
 
         [Required, StringLength(100), Column(TypeName = "varchar")]
         public string Localidad { get; set; }
@@ -46,5 +46,9 @@ namespace RossiEventos.Entidades
         public string Licencia { get; set; }
 
         public bool Habilitado { get; set; }
+
+        public ICollection<AsignacionVehicTransp> AsignacionVehicTrans { get; set; } 
+            = new HashSet<AsignacionVehicTransp>();
+
     }
 }
