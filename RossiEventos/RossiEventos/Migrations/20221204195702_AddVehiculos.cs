@@ -36,7 +36,7 @@ namespace RossiEventos.Migrations
                         column: x => x.TitularId,
                         principalTable: "Titulares",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

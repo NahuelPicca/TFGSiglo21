@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RossiEventos;
 
@@ -11,9 +12,11 @@ using RossiEventos;
 namespace RossiEventos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221206013529_AddTipoProducto")]
+    partial class AddTipoProducto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,39 +99,6 @@ namespace RossiEventos.Migrations
                     b.ToTable("Calidad");
                 });
 
-            modelBuilder.Entity("RossiEventos.Entidades.Categoria", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("varchar");
-
-                    b.Property<DateTime>("FechaInsercion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("FechaModificacion")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar");
-
-                    b.Property<string>("UsuarioInserto")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Categoria");
-                });
-
             modelBuilder.Entity("RossiEventos.Entidades.Producto", b =>
                 {
                     b.Property<int>("Id")
@@ -194,9 +164,6 @@ namespace RossiEventos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoriaId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasMaxLength(1000)
@@ -218,8 +185,6 @@ namespace RossiEventos.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CategoriaId");
 
                     b.ToTable("TipoProducto");
                 });
@@ -574,17 +539,6 @@ namespace RossiEventos.Migrations
                     b.Navigation("Calidad");
 
                     b.Navigation("Tipo");
-                });
-
-            modelBuilder.Entity("RossiEventos.Entidades.TipoProducto", b =>
-                {
-                    b.HasOne("RossiEventos.Entidades.Categoria", "Categoria")
-                        .WithMany()
-                        .HasForeignKey("CategoriaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Categoria");
                 });
 
             modelBuilder.Entity("RossiEventos.Entidades.Vehiculo", b =>
