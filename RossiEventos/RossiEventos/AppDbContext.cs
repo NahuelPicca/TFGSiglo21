@@ -58,9 +58,15 @@ namespace RossiEventos
             modelBuilder.Entity<Calidad>()
                        .HasIndex(u => u.Codigo)
                        .IsUnique();
+            //Producto
+            modelBuilder.Entity<Producto>()
+                       .HasIndex(u => u.Codigo)
+                       .IsUnique();
+
             //FIN Creación de Índices
 
             //INICIO ForeingKeys
+            //Estos son los casos de muchos a muchos.
             modelBuilder.Entity<AsignacionVehicTransp>()
                         .HasOne(pt => pt.Vehiculo)
                         .WithMany(p => p.AsignacionVehicTrans)
@@ -79,6 +85,7 @@ namespace RossiEventos
         public DbSet<Transportista> Transportistas { get; set; }
         public DbSet<Titular> Titulares { get; set; }
         public DbSet<Calidad> Calidad { get; set; }
+        public DbSet<Producto> Producto { get; set; }
 
     }
 }
