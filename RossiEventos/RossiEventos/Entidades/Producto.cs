@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RossiEventos.Entidades
 {
-    public class Producto : Base
+    public class Producto : Base, IProducto
     {
         [Required, StringLength(20), Column(TypeName = "varchar")]
         public string Codigo { get; set; }

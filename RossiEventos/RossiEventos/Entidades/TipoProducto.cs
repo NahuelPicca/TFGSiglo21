@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RossiEventos.Entidades
 {
-    public class TipoProducto : Base
+    public class TipoProducto : Base, ITipoProducto
     {
         [Required, StringLength(100), Column(TypeName = "varchar")]
         public string Nombre { get; set; }

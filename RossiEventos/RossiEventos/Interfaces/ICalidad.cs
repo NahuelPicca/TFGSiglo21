@@ -1,4 +1,4 @@
-﻿namespace RossiEventos.Entidades
+﻿namespace RossiEventos.Interfaces
 {
     public interface ICalidad
     {
