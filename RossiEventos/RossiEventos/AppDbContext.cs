@@ -45,6 +45,11 @@ namespace RossiEventos
                        .HasIndex(u => u.Codigo)
                        .IsUnique();
 
+            //Reserva
+            modelBuilder.Entity<Reserva>()
+                       .HasIndex(u => new { u.NroReserva, u.UsuarioId})
+                       .IsUnique();
+
             //FIN Creación de Índices
 
             //INICIO ForeingKeys
@@ -69,5 +74,7 @@ namespace RossiEventos
         public DbSet<Transportista> Transportista { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Titular> Titular { get; set; }
+
+        public DbSet<Reserva> Reservas { get; set; }
     }
 }

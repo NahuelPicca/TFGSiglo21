@@ -6,7 +6,7 @@ namespace RossiEventos.Entidades
 {
     public class Base : IBase
     {
-        //[Key]
+        [Key]
         public int Id { get; set; }
         public DateTime FechaInsercion { get; set; } = DateTime.Now;
         public DateTime FechaModificacion { get; set; } = new DateTime(1990, 01, 01);
