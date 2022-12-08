@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RossiEventos;
 
@@ -11,9 +12,11 @@ using RossiEventos;
 namespace RossiEventos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221208041947_DeleteUsuarioYCreaIndicesPersona")]
+    partial class DeleteUsuarioYCreaIndicesPersona
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -529,7 +532,7 @@ namespace RossiEventos.Migrations
                     b.ToTable("Vehiculo");
                 });
 
-            modelBuilder.Entity("Usuario", b =>
+            modelBuilder.Entity("Usuario2", b =>
                 {
                     b.HasBaseType("RossiEventos.Entidades.Persona");
 
@@ -607,11 +610,11 @@ namespace RossiEventos.Migrations
                     b.Navigation("Titular");
                 });
 
-            modelBuilder.Entity("Usuario", b =>
+            modelBuilder.Entity("Usuario2", b =>
                 {
                     b.HasOne("RossiEventos.Entidades.Persona", null)
                         .WithOne()
-                        .HasForeignKey("Usuario", "Id")
+                        .HasForeignKey("Usuario2", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
