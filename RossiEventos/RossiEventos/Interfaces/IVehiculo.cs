@@ -10,6 +10,6 @@ namespace RossiEventos.Interfaces
         string Modelo { get; set; }
         string NroPoliza { get; set; }
         string Patente { get; set; }
-       // Titular Titular { get; set; }
+        Titular Titular { get; set; }
     }
 }
