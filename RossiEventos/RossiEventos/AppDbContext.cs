@@ -38,13 +38,13 @@ namespace RossiEventos
             //            .IsUnique();
 
             //Titular
-            modelBuilder.Entity<Titular>()
-                        .HasIndex(u => u.NroDni)
-                        .IsUnique();
+            //modelBuilder.Entity<Titular>()
+            //            .HasIndex(u => u.NroDni)
+            //            .IsUnique();
 
-            modelBuilder.Entity<Titular>()
-                        .HasIndex(u => u.Cuit)
-                        .IsUnique();
+            //modelBuilder.Entity<Titular>()
+            //            .HasIndex(u => u.Cuit)
+            //            .IsUnique();
 
             //Vehiculos
             modelBuilder.Entity<Vehiculo>()
@@ -73,11 +73,11 @@ namespace RossiEventos
                         .HasForeignKey(pt => pt.VehiculoId)
                         .OnDelete(DeleteBehavior.Restrict);
 
-            //modelBuilder.Entity<AsignacionVehicTransp>()
-            //            .HasOne(pt => pt.Transportista)
-            //            .WithMany(t => t.AsignacionVehicTrans)
-            //            .HasForeignKey(pt => pt.TransportitaId)
-            //            .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<AsignacionVehicTransp>()
+                        .HasOne(pt => pt.Transportista)
+                        .WithMany(t => t.AsignacionVehicTrans)
+                        .HasForeignKey(pt => pt.TransportitaId)
+                        .OnDelete(DeleteBehavior.Restrict);
             //FIN ForeingKeys
         }
 
