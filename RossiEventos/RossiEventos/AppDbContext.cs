@@ -98,5 +98,7 @@ namespace RossiEventos
         public DbSet<Reserva> Reservas { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ComprobanteEntrega> ComprobanteEntrega { get; set; }
+        public DbSet<SeguimientoPedido> SeguimientoPedido { get; set; }
+        
     }
 }
