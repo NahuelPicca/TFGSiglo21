@@ -6,8 +6,8 @@ namespace RossiEventos.Entidades
     {
         public int TransportitaId { get; set; }
 
-        [ForeignKey(nameof(TransportitaId))]
-        public virtual Transportista Transportista { get; set; }
+        //[ForeignKey(nameof(TransportitaId))]
+        //public virtual Transportista Transportista { get; set; }
 
         public int VehiculoId { get; set; }
 

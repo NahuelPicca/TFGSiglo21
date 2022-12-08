@@ -29,13 +29,13 @@ namespace RossiEventos
                         .IsUnique();
 
             //Transportista
-            modelBuilder.Entity<Transportista>()
-                        .HasIndex(u => u.NroDni)
-                        .IsUnique();
+            //modelBuilder.Entity<Transportista2>()
+            //            .HasIndex(u => u.NroDni)
+            //            .IsUnique();
 
-            modelBuilder.Entity<Transportista>()
-                        .HasIndex(u => u.Cuit)
-                        .IsUnique();
+            //modelBuilder.Entity<Transportista2>()
+            //            .HasIndex(u => u.Cuit)
+            //            .IsUnique();
 
             //Titular
             modelBuilder.Entity<Titular>()
@@ -73,11 +73,11 @@ namespace RossiEventos
                         .HasForeignKey(pt => pt.VehiculoId)
                         .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<AsignacionVehicTransp>()
-                        .HasOne(pt => pt.Transportista)
-                        .WithMany(t => t.AsignacionVehicTrans)
-                        .HasForeignKey(pt => pt.TransportitaId)
-                        .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<AsignacionVehicTransp>()
+            //            .HasOne(pt => pt.Transportista)
+            //            .WithMany(t => t.AsignacionVehicTrans)
+            //            .HasForeignKey(pt => pt.TransportitaId)
+            //            .OnDelete(DeleteBehavior.Restrict);
             //FIN ForeingKeys
         }
 
@@ -86,7 +86,7 @@ namespace RossiEventos
         public DbSet<Producto> Producto { get; set; }
         public DbSet<Transportista2> Transportista2 { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
-        public DbSet<Transportista> Transportistas { get; set; }
+       // public DbSet<Transportista> Transportistas { get; set; }
         public DbSet<Titular> Titulares { get; set; }
     }
 }
