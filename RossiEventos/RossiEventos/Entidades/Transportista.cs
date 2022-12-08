@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace RossiEventos.Entidades
 {
     [Table("Transportista")]
-    public class Transportista2 : Persona
+    public class Transportista : Persona
     {
         [Required]
         public DateTime FechaVencLicencia { get; set; }
@@ -15,7 +15,7 @@ namespace RossiEventos.Entidades
 
         public bool Habilitado { get; set; }
 
-        //public ICollection<AsignacionVehicTransp> AsignacionVehicTrans { get; set; }
-        //    = new HashSet<AsignacionVehicTransp>();
+        public ICollection<AsignacionVehicTransp> AsignacionVehicTrans { get; set; }
+            = new HashSet<AsignacionVehicTransp>();
     }
 }
