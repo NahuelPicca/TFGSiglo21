@@ -84,7 +84,7 @@ namespace RossiEventos
         public DbSet<Calidad> Calidad { get; set; }
         public DbSet<Persona> Persona { get; set; }
         public DbSet<Producto> Producto { get; set; }
-       // public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Transportista2> Transportista2 { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Transportista> Transportistas { get; set; }
         public DbSet<Titular> Titulares { get; set; }
