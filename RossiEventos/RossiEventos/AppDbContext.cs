@@ -2,6 +2,8 @@
 //using System.Data.Entity;
 //using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+
 namespace RossiEventos
 {
     public class AppDbContext : DbContext
@@ -66,6 +68,17 @@ namespace RossiEventos
                         .HasForeignKey(pt => pt.TransportitaId)
                         .OnDelete(DeleteBehavior.Restrict);
             //FIN ForeingKeys
+
+            // Detemina la cantidad de decimales de los campos
+            // de dicho objeto. 
+            modelBuilder.Entity<RenglonDeReserva>()
+                       .Property(o => o.CostoUnitario)
+                       .HasPrecision(15, 2);
+
+            modelBuilder.Entity<RenglonDeReserva>()
+                        .Property(o => o.CostoTotal)
+                        .HasPrecision(15, 2);
+
         }
 
         public DbSet<Calidad> Calidad { get; set; }
