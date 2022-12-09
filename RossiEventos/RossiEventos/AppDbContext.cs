@@ -49,7 +49,7 @@ namespace RossiEventos
 
             //Reserva
             modelBuilder.Entity<Reserva>()
-                       .HasIndex(u => new { u.NroReserva, u.UsuarioId})
+                       .HasIndex(u => new { u.NroReserva, u.UsuarioId })
                        .IsUnique();
 
             modelBuilder.Entity<Pedido>()
@@ -57,13 +57,18 @@ namespace RossiEventos
                       .IsUnique();
 
             modelBuilder.Entity<Pedido>()
-                      .HasIndex(p=>p.Factura)
+                      .HasIndex(p => p.Factura)
                       .IsUnique();
 
             //Encabezado Mov Stk.
             modelBuilder.Entity<EncabezadoMovStk>()
                         .HasIndex(u => new { u.TipoMovimiento, u.NroComprobante })
                         .IsUnique();
+
+            //Deposito
+            modelBuilder.Entity<Deposito>()
+                       .HasIndex(d => d.Codigo)
+                       .IsUnique();
 
             //FIN Creación de Índices
 
@@ -105,6 +110,8 @@ namespace RossiEventos
         public DbSet<ComprobanteEntrega> ComprobanteEntrega { get; set; }
         public DbSet<SeguimientoPedido> SeguimientoPedido { get; set; }
         public DbSet<EncabezadoMovStk> EncabezadoMovStk { get; set; }
+
+        public DbSet<Deposito> Deposito { get; set; }
 
     }
 }
