@@ -60,6 +60,11 @@ namespace RossiEventos
                       .HasIndex(p=>p.Factura)
                       .IsUnique();
 
+            //Encabezado Mov Stk.
+            modelBuilder.Entity<EncabezadoMovStk>()
+                        .HasIndex(u => new { u.TipoMovimiento, u.NroComprobante })
+                        .IsUnique();
+
             //FIN Creación de Índices
 
             //INICIO ForeingKeys
@@ -99,6 +104,7 @@ namespace RossiEventos
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<ComprobanteEntrega> ComprobanteEntrega { get; set; }
         public DbSet<SeguimientoPedido> SeguimientoPedido { get; set; }
-        
+        public DbSet<EncabezadoMovStk> EncabezadoMovStk { get; set; }
+
     }
 }
