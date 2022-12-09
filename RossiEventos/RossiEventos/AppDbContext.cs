@@ -70,6 +70,11 @@ namespace RossiEventos
                        .HasIndex(d => d.Codigo)
                        .IsUnique();
 
+            //Deposito
+            modelBuilder.Entity<Ubicacion>()
+                       .HasIndex(d => d.Codigo)
+                       .IsUnique();
+
             //FIN Creación de Índices
 
             //INICIO ForeingKeys
@@ -110,8 +115,7 @@ namespace RossiEventos
         public DbSet<ComprobanteEntrega> ComprobanteEntrega { get; set; }
         public DbSet<SeguimientoPedido> SeguimientoPedido { get; set; }
         public DbSet<EncabezadoMovStk> EncabezadoMovStk { get; set; }
-
         public DbSet<Deposito> Deposito { get; set; }
-
+        public DbSet<Ubicacion> Ubicacion { get; set; }
     }
 }
