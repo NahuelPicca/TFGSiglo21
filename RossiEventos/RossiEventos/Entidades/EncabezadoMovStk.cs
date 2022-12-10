@@ -20,5 +20,7 @@ namespace RossiEventos.Entidades
 
         [Required, StringLength(200), Column(TypeName = "varchar")]
         public string ComprobanteRelacionado { get; set; }
+
+        ICollection<RenglonMovStk> RenglonMovStks { get; set; } = new HashSet<RenglonMovStk>();
     }
 }
