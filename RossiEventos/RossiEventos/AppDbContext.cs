@@ -117,5 +117,6 @@ namespace RossiEventos
         public DbSet<EncabezadoMovStk> EncabezadoMovStk { get; set; }
         public DbSet<Deposito> Deposito { get; set; }
         public DbSet<Ubicacion> Ubicacion { get; set; }
+        public DbSet<SaldoUbicacion> SaldoUbicacion { get; set; }
     }
 }
