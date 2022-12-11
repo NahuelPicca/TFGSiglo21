@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RossiEventos.Entidades
 {
-    public class SeguimientoPedido : Base
+    public class SeguimientoPedido : Base, ISeguimientoPedido
     {
         [Required]
         public int PedidoId { get; set; }

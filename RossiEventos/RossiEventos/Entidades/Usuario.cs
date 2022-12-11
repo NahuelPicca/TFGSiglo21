@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
 [Table("Usuario")]
-public class Usuario : Persona
+public class Usuario : Persona, IUsuario
 {
     [Required]
     public TipoUsuario Tipo { get; set; }

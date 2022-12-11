@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace RossiEventos.Entidades
 {
     [Table("Transportista")]
-    public class Transportista : Persona
+    public class Transportista : Persona, ITransportista
     {
         [Required]
         public DateTime FechaVencLicencia { get; set; }

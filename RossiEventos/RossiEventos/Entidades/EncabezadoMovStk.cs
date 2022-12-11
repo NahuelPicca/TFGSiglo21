@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RossiEventos.Entidades
 {
-    public class EncabezadoMovStk : Base
+    public class EncabezadoMovStk : Base, IEncabezadoMovStk
     {
         [Required]
         public DateTime FechaMovimiento { get; set; }

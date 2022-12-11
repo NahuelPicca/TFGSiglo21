@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RossiEventos.Entidades
 {
-    public class SaldoUbicacion : Base
+    public class SaldoUbicacion : Base, ISaldoUbicacion
     {
         [Required]
         public int DepositoId { get; set; }

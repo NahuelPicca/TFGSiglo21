@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RossiEventos.Entidades
 {
-    public class Reserva : Base
+    public class Reserva : Base, IReserva
     {
         public int UsuarioId { get; set; }
 

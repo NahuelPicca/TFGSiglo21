@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RossiEventos.Entidades
 {
-    public class RenglonMovStk : Base
+    public class RenglonMovStk : Base, IRenglonMovStk
     {
         [Required]
         public int MovimientoId { get; set; }

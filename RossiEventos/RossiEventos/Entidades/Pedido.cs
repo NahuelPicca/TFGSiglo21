@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RossiEventos.Entidades
 {
-    public class Pedido : Base
+    public class Pedido : Base, IPedido
     {
         [Required]
         public int AsignacionId { get; set; }
