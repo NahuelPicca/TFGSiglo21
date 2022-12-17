@@ -28,7 +28,22 @@ namespace RossiEventos.Controllers
             logger.LogInformation("Lista de usuarios");
             var usuario = await context.Usuario.FirstOrDefaultAsync(u => u.Id == id);
             return mapper.Map<UsuarioDto>(usuario);
-            //return context.Usuario.FirstOrDefault(u => u.Id == id);
         }
+
+        [HttpGet()]
+        public async Task<ActionResult<List<UsuarioDto>>> GetListUsuario()
+        {
+            logger.LogInformation("Lista de usuarios");
+            var listUsuario = await context.Usuario.ToListAsync();
+            return mapper.Map<List<UsuarioDto>>(listUsuario);
+        }
+
+        //[HttpPost()]
+        //public async Task<ActionResult<List<UsuarioDto>>> GetListUsuario(int id)
+        //{
+        //    logger.LogInformation("Lista de usuarios");
+        //    var listUsuario = await context.Usuario.ToListAsync();
+        //    return mapper.Map<List<UsuarioDto>>(listUsuario);
+        //}
     }
 }
