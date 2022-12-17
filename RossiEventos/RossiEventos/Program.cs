@@ -4,6 +4,8 @@ using RossiEventos;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<AppDbContext>();
+builder.Services.AddAutoMapper(typeof(Program));
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
 builder.Services.AddDbContext<AppDbContext>(opt =>
