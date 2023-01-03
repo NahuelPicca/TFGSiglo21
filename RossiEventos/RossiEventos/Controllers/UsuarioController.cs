@@ -43,10 +43,17 @@ namespace RossiEventos.Controllers
         [HttpPost()]
         public async Task<ActionResult> PostUsuarioDto([FromBody] UsuarioDto usuarioDto)
         {
-            var usuario = mapper.Map<Usuario>(usuarioDto);
-            context.Add(usuario);
-            var aa = await context.SaveChangesAsync();
-            return Ok(aa);
+            try
+            {
+                var usuario = mapper.Map<Usuario>(usuarioDto);
+                context.Add(usuario);
+                var aa = await context.SaveChangesAsync();
+                return Ok(aa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
         }
 
         [HttpDelete("{id:int}")]
