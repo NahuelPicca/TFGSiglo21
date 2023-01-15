@@ -46,6 +46,7 @@ namespace RossiEventos.Controllers
             try
             {
                 var usuario = mapper.Map<Usuario>(usuarioDto);
+                usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuarioDto.Contraseña);
                 context.Add(usuario);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
