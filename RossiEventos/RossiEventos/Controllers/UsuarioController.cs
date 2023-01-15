@@ -65,7 +65,7 @@ namespace RossiEventos.Controllers
             {
                 context.Usuario.Remove(usuario);
                 var aa = context.SaveChanges();
-                return Ok(aa);
+                return Ok($"Se eliminó OK el usuario {usuario.Nombre + " " + usuario.Apellido + " " + usuario.Cuit}");
             }
             return NotFound($"No se encontró el Usuario con el Id: {id}");
         }
