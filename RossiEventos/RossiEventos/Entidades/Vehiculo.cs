@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using RossiEventos.Interfaces;
 
 namespace RossiEventos.Entidades
@@ -21,7 +22,7 @@ namespace RossiEventos.Entidades
         [Required, StringLength(10), Column(TypeName = "varchar")]
         public string NroPoliza { get; set; }
 
-        public Titular Titular { get; set; }
+        public int TitularId { get; set; }
 
         [Required]
         public bool Habilitado { get; set; }

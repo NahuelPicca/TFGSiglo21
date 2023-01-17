@@ -70,7 +70,6 @@ namespace RossiEventos
                        .HasIndex(d => d.Codigo)
                        .IsUnique();
 
-            //Deposito
             modelBuilder.Entity<Ubicacion>()
                        .HasIndex(d => d.Codigo)
                        .IsUnique();

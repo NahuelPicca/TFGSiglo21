@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RossiEventos.Dto;
+using RossiEventos.Entidades;
 
 namespace RossiEventos.Utilidades
 {
@@ -8,6 +9,7 @@ namespace RossiEventos.Utilidades
         public AutoMapperProfile()
         {
             CreateMap<Usuario, UsuarioDto>().ReverseMap();
+            CreateMap<Titular, TitularDto>().ReverseMap();
             //CreateMap<GeneroCreacionDto, Genero>();
         }
     }
