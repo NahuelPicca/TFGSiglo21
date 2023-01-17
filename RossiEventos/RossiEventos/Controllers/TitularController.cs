@@ -26,7 +26,7 @@ namespace RossiEventos.Controllers
         public async Task<ActionResult<TitularDto>> GetTitularDto(int id)
         {
             logger.LogInformation("Obtiene un titular");
-            var titular = await context.Titular
+            var titular = await context.Transportista
                                        .FirstOrDefaultAsync(u => u.Id == id);
             if (titular != null)
                 return mapper.Map<TitularDto>(titular);
@@ -37,7 +37,7 @@ namespace RossiEventos.Controllers
         public async Task<ActionResult<List<TitularDto>>> GetListTitularesDto()
         {
             logger.LogInformation("Lista de titulares");
-            var listTitular = await context.Titular.ToListAsync();
+            var listTitular = await context.Transportista.ToListAsync();
             return mapper.Map<List<TitularDto>>(listTitular);
         }
 
@@ -60,11 +60,11 @@ namespace RossiEventos.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteTitular(int id)
         {
-            var titular = await context.Titular
+            var titular = await context.Transportista
                                        .FirstOrDefaultAsync(u => u.Id == id);
             if (titular != null)
             {
-                context.Titular.Remove(titular);
+                context.Transportista.Remove(titular);
                 var aa = context.SaveChanges();
                 return Ok($"Se eliminó OK el titular " +
                           $"{titular.Nombre + " " + titular.Apellido + " " + titular.Cuit}");
