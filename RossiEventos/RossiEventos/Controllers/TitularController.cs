@@ -71,6 +71,5 @@ namespace RossiEventos.Controllers
             }
             return NotFound($"No se encontró el Titular con el Id: {id}");
         }
-
     }
 }
