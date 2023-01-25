@@ -17,6 +17,6 @@ namespace RossiEventos.Entidades
         public int CategoriaId { get; set; }
 
         [ForeignKey(nameof(CategoriaId))]
-        public virtual Categoria? Categoria { get; set; }
+        public virtual Categoria Categoria { get; set; }
     }
 }

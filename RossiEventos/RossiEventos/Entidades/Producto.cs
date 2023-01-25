@@ -27,12 +27,12 @@ namespace RossiEventos.Entidades
         public int CalidadId { get; set; }
 
         [ForeignKey(nameof(CalidadId))]
-        public virtual Calidad Calidad { get; set; }
+        public virtual Calidad? Calidad { get; set; }
 
         [Required]
         public int TipoId { get; set; }
 
         [ForeignKey(nameof(TipoId))]
-        public virtual TipoProducto Tipo { get; set; }
+        public virtual TipoProducto? Tipo { get; set; }
     }
 }
