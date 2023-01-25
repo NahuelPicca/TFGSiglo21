@@ -119,6 +119,7 @@ namespace RossiEventos
         public DbSet<Ubicacion> Ubicacion { get; set; }
         public DbSet<SaldoUbicacion> SaldoUbicacion { get; set; }
         public DbSet<RenglonMovStk> RenglonMov { get; set; }
-        
+        public DbSet<TipoProducto> TipoProducto { get; set; }
+
     }
 }

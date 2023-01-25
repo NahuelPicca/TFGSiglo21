@@ -12,6 +12,7 @@ namespace RossiEventos.Utilidades
             CreateMap<Titular, TitularDto>().ReverseMap();
             CreateMap<Transportista, TransportistaDto>().ReverseMap();
             CreateMap<Categoria, CategoriaDto>().ReverseMap();
+            CreateMap<TipoProducto, TipoProductoDto>().ReverseMap();
             //CreateMap<GeneroCreacionDto, Genero>();
         }
     }

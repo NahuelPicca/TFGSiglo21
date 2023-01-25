@@ -13,10 +13,10 @@ namespace RossiEventos.Entidades
         [Required, StringLength(1000), Column(TypeName = "varchar")]
         public string Descripcion { get; set; }
 
-        [Required]
+       // [Required]
         public int CategoriaId { get; set; }
 
         [ForeignKey(nameof(CategoriaId))]
-        public virtual Categoria Categoria { get; set; }
+        public virtual Categoria? Categoria { get; set; }
     }
 }
