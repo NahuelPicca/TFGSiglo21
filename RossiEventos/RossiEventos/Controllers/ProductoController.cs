@@ -48,15 +48,15 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostProductoDto([FromBody] ProductoDto productoDto)
+        public async Task<ActionResult> PostProductoDto([FromBody] CreateProductoDto productoDto)
         {
             try
             {
+                var producto = mapper.Map<Producto>(productoDto);
                 var calidad = context.Calidad.FirstOrDefault(c => c.Id == productoDto.CalidadId);
                 var tipo = context.TipoProducto.FirstOrDefault(c => c.Id == productoDto.TipoId);
-                productoDto.Calidad = calidad;
-                productoDto.Tipo = tipo;
-                var producto = mapper.Map<ProductoDto>(productoDto);
+                producto.Calidad = calidad;
+                producto.Tipo = tipo;
                 context.Add(producto);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
