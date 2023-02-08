@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RossiEventos.Dto;
+using RossiEventos.Entidades;
 
 namespace RossiEventos.Controllers
 {
@@ -43,11 +44,12 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostTipoProductoDto([FromBody] TipoProductoDto tipoProductoDto)
+        public async Task<ActionResult> PostTipoProductoDto([FromBody] CreateTipoDeProductoDto tipoProductoDto)
         {
             try
             {
                 var tipoProducto = mapper.Map<TipoProductoDto>(tipoProductoDto);
+                HidrataPropFaltante(tipoProductoDto, tipoProducto);
                 context.Add(tipoProducto);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
@@ -56,6 +58,12 @@ namespace RossiEventos.Controllers
             {
                 return BadRequest(ex.InnerException.Message);
             }
+        }
+
+        void HidrataPropFaltante(CreateTipoDeProductoDto cTipoDto, TipoProductoDto tipoDto)
+        {
+            var categoria = context.Categoria.FirstOrDefault(c => c.Id == cTipoDto.CategoriaId);
+            tipoDto.Categoria = categoria;
         }
 
         [HttpDelete("{id:int}")]
