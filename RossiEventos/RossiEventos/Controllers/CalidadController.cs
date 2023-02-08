@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RossiEventos.Dto;
+using RossiEventos.Entidades;
 
 namespace RossiEventos.Controllers
 {
@@ -43,11 +44,12 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostCalidadDto([FromBody] CalidadDto calidadDto)
+        public async Task<ActionResult> PostCalidadDto([FromBody] CreateCalidadDto calidadDto)
         {
             try
             {
-                var calidad = mapper.Map<CalidadDto>(calidadDto);
+                var calidad = mapper.Map<Calidad>(calidadDto);
+                HidrataPropFaltantes(calidad);
                 context.Add(calidad);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
@@ -56,6 +58,12 @@ namespace RossiEventos.Controllers
             {
                 return BadRequest(ex.InnerException.Message);
             }
+        }
+
+        private void HidrataPropFaltantes(Calidad calidad)
+        {
+            calidad.FechaInsercion = DateTime.Now;
+            calidad.FechaModificacion = DateTime.Now;
         }
 
         [HttpDelete("{id:int}")]

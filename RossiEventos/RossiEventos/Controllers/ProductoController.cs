@@ -53,10 +53,7 @@ namespace RossiEventos.Controllers
             try
             {
                 var producto = mapper.Map<Producto>(productoDto);
-                var calidad = context.Calidad.FirstOrDefault(c => c.Id == productoDto.CalidadId);
-                var tipo = context.TipoProducto.FirstOrDefault(c => c.Id == productoDto.TipoId);
-                producto.Calidad = calidad;
-                producto.Tipo = tipo;
+                HidrataPropFaltante(productoDto, producto);
                 context.Add(producto);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
@@ -67,10 +64,13 @@ namespace RossiEventos.Controllers
             }
         }
 
-        //async void SeteaObjetosFaltantes(ProductoDto productoDto)
-        //{
-  
-        //}
+        void HidrataPropFaltante(CreateProductoDto productoDto, Producto producto)
+        {
+            var calidad = context.Calidad.FirstOrDefault(c => c.Id == productoDto.CalidadId);
+            var tipo = context.TipoProducto.FirstOrDefault(c => c.Id == productoDto.TipoId);
+            producto.Calidad = calidad;
+            producto.Tipo = tipo;
+        }
 
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteProducto(int id)

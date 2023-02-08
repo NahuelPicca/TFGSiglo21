@@ -15,5 +15,7 @@
         public int CalidadId { get; set; }
 
         public int TipoId { get; set; }
+
+        public string UsuarioInserto { get; set; }
     }
 }
