@@ -49,7 +49,6 @@ namespace RossiEventos.Controllers
             try
             {
                 var calidad = mapper.Map<Calidad>(calidadDto);
-                HidrataPropFaltantes(calidad);
                 context.Add(calidad);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
@@ -58,12 +57,6 @@ namespace RossiEventos.Controllers
             {
                 return BadRequest(ex.InnerException.Message);
             }
-        }
-
-        private void HidrataPropFaltantes(Calidad calidad)
-        {
-            calidad.FechaInsercion = DateTime.Now;
-            calidad.FechaModificacion = DateTime.Now;
         }
 
         [HttpDelete("{id:int}")]

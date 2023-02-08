@@ -42,7 +42,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostCategoriaDto([FromBody] CategoriaDto categoriaDto)
+        public async Task<ActionResult> PostCategoriaDto([FromBody] CreateCategoriaDto categoriaDto)
         {
             try
             {

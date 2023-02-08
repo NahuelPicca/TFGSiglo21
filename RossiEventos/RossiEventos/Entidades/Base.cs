@@ -4,7 +4,7 @@ using RossiEventos.Interfaces;
 
 namespace RossiEventos.Entidades
 {
-    public class Base : IBase
+    public abstract class Base : IBase
     {
         [Key]
         public int Id { get; set; }
