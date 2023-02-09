@@ -41,7 +41,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostUsuarioDto([FromBody] UsuarioDto usuarioDto)
+        public async Task<ActionResult> PostUsuarioDto([FromBody] CreateUsuarioDto usuarioDto)
         {
             try
             {
