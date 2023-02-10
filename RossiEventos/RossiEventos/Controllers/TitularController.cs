@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RossiEventos.Dto;
+using RossiEventos.Entidades;
 
 namespace RossiEventos.Controllers
 {
@@ -42,11 +43,11 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostTitularDto([FromBody] TitularDto titularDto)
+        public async Task<ActionResult> PostTitularDto([FromBody] CreateTitularDto titularDto)
         {
             try
             {
-                var titular = mapper.Map<TitularDto>(titularDto);
+                var titular = mapper.Map<Titular>(titularDto);
                 context.Add(titular);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);

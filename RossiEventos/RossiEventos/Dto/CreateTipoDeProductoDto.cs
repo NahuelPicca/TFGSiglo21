@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace RossiEventos.Dto
+﻿namespace RossiEventos.Dto
 {
     public class CreateTipoDeProductoDto
     {
