@@ -8,19 +8,20 @@ namespace RossiEventos.Utilidades
     {
         public AutoMapperProfile()
         {
-            CreateMap<Usuario, UsuarioDto>().ReverseMap();
-            CreateMap<Titular, TitularDto>().ReverseMap();
-            CreateMap<Transportista, TransportistaDto>().ReverseMap();
-            CreateMap<Categoria, CategoriaDto>().ReverseMap();
-            CreateMap<CreateCategoriaDto, CategoriaDto>();
-            CreateMap<TipoProducto, TipoProductoDto>().ReverseMap();
-            CreateMap<CreateTipoDeProductoDto, TipoProductoDto>();
-            CreateMap<CreateCalidadDto, Calidad>();
             CreateMap<Calidad, CalidadDto>().ReverseMap();
-            CreateMap<Producto, ProductoDto>().ReverseMap();
+            CreateMap<Categoria, CategoriaDto>().ReverseMap();
+            CreateMap<CreateCalidadDto, Calidad>(); 
+            CreateMap<CreateCategoriaDto, CategoriaDto>();
             CreateMap<CreateProductoDto, Producto>();
-            CreateMap<CreateUsuarioDto, Usuario>();
+            CreateMap<CreateTransportistaDto, Transportista>();
+            CreateMap<CreateTipoDeProductoDto, TipoProductoDto>();
             CreateMap<CreateTitularDto, Titular>();
+            CreateMap<CreateUsuarioDto, Usuario>();
+            CreateMap<Producto, ProductoDto>().ReverseMap();
+            CreateMap<Transportista, TransportistaDto>().ReverseMap();
+            CreateMap<TipoProducto, TipoProductoDto>().ReverseMap();
+            CreateMap<Titular, TitularDto>().ReverseMap();
+            CreateMap<Usuario, UsuarioDto>().ReverseMap();
         }
     }
 }

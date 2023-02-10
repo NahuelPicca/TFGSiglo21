@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RossiEventos.Dto;
+using RossiEventos.Entidades;
 
 namespace RossiEventos.Controllers
 {
@@ -42,11 +43,11 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostTransportistaDto([FromBody] TransportistaDto transportistaDto)
+        public async Task<ActionResult> PostTransportistaDto([FromBody] CreateTransportistaDto transportistaDto)
         {
             try
             {
-                var transportista = mapper.Map<TransportistaDto>(transportistaDto);
+                var transportista = mapper.Map<Transportista>(transportistaDto);
                 context.Add(transportista);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
