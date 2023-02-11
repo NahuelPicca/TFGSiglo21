@@ -10,8 +10,8 @@ namespace RossiEventos.Controllers
     [ApiController]
     public class ProductoController : ControllerBase
     {
-        private readonly ILogger<ProductoController> logger;
         private readonly AppDbContext context;
+        private readonly ILogger<ProductoController> logger;
         private readonly IMapper mapper;
 
         public ProductoController(ILogger<ProductoController> logger,
@@ -23,53 +23,14 @@ namespace RossiEventos.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<ProductoDto>> GetProductoDto(int id)
-        {
-            logger.LogInformation("Obtiene un producto");
-            var producto = await context.Producto
-                                        .Include(c => c.Calidad)
-                                        .Include(c => c.Tipo)
-                                        .FirstOrDefaultAsync(u => u.Id == id);
-            if (producto != null)
-                return mapper.Map<ProductoDto>(producto);
-            return NotFound($"No se encontró el producto con el Id: {id}");
-        }
-
-        [HttpGet()]
-        public async Task<ActionResult<List<ProductoDto>>> GetListProductosDto()
-        {
-            logger.LogInformation("Lista de productos");
-            var list = await context.Producto
-                                    .Include(c => c.Calidad)
-                                    .Include(c => c.Tipo)
-                                    .ToListAsync();
-            return mapper.Map<List<ProductoDto>>(list);
-        }
-
-        [HttpPost()]
-        public async Task<ActionResult> PostProductoDto([FromBody] CreateProductoDto productoDto)
-        {
-            try
-            {
-                var producto = mapper.Map<Producto>(productoDto);
-                HidrataPropFaltante(productoDto, producto);
-                context.Add(producto);
-                var aa = await context.SaveChangesAsync();
-                return Ok(aa);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.InnerException.Message);
-            }
-        }
-
-        void HidrataPropFaltante(CreateProductoDto productoDto, Producto producto)
+        void HidrataPropFaltante(CreateUpdateProductoDto productoDto, Producto producto)
         {
             var calidad = context.Calidad.FirstOrDefault(c => c.Id == productoDto.CalidadId);
             var tipo = context.TipoProducto.FirstOrDefault(c => c.Id == productoDto.TipoId);
             producto.Calidad = calidad;
             producto.Tipo = tipo;
+            if (producto.Id > 0)
+                producto.FechaModificacion = DateTime.Now;
         }
 
         [HttpDelete("{id:int}")]
@@ -85,6 +46,66 @@ namespace RossiEventos.Controllers
                           $"{producto.Codigo} {producto.Marca}");
             }
             return NotFound($"No se encontró el producto con el Id: {id}");
+        }
+
+        [HttpGet()]
+        public async Task<ActionResult<List<ProductoDto>>> GetListProductosDto()
+        {
+            logger.LogInformation("Lista de productos");
+            var list = await context.Producto
+                                    .Include(c => c.Calidad)
+                                    .Include(c => c.Tipo)
+                                    .ToListAsync();
+            return mapper.Map<List<ProductoDto>>(list);
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<ProductoDto>> GetProductoDto(int id)
+        {
+            logger.LogInformation("Obtiene un producto");
+            var producto = await context.Producto
+                                        .Include(c => c.Calidad)
+                                        .Include(c => c.Tipo)
+                                        .FirstOrDefaultAsync(u => u.Id == id);
+            if (producto != null)
+                return mapper.Map<ProductoDto>(producto);
+            return NotFound($"No se encontró el producto con el Id: {id}");
+        }
+
+        [HttpPost()]
+        public async Task<ActionResult> PostProductoDto([FromBody] CreateUpdateProductoDto productoDto)
+        {
+            try
+            {
+                var producto = mapper.Map<Producto>(productoDto);
+                HidrataPropFaltante(productoDto, producto);
+                context.Add(producto);
+                var aa = await context.SaveChangesAsync();
+                return Ok(aa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> PutProductoDto(int id, [FromBody] CreateUpdateProductoDto create)
+        {
+            try
+            {
+                var productDb = context.Producto.FirstOrDefault(p => p.Id == id);
+
+                var producto = mapper.Map<CreateUpdateProductoDto, Producto>(create, productDb);
+                HidrataPropFaltante(create, producto);
+                //context.Entry = EntityState.Modified;
+                var aa = await context.SaveChangesAsync();
+                return Ok(aa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
         }
     }
 }
