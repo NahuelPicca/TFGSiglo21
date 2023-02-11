@@ -15,7 +15,7 @@ namespace RossiEventos.Utilidades
             CreateMap<CreateUpdateProductoDto, Producto>();
             CreateMap<CreateUpdateTransportistaDto, Transportista>();
             CreateMap<CreateTipoDeProductoDto, TipoProductoDto>();
-            CreateMap<CreateTitularDto, Titular>();
+            CreateMap<CreateUpdateTitularDto, Titular>();
             CreateMap<CreateUpdateUsuarioDto, Usuario>();
             CreateMap<Producto, ProductoDto>().ReverseMap();
             CreateMap<Transportista, TransportistaDto>().ReverseMap();

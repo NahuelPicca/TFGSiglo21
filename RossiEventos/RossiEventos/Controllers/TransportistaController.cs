@@ -10,8 +10,8 @@ namespace RossiEventos.Controllers
     [ApiController]
     public class TransportistaController : ControllerBase
     {
-        private readonly ILogger<TransportistaController> logger;
         private readonly AppDbContext context;
+        private readonly ILogger<TransportistaController> logger;
         private readonly IMapper mapper;
 
         public TransportistaController(ILogger<TransportistaController> logger,
@@ -23,6 +23,29 @@ namespace RossiEventos.Controllers
             this.mapper = mapper;
         }
 
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeleteTransportista(int id)
+        {
+            var transportista = await context.Transportista
+                                       .FirstOrDefaultAsync(u => u.Id == id);
+            if (transportista != null)
+            {
+                context.Transportista.Remove(transportista);
+                var aa = context.SaveChanges();
+                return Ok($"Se eliminó OK el transportista " +
+                          $"{transportista.Nombre + " " + transportista.Apellido + " " + transportista.Cuit}");
+            }
+            return NotFound($"No se encontró el Transportista con el Id: {id}");
+        }
+
+        [HttpGet()]
+        public async Task<ActionResult<List<TransportistaDto>>> GetListTransportistaDto()
+        {
+            logger.LogInformation("Lista de transportistas");
+            var listTransportistas = await context.Transportista.ToListAsync();
+            return mapper.Map<List<TransportistaDto>>(listTransportistas);
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<TransportistaDto>> GetTransportistaDto(int id)
         {
@@ -32,14 +55,6 @@ namespace RossiEventos.Controllers
             if (transportista != null)
                 return mapper.Map<TransportistaDto>(transportista);
             return NotFound($"No se encontró el transportista con el Id: {id}");
-        }
-
-        [HttpGet()]
-        public async Task<ActionResult<List<TransportistaDto>>> GetListTransportistaDto()
-        {
-            logger.LogInformation("Lista de transportistas");
-            var listTransportistas = await context.Transportista.ToListAsync();
-            return mapper.Map<List<TransportistaDto>>(listTransportistas);
         }
 
         [HttpPost()]
@@ -64,7 +79,6 @@ namespace RossiEventos.Controllers
             try
             {
                 var transportistaDb = context.Transportista.FirstOrDefault(c => c.Id == id);
-                //var transportista = mapper.Map<Transportista>(transportistaDto);
                 var calidad = mapper.Map<CreateUpdateTransportistaDto, Transportista>(create, transportistaDb);
                 calidad.FechaModificacion = DateTime.Now;
                 var aa = await context.SaveChangesAsync();
@@ -74,38 +88,6 @@ namespace RossiEventos.Controllers
             {
                 return BadRequest(ex.InnerException.Message);
             }
-        }
-
-        //[HttpPut("{id:int}")]
-        //public async Task<ActionResult> PutCalidadDto(int id, [FromBody] CreateUpdateCalidadDto create)
-        //{
-        //    try
-        //    {
-        //        var calidadDb = context.Calidad.FirstOrDefault(c => c.Id == id);
-        //        var calidad = mapper.Map<CreateUpdateCalidadDto, Calidad>(create, calidadDb);
-        //        calidad.FechaModificacion = DateTime.Now;
-        //        var aa = await context.SaveChangesAsync();
-        //        return Ok(aa);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.InnerException.Message);
-        //    }
-        //}
-
-        [HttpDelete("{id:int}")]
-        public async Task<ActionResult> DeleteTransportista(int id)
-        {
-            var transportista = await context.Transportista
-                                       .FirstOrDefaultAsync(u => u.Id == id);
-            if (transportista != null)
-            {
-                context.Transportista.Remove(transportista);
-                var aa = context.SaveChanges();
-                return Ok($"Se eliminó OK el transportista " +
-                          $"{transportista.Nombre + " " + transportista.Apellido + " " + transportista.Cuit}");
-            }
-            return NotFound($"No se encontró el Transportista con el Id: {id}");
         }
     }
 }
