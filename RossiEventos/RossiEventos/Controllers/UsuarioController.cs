@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RossiEventos.Dto;
+using RossiEventos.Entidades;
 
 namespace RossiEventos.Controllers
 {
@@ -41,7 +43,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostUsuarioDto([FromBody] CreateUsuarioDto usuarioDto)
+        public async Task<ActionResult> PostUsuarioDto([FromBody] CreateUpdateUsuarioDto usuarioDto)
         {
             try
             {
@@ -57,6 +59,45 @@ namespace RossiEventos.Controllers
             }
         }
 
+        [HttpPut("id:int")]
+        public async Task<ActionResult> PostUsuarioDto(int id, [FromBody] CreateUpdateUsuarioDto create)
+        {
+            try
+            {
+                var usuarioDb = context.Usuario.FirstOrDefault(p => p.Id == id);
+                var usuario = mapper.Map<CreateUpdateUsuarioDto, Usuario>(create, usuarioDb);
+                usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuario.Contraseña);
+                usuario.FechaModificacion = DateTime.Now;
+                var aa = await context.SaveChangesAsync();
+                return Ok(aa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
+        }
+
+
+        //EXAMPLEEEEEEEEE
+        //[HttpPut("{id:int}")]
+        //public async Task<ActionResult> PutProductoDto(int id, [FromBody] CreateUpdateProductoDto create)
+        //{
+        //    try
+        //    {
+        //        var productDb = context.Producto.FirstOrDefault(p => p.Id == id);
+
+        //        var producto = mapper.Map<CreateUpdateProductoDto, Producto>(create, productDb);
+        //        HidrataPropFaltante(create, producto);
+        //        //context.Entry = EntityState.Modified;
+        //        var aa = await context.SaveChangesAsync();
+        //        return Ok(aa);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.InnerException.Message);
+        //    }
+        //}
+
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteUsuario(int id)
         {
@@ -70,5 +111,8 @@ namespace RossiEventos.Controllers
             }
             return NotFound($"No se encontró el Usuario con el Id: {id}");
         }
+
+
+
     }
 }
