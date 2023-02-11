@@ -77,27 +77,6 @@ namespace RossiEventos.Controllers
             }
         }
 
-
-        //EXAMPLEEEEEEEEE
-        //[HttpPut("{id:int}")]
-        //public async Task<ActionResult> PutProductoDto(int id, [FromBody] CreateUpdateProductoDto create)
-        //{
-        //    try
-        //    {
-        //        var productDb = context.Producto.FirstOrDefault(p => p.Id == id);
-
-        //        var producto = mapper.Map<CreateUpdateProductoDto, Producto>(create, productDb);
-        //        HidrataPropFaltante(create, producto);
-        //        //context.Entry = EntityState.Modified;
-        //        var aa = await context.SaveChangesAsync();
-        //        return Ok(aa);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.InnerException.Message);
-        //    }
-        //}
-
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteUsuario(int id)
         {
@@ -111,8 +90,5 @@ namespace RossiEventos.Controllers
             }
             return NotFound($"No se encontró el Usuario con el Id: {id}");
         }
-
-
-
     }
 }

@@ -43,7 +43,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostTransportistaDto([FromBody] CreateTransportistaDto transportistaDto)
+        public async Task<ActionResult> PostTransportistaDto([FromBody] CreateUpdateTransportistaDto transportistaDto)
         {
             try
             {
@@ -57,6 +57,41 @@ namespace RossiEventos.Controllers
                 return BadRequest(ex.InnerException.Message);
             }
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromBody] CreateUpdateTransportistaDto create)
+        {
+            try
+            {
+                var transportistaDb = context.Transportista.FirstOrDefault(c => c.Id == id);
+                //var transportista = mapper.Map<Transportista>(transportistaDto);
+                var calidad = mapper.Map<CreateUpdateTransportistaDto, Transportista>(create, transportistaDb);
+                calidad.FechaModificacion = DateTime.Now;
+                var aa = await context.SaveChangesAsync();
+                return Ok(aa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
+        }
+
+        //[HttpPut("{id:int}")]
+        //public async Task<ActionResult> PutCalidadDto(int id, [FromBody] CreateUpdateCalidadDto create)
+        //{
+        //    try
+        //    {
+        //        var calidadDb = context.Calidad.FirstOrDefault(c => c.Id == id);
+        //        var calidad = mapper.Map<CreateUpdateCalidadDto, Calidad>(create, calidadDb);
+        //        calidad.FechaModificacion = DateTime.Now;
+        //        var aa = await context.SaveChangesAsync();
+        //        return Ok(aa);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.InnerException.Message);
+        //    }
+        //}
 
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteTransportista(int id)

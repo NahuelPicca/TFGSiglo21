@@ -13,7 +13,7 @@ namespace RossiEventos.Utilidades
             CreateMap<CreateUpdateCalidadDto, Calidad>(); 
             CreateMap<CreateCategoriaDto, CategoriaDto>();
             CreateMap<CreateUpdateProductoDto, Producto>();
-            CreateMap<CreateTransportistaDto, Transportista>();
+            CreateMap<CreateUpdateTransportistaDto, Transportista>();
             CreateMap<CreateTipoDeProductoDto, TipoProductoDto>();
             CreateMap<CreateTitularDto, Titular>();
             CreateMap<CreateUpdateUsuarioDto, Usuario>();
