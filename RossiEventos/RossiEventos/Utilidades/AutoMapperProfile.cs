@@ -10,7 +10,7 @@ namespace RossiEventos.Utilidades
         {
             CreateMap<Calidad, CalidadDto>().ReverseMap();
             CreateMap<Categoria, CategoriaDto>().ReverseMap();
-            CreateMap<CreateCalidadDto, Calidad>(); 
+            CreateMap<CreateUpdateCalidadDto, Calidad>(); 
             CreateMap<CreateCategoriaDto, CategoriaDto>();
             CreateMap<CreateUpdateProductoDto, Producto>();
             CreateMap<CreateTransportistaDto, Transportista>();
