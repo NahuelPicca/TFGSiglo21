@@ -10,8 +10,8 @@ namespace RossiEventos.Controllers
     [ApiController]
     public class VehiculoController : ControllerBase
     {
-        private readonly ILogger<VehiculoController> logger;
         private readonly AppDbContext context;
+        private readonly ILogger<VehiculoController> logger;
         private readonly IMapper mapper;
 
         public VehiculoController(ILogger<VehiculoController> logger,
@@ -21,6 +21,12 @@ namespace RossiEventos.Controllers
             this.logger = logger;
             this.context = context;
             this.mapper = mapper;
+        }
+
+        static void HidrataPropiedadesFaltantes(Vehiculo vehiculo)
+        {
+            if (vehiculo.Id > 0)
+                vehiculo.FechaModificacion = DateTime.Now;
         }
 
         [HttpDelete("{id:int}")]
@@ -88,12 +94,6 @@ namespace RossiEventos.Controllers
             {
                 return BadRequest(ex.InnerException.Message);
             }
-        }
-
-        static void HidrataPropiedadesFaltantes(Vehiculo vehiculo)
-        {
-            if (vehiculo.Id > 0)
-                vehiculo.FechaModificacion = DateTime.Now;
         }
     }
 }
