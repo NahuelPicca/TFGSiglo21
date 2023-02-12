@@ -11,8 +11,8 @@ namespace RossiEventos.Controllers
     [ApiController]
     public class CategoriaController : ControllerBase
     {
-        private readonly ILogger<CategoriaController> logger;
         private readonly AppDbContext context;
+        private readonly ILogger<CategoriaController> logger;
         private readonly IMapper mapper;
 
         public CategoriaController(ILogger<CategoriaController> logger,
@@ -22,6 +22,21 @@ namespace RossiEventos.Controllers
             this.logger = logger;
             this.context = context;
             this.mapper = mapper;
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeleteCategoria(int id)
+        {
+            var titular = await context.Categoria
+                                       .FirstOrDefaultAsync(u => u.Id == id);
+            if (titular != null)
+            {
+                context.Categoria.Remove(titular);
+                var aa = context.SaveChanges();
+                return Ok($"Se eliminó OK la categoria " +
+                          $"{titular.Nombre}");
+            }
+            return NotFound($"No se encontró la Categoria con el Id: {id}");
         }
 
         [HttpGet("{id:int}")]
@@ -74,21 +89,6 @@ namespace RossiEventos.Controllers
             {
                 return BadRequest(ex.InnerException.Message);
             }
-        }
-
-        [HttpDelete("{id:int}")]
-        public async Task<ActionResult> DeleteCategoria(int id)
-        {
-            var titular = await context.Categoria
-                                       .FirstOrDefaultAsync(u => u.Id == id);
-            if (titular != null)
-            {
-                context.Categoria.Remove(titular);
-                var aa = context.SaveChanges();
-                return Ok($"Se eliminó OK la categoria " +
-                          $"{titular.Nombre}");
-            }
-            return NotFound($"No se encontró la Categoria con el Id: {id}");
         }
     }
 }

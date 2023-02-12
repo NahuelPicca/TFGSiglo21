@@ -11,8 +11,8 @@ namespace RossiEventos.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly ILogger<UsuarioController> logger;
         private readonly AppDbContext context;
+        private readonly ILogger<UsuarioController> logger;
         private readonly IMapper mapper;
 
         public UsuarioController(ILogger<UsuarioController> logger,
@@ -24,14 +24,18 @@ namespace RossiEventos.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<UsuarioDto>> GetUsuario(int id)
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeleteUsuario(int id)
         {
-            logger.LogInformation("Get usuario");
-            var usuario = await context.Usuario.FirstOrDefaultAsync(u => u.Id == id);
+            var usuario = await context.Usuario
+                                       .FirstOrDefaultAsync(u => u.Id == id);
             if (usuario != null)
-                return mapper.Map<UsuarioDto>(usuario);
-            return NotFound($"No se encontró el usuario con el Id: {id}");
+            {
+                context.Usuario.Remove(usuario);
+                var aa = context.SaveChanges();
+                return Ok($"Se eliminó OK el usuario {usuario.Nombre + " " + usuario.Apellido + " " + usuario.Cuit}");
+            }
+            return NotFound($"No se encontró el Usuario con el Id: {id}");
         }
 
         [HttpGet()]
@@ -40,6 +44,16 @@ namespace RossiEventos.Controllers
             logger.LogInformation("Lista de usuarios");
             var listUsuario = await context.Usuario.ToListAsync();
             return mapper.Map<List<UsuarioDto>>(listUsuario);
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<UsuarioDto>> GetUsuario(int id)
+        {
+            logger.LogInformation("Get usuario");
+            var usuario = await context.Usuario.FirstOrDefaultAsync(u => u.Id == id);
+            if (usuario != null)
+                return mapper.Map<UsuarioDto>(usuario);
+            return NotFound($"No se encontró el usuario con el Id: {id}");
         }
 
         [HttpPost()]
@@ -75,20 +89,6 @@ namespace RossiEventos.Controllers
             {
                 return BadRequest(ex.InnerException.Message);
             }
-        }
-
-        [HttpDelete("{id:int}")]
-        public async Task<ActionResult> DeleteUsuario(int id)
-        {
-            var usuario = await context.Usuario
-                                       .FirstOrDefaultAsync(u => u.Id == id);
-            if (usuario != null)
-            {
-                context.Usuario.Remove(usuario);
-                var aa = context.SaveChanges();
-                return Ok($"Se eliminó OK el usuario {usuario.Nombre + " " + usuario.Apellido + " " + usuario.Cuit}");
-            }
-            return NotFound($"No se encontró el Usuario con el Id: {id}");
         }
     }
 }
