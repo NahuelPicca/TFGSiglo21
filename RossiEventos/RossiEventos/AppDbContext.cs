@@ -102,7 +102,7 @@ namespace RossiEventos
                         .HasPrecision(15, 2);
 
         }
-
+        public DbSet<AsignacionVehicTransp> AsignacionVehicTransp { get; set; }
         public DbSet<Calidad> Calidad { get; set; }
         public DbSet<Categoria> Categoria { get; set; }
         public DbSet<Persona> Persona { get; set; }

@@ -8,8 +8,10 @@ namespace RossiEventos.Utilidades
     {
         public AutoMapperProfile()
         {
+            CreateMap<AsignacionVehicTransp, AsignacionVehicTranspDto>().ReverseMap();
             CreateMap<Calidad, CalidadDto>().ReverseMap();
             CreateMap<Categoria, CategoriaDto>().ReverseMap();
+            CreateMap<CreateUpdateAsignacionVehicTranspDto, AsignacionVehicTransp>();
             CreateMap<CreateUpdateCalidadDto, Calidad>(); 
             CreateMap<CreateUpdateCategoriaDto, Categoria>();
             CreateMap<CreateUpdateProductoDto, Producto>();
