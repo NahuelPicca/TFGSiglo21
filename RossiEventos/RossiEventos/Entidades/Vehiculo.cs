@@ -13,7 +13,7 @@ namespace RossiEventos.Entidades
         [Required, StringLength(50), Column(TypeName = "varchar")]
         public string Marca { get; set; }
 
-        [Required, StringLength(10), Column(TypeName = "varchar")]
+        [Required, StringLength(100), Column(TypeName = "varchar")]
         public string Modelo { get; set; }//Boniato argentino
 
         [Required]
