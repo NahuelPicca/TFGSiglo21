@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RossiEventos.Dto;
+using RossiEventos.Entidades;
 
 namespace RossiEventos.Controllers
 {
@@ -42,12 +44,29 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostCategoriaDto([FromBody] CreateCategoriaDto categoriaDto)
+        public async Task<ActionResult> PostCategoriaDto([FromBody] CreateUpdateCategoriaDto categoriaDto)
         {
             try
             {
                 var categoria = mapper.Map<CategoriaDto>(categoriaDto);
                 context.Add(categoria);
+                var aa = await context.SaveChangesAsync();
+                return Ok(aa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> PutCategoriaDto(int id, [FromBody] CreateUpdateCategoriaDto create)
+        {
+            try
+            {
+                var categoriaDb = context.Categoria.FirstOrDefault(c => c.Id == id);
+                var categoria = mapper.Map<CreateUpdateCategoriaDto, Categoria>(create, categoriaDb);
+                categoria.FechaModificacion = DateTime.Now;
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
             }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RossiEventos.Dto;
@@ -44,11 +45,11 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostTipoProductoDto([FromBody] CreateTipoDeProductoDto tipoProductoDto)
+        public async Task<ActionResult> PostTipoProductoDto([FromBody] CreateUpdateTipoDeProductoDto tipoProductoDto)
         {
             try
             {
-                var tipoProducto = mapper.Map<TipoProductoDto>(tipoProductoDto);
+                var tipoProducto = mapper.Map<TipoProducto>(tipoProductoDto);
                 HidrataPropFaltante(tipoProductoDto, tipoProducto);
                 context.Add(tipoProducto);
                 var aa = await context.SaveChangesAsync();
@@ -60,10 +61,45 @@ namespace RossiEventos.Controllers
             }
         }
 
-        void HidrataPropFaltante(CreateTipoDeProductoDto cTipoDto, TipoProductoDto tipoDto)
+        [HttpPut()]
+        public async Task<ActionResult> PostTipoProductoDto(int id, [FromBody] CreateUpdateTipoDeProductoDto tipoProductoDto)
         {
-            var categoria = context.Categoria.FirstOrDefault(c => c.Id == cTipoDto.CategoriaId);
-            tipoDto.Categoria = categoria;
+            try
+            {
+                var tipoDb = context.TipoProducto.FirstOrDefault(c => c.Id == id);
+                var tipo = mapper.Map<CreateUpdateTipoDeProductoDto, TipoProducto>(tipoProductoDto, tipoDb);
+                HidrataPropFaltante(tipoProductoDto, tipo);
+                var aa = await context.SaveChangesAsync();
+                return Ok(aa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
+        }
+        //[HttpPut("{id:int}")]
+        //public async Task<ActionResult> PutCalidadDto(int id, [FromBody] CreateUpdateCalidadDto create)
+        //{
+        //    try
+        //    {
+        //        var calidadDb = context.Calidad.FirstOrDefault(c => c.Id == id);
+        //        var calidad = mapper.Map<CreateUpdateCalidadDto, Calidad>(create, calidadDb);
+        //        calidad.FechaModificacion = DateTime.Now;
+        //        var aa = await context.SaveChangesAsync();
+        //        return Ok(aa);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.InnerException.Message);
+        //    }
+        //}
+
+        void HidrataPropFaltante(CreateUpdateTipoDeProductoDto cTipoDto, TipoProducto tipoDto)
+        {
+            tipoDto.Categoria = context.Categoria
+                                       .FirstOrDefault(c => c.Id == cTipoDto.CategoriaId);
+            if (tipoDto.Id > 0)
+                tipoDto.FechaModificacion = DateTime.Now;
         }
 
         [HttpDelete("{id:int}")]
