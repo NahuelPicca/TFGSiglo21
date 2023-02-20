@@ -13,5 +13,8 @@ namespace RossiEventos.Entidades
         
         [Column(TypeName ="varchar(100)")]
         public string UsuarioInserto { get; set; } = "";
+
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
     }
 }
