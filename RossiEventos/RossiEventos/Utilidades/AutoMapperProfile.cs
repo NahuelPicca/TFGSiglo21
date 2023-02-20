@@ -20,6 +20,7 @@ namespace RossiEventos.Utilidades
             CreateMap<CreateUpdateTransportistaDto, Transportista>();
             CreateMap<CreateUpdateTipoDeProductoDto, TipoProducto>();
             CreateMap<CreateUpdateTitularDto, Titular>();
+            CreateMap<CreateUpdateUbicacionDto, Ubicacion>();
             CreateMap<CreateUpdateUsuarioDto, Usuario>();
             CreateMap<CreateUpdateVehiculoDto, Vehiculo>();
             CreateMap<Deposito, DepositoDto>().ReverseMap();
@@ -27,6 +28,7 @@ namespace RossiEventos.Utilidades
             CreateMap<Transportista, TransportistaDto>().ReverseMap();
             CreateMap<TipoProducto, TipoProductoDto>().ReverseMap();
             CreateMap<Titular, TitularDto>().ReverseMap();
+            CreateMap<Ubicacion, UbicacionDto>().ReverseMap();
             CreateMap<Usuario, UsuarioDto>().ReverseMap();
             CreateMap<Vehiculo, VehiculoDto>().ReverseMap();
         }
