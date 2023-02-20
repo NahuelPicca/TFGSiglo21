@@ -90,7 +90,6 @@ namespace RossiEventos.Controllers
                 var depDb = context.Deposito.FirstOrDefault(c => c.Id == id);
                 if (depDb != null)
                 {
-
                     var deposito = mapper.Map<CreateUpdateDepositoDto, Deposito>(create, depDb);
                     HidrataPropFaltante(create, deposito);
                     var aa = await context.SaveChangesAsync();
