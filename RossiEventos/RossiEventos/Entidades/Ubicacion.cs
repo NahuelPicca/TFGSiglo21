@@ -21,7 +21,7 @@ namespace RossiEventos.Entidades
         [Required, StringLength(10), Column(TypeName = "varchar")]
         public string Fila { get; set; }
 
-        [Required, StringLength(10), Column(TypeName = "varchar")]
-        public string Habilitado { get; set; }
+        [Required]
+        public bool Habilitado { get; set; }
     }
 }

@@ -14,9 +14,10 @@ namespace RossiEventos.Utilidades
             CreateMap<CreateUpdateAsignacionVehicTranspDto, AsignacionVehicTransp>();
             CreateMap<CreateUpdateCalidadDto, Calidad>(); 
             CreateMap<CreateUpdateCategoriaDto, Categoria>();
-            CreateMap<CreateUpdateCategoriaDto, Categoria>();
+            CreateMap<CreateUpdateEncabezadoMovStkDto, EncabezadoMovStk>();
             CreateMap<CreateUpdateDepositoDto, Deposito>();
             CreateMap<CreateUpdateProductoDto, Producto>();
+            CreateMap<CreateUpdateRenglonMovStkDto, RenglonMovStk>();
             CreateMap<CreateUpdateTransportistaDto, Transportista>();
             CreateMap<CreateUpdateTipoDeProductoDto, TipoProducto>();
             CreateMap<CreateUpdateTitularDto, Titular>();
@@ -24,6 +25,8 @@ namespace RossiEventos.Utilidades
             CreateMap<CreateUpdateUsuarioDto, Usuario>();
             CreateMap<CreateUpdateVehiculoDto, Vehiculo>();
             CreateMap<Deposito, DepositoDto>().ReverseMap();
+            CreateMap<EncabezadoMovStkDto, EncabezadoMovStk>().ReverseMap();
+            CreateMap<RenglonMovStk, RenglonMovStkDto>().ReverseMap();
             CreateMap<Producto, ProductoDto>().ReverseMap();
             CreateMap<Transportista, TransportistaDto>().ReverseMap();
             CreateMap<TipoProducto, TipoProductoDto>().ReverseMap();
