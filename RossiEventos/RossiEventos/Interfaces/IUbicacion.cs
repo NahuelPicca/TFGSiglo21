@@ -6,7 +6,7 @@
         string Columna { get; set; }
         string Estante { get; set; }
         string Fila { get; set; }
-        string Habilitado { get; set; }
+        bool Habilitado { get; set; }
         string Nombre { get; set; }
     }
 }
