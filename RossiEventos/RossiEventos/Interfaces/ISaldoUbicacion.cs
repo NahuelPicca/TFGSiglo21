@@ -8,5 +8,7 @@
         int ProductoId { get; set; }
         Ubicacion Ubicacion { get; set; }
         int UbicacionId { get; set; }
+
+        int Cantidad { get; set; }
     }
 }
