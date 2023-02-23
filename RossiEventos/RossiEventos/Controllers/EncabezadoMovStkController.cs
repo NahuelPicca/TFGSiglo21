@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RossiEventos.Dto;
@@ -28,6 +29,7 @@ namespace RossiEventos.Controllers
         {
             return await context.EncabezadoMovStk
                                 .Include("Renglones")
+                                .Include("Renglones.SaldoUbi")
                                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
@@ -41,9 +43,35 @@ namespace RossiEventos.Controllers
             {
                 reng.Producto = context.Producto
                                        .FirstOrDefault(p => p.Id == reng.ProductoId);
-                reng.SaldoUbi = context.SaldoUbicacion
-                                       .FirstOrDefault(p => p.Id == reng.SaldoUbiId);
+                var saldo = context.SaldoUbicacion
+                                   .FirstOrDefault(p => p.Id == reng.SaldoUbiId);
+                DefineCantidad(create, reng, saldo);
+                reng.Saldo = saldo;
                 reng.Encabezado = mov;
+            }
+        }
+
+        void DefineCantidad(CreateUpdateEncabezadoMovStkDto create
+                          , RenglonMovStk reng
+                          , SaldoUbicacion saldo)
+        {
+            if (create.TipoMovimiento == TipoComprobante.Ingreso)
+                saldo.Cantidad += reng.Cantidad;
+            else if (create.TipoMovimiento == TipoComprobante.Egreso)
+                saldo.Cantidad -= reng.Cantidad;
+            else if (create.TipoMovimiento == TipoComprobante.Ajuste)
+                saldo.Cantidad = reng.Cantidad;
+        }
+
+        void RestableceCantidad(EncabezadoMovStk enc)
+        {
+            //Solamente se restablece las cantidades si es un Ing o Egr.
+            foreach (var renglon in enc.Renglones)
+            {
+                if (enc.TipoMovimiento == TipoComprobante.Ingreso)
+                    renglon.Saldo.Cantidad -= renglon.Cantidad;
+                else if (enc.TipoMovimiento == TipoComprobante.Egreso)
+                    renglon.Saldo.Cantidad += renglon.Cantidad;
             }
         }
 
@@ -58,18 +86,29 @@ namespace RossiEventos.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteMov(int id)
         {
-            var encab = await GetMovimiento(id);
-            if (encab != null)
+            try
             {
-                var mensaje = $"Se eliminó OK el Movimiento " +
-                              $"Id {nameof(encab.Id)}" +
-                              $"Tipo Movimiento {nameof(encab.TipoMovimiento)} {encab.ComprobanteRelacionado}" +
-                              $"con sus renglones correspondientes.";
-                RemoveObject(encab);
-                context.SaveChanges();
-                return Ok(mensaje);
+                context.Database.BeginTransactionAsync();
+                var encab = await GetMovimiento(id);
+                if (encab != null)
+                {
+                    var mensaje = $"Se eliminó OK el Movimiento " +
+                                  $"Id {nameof(encab.Id)}" +
+                                  $"Tipo Movimiento {nameof(encab.TipoMovimiento)} {encab.ComprobanteRelacionado}" +
+                                  $"con sus renglones correspondientes.";
+                    RestableceCantidad(encab);
+                    RemoveObject(encab);
+                    context.SaveChanges();
+                    context.Database.CommitTransactionAsync();
+                    return Ok(mensaje);
+                }
+                return NotFound($"No se encontró el Movimiento con el Id: {id}");
             }
-            return NotFound($"No se encontró el Movimiento con el Id: {id}");
+            catch (Exception ex)
+            {
+                context.Database.RollbackTransactionAsync();
+                return BadRequest(ex.InnerException.Message);
+            }
         }
 
         [HttpGet()]
@@ -97,38 +136,42 @@ namespace RossiEventos.Controllers
         {
             try
             {
+                context.Database.BeginTransactionAsync();
                 var mov = mapper.Map<EncabezadoMovStk>(create);
                 HidrataPropFaltante(create, mov);
                 context.Add(mov);
                 var cambios = await context.SaveChangesAsync();
+                context.Database.CommitTransactionAsync();
                 return Ok(cambios);
             }
             catch (Exception ex)
             {
+                context.Database.RollbackTransactionAsync();
                 return BadRequest(ex.InnerException.Message);
             }
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] CreateUpdateEncabezadoMovStkDto create)
-        {
-            try
-            {
-                var movDb = context.EncabezadoMovStk
-                                   .FirstOrDefault(c => c.Id == id);
-                if (movDb != null)
-                {
-                    var mov = mapper.Map<CreateUpdateEncabezadoMovStkDto, EncabezadoMovStk>(create, movDb);
-                    HidrataPropFaltante(create, mov);
-                    var aa = await context.SaveChangesAsync();
-                    return Ok(aa);
-                }
-                return NotFound($"No se encontró el Movimiento con el Id: {id}");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.InnerException.Message);
-            }
-        }
+        //Por ahora lo comento, porque me parece que este evento no debería ir..
+        //[HttpPut("{id:int}")]
+        //public async Task<ActionResult> Put(int id, [FromBody] CreateUpdateEncabezadoMovStkDto create)
+        //{
+        //    try
+        //    {
+        //        var movDb = context.EncabezadoMovStk
+        //                           .FirstOrDefault(c => c.Id == id);
+        //        if (movDb != null)
+        //        {
+        //            var mov = mapper.Map<CreateUpdateEncabezadoMovStkDto, EncabezadoMovStk>(create, movDb);
+        //            HidrataPropFaltante(create, mov);
+        //            var aa = await context.SaveChangesAsync();
+        //            return Ok(aa);
+        //        }
+        //        return NotFound($"No se encontró el Movimiento con el Id: {id}");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.InnerException.Message);
+        //    }
+        //}
     }
 }
