@@ -29,7 +29,7 @@ namespace RossiEventos.Controllers
         {
             return await context.EncabezadoMovStk
                                 .Include("Renglones")
-                                .Include("Renglones.SaldoUbi")
+                                .Include("Renglones.Saldo")
                                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
@@ -93,8 +93,8 @@ namespace RossiEventos.Controllers
                 if (encab != null)
                 {
                     var mensaje = $"Se eliminó OK el Movimiento " +
-                                  $"Id {nameof(encab.Id)}" +
-                                  $"Tipo Movimiento {nameof(encab.TipoMovimiento)} {encab.ComprobanteRelacionado}" +
+                                  $"Id {encab.Id}" +
+                                  $"Tipo Movimiento {encab.TipoMovimiento} {encab.ComprobanteRelacionado}" +
                                   $"con sus renglones correspondientes.";
                     RestableceCantidad(encab);
                     RemoveObject(encab);
