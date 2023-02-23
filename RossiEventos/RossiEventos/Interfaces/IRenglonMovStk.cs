@@ -7,7 +7,7 @@
         int MovimientoId { get; set; }
         Producto Producto { get; set; }
         int ProductoId { get; set; }
-        SaldoUbicacion SaldoUbi { get; set; }
+        SaldoUbicacion Saldo { get; set; }
         int SaldoUbiId { get; set; }
     }
 }

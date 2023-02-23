@@ -22,6 +22,7 @@ namespace RossiEventos.Entidades
 
         [ForeignKey(nameof(ProductoId))]
         public Producto Producto { get; set; }
+
         public int Cantidad { get; set; }
     }
 }

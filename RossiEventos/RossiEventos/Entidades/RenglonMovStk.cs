@@ -15,7 +15,7 @@ namespace RossiEventos.Entidades
         public int SaldoUbiId { get; set; }
 
         [ForeignKey(nameof(SaldoUbiId))]
-        public SaldoUbicacion SaldoUbi { get; set; }
+        public SaldoUbicacion Saldo { get; set; }
 
         [Required]
         public int ProductoId { get; set; }
