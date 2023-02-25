@@ -16,6 +16,7 @@ namespace RossiEventos.Entidades
 
         [ForeignKey(nameof(ReservaId))]
         public Reserva Reserva { get; set; }
+    
         public int Cantidad { get; set; }
 
         [Required]

@@ -32,5 +32,7 @@ namespace RossiEventos.Entidades
 
         [Required, StringLength(5), Column(TypeName = "varchar")]
         public string CodigoPostal { get; set; }
+
+        public ICollection<RenglonReserva> Renglones { get; set; } = new HashSet<RenglonReserva>();
     }
 }
