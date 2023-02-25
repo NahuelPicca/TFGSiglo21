@@ -16,13 +16,31 @@ namespace RossiEventos.Entidades
 
         [ForeignKey(nameof(ReservaId))]
         public Reserva Reserva { get; set; }
-    
+
         public int Cantidad { get; set; }
 
-        [Required]
-        public decimal CostoUnitario { get; set; }
+        public decimal PrecioUnit
+        {
+            get
+            {
+                return this.PrecioUnit;
+            }
+            set
+            {
+                this.PrecioUnit = Producto.Precio;
+            }
+        }
 
-        [Required]
-        public decimal CostoTotal { get; set; }
+        public decimal PrecioTotal
+        {
+            get
+            {
+                return this.PrecioTotal;
+            }
+            set
+            {
+                this.PrecioTotal = Cantidad * PrecioUnit;
+            }
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace RossiEventos.Interfaces
         string Marca { get; set; }
         TipoProducto Tipo { get; set; }
         int TipoId { get; set; }
+        decimal Precio { get; set; }
     }
 }

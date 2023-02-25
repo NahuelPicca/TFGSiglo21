@@ -93,12 +93,12 @@ namespace RossiEventos
 
             // Detemina la cantidad de decimales de los campos
             // de dicho objeto. 
-            modelBuilder.Entity<RenglonReserva>()
-                       .Property(o => o.CostoUnitario)
+            modelBuilder.Entity<Producto>()
+                       .Property(o => o.Precio)
                        .HasPrecision(15, 2);
 
             modelBuilder.Entity<RenglonReserva>()
-                        .Property(o => o.CostoTotal)
+                        .Property(o => o.PrecioTotal)
                         .HasPrecision(15, 2);
 
         }

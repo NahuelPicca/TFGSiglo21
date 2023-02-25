@@ -34,5 +34,8 @@ namespace RossiEventos.Entidades
 
         [ForeignKey(nameof(TipoId))]
         public virtual TipoProducto? Tipo { get; set; }
+
+        [Required]
+        public decimal Precio { get; set; }
     }
 }
