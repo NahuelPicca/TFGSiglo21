@@ -57,8 +57,8 @@ namespace RossiEventos.Controllers
             logger.LogInformation("Obtiene un saldo de una ubicación");
             var listSaldo = await GetSaldoUbi();
             var saldo = listSaldo.FirstOrDefault(s => s.Id == id);
-            if (listSaldo != null)
-                return mapper.Map<SaldoUbicacionDto>(listSaldo);
+            if (saldo != null)
+                return mapper.Map<SaldoUbicacionDto>(saldo);
             return NotFound($"No se encontró el Saldo con el Id: {id}");
         }
 
