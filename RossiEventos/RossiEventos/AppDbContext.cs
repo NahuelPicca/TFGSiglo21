@@ -91,7 +91,7 @@ namespace RossiEventos
                         .OnDelete(DeleteBehavior.Restrict);
             //FIN ForeingKeys
 
-            // Detemina la cantidad de decimales de los campos
+            // INI - Detemina la cantidad de decimales de los campos
             // de dicho objeto. 
             modelBuilder.Entity<Producto>()
                        .Property(o => o.Precio)
@@ -103,6 +103,13 @@ namespace RossiEventos
             modelBuilder.Entity<RenglonReserva>()
                         .Property(o => o.PrecioUnit)
                         .HasPrecision(15, 2);
+            //FIN
+
+            //INI campos calculados
+            modelBuilder.Entity<RenglonReserva>()
+                        .Property(u => u.PrecioTotal)
+                        .HasComputedColumnSql("Cantidad*PrecioUnit");
+            //FIN campos calculados
         }
         public DbSet<AsignacionVehicTransp> AsignacionVehicTransp { get; set; }
         public DbSet<Calidad> Calidad { get; set; }
