@@ -100,7 +100,9 @@ namespace RossiEventos
             modelBuilder.Entity<RenglonReserva>()
                         .Property(o => o.PrecioTotal)
                         .HasPrecision(15, 2);
-
+            modelBuilder.Entity<RenglonReserva>()
+                        .Property(o => o.PrecioUnit)
+                        .HasPrecision(15, 2);
         }
         public DbSet<AsignacionVehicTransp> AsignacionVehicTransp { get; set; }
         public DbSet<Calidad> Calidad { get; set; }
