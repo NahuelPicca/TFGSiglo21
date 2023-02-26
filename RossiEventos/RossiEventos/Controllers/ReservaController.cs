@@ -97,5 +97,23 @@ namespace RossiEventos.Controllers
                 return BadRequest(ex.InnerException.Message);
             }
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> PutReservaDto(int id, [FromBody] CreateUpdateReservaDto create)
+        {
+            try
+            {
+                var reservaDb = context.Reservas
+                                       .FirstOrDefault(t => t.Id == id);
+                var reserva = mapper.Map<CreateUpdateReservaDto, Reserva>(create, reservaDb);
+                HidrataPropFaltante(create, reserva);
+                var aa = await context.SaveChangesAsync();
+                return Ok(aa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
+        }
     }
 }
