@@ -19,28 +19,8 @@ namespace RossiEventos.Entidades
 
         public int Cantidad { get; set; }
 
-        public decimal PrecioUnit
-        {
-            get
-            {
-                return this.PrecioUnit;
-            }
-            set
-            {
-                this.PrecioUnit = Producto.Precio;
-            }
-        }
+        public decimal PrecioUnit { get; set; }
 
-        public decimal PrecioTotal
-        {
-            get
-            {
-                return this.PrecioTotal;
-            }
-            set
-            {
-                this.PrecioTotal = Cantidad * PrecioUnit;
-            }
-        }
+        public decimal PrecioTotal { get; private set; }
     }
 }

@@ -17,7 +17,7 @@ namespace RossiEventos.Utilidades
             CreateMap<CreateUpdateEncabezadoMovStkDto, EncabezadoMovStk>();
             CreateMap<CreateUpdateDepositoDto, Deposito>();
             CreateMap<CreateUpdateProductoDto, Producto>();
-            CreateMap<CreateUpdateRenglonDeReservaDto, RenglonMovStk>();
+            CreateMap<CreateUpdateRenglonDeReservaDto, RenglonReserva>();
             CreateMap<CreateUpdateRenglonMovStkDto, RenglonMovStk>();
             CreateMap<CreateUpdateReservaDto, Reserva>();
             CreateMap<CreateUpdateSaldoUbiDto, SaldoUbicacion>();
