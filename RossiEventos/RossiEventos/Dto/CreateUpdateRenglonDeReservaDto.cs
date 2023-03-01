@@ -8,7 +8,6 @@ namespace RossiEventos.Dto
     {
         public int ProductoId { get; set; }
         public int Cantidad { get; set; }
-
-        public int RenglonReservaId { get; set; }
+        public int Id { get; set; }
     }
 }

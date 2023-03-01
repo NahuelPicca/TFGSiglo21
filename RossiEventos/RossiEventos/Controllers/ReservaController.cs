@@ -37,6 +37,12 @@ namespace RossiEventos.Controllers
                           .FirstOrDefault(p => p.Id == reng.ProductoId);
         }
 
+        async Task<Reserva> GetReserva(int id)
+        {
+            var listReserva = await GetListReserva();
+            return listReserva.FirstOrDefault(t => t.Id == id);
+        }
+
         Usuario GetUsuario(CreateUpdateReservaDto create)
         {
             return context.Usuario
@@ -52,10 +58,46 @@ namespace RossiEventos.Controllers
             foreach (var reng in reserva.Renglones)
             {
                 //DefineCantidad(create, reng, saldo);
+                if (reng.Id > 0)
+                    reng.FechaModificacion = DateTime.Now;
                 var producto = GetProducto(reng);
                 reng.PrecioUnit = producto.Precio;
                 reng.Producto = producto;
                 reng.Reserva = reserva;
+            }
+        }
+
+        void RemoveObject(Reserva reserva)
+        {
+            //Elimina la reserva con sus renglones.
+            context.Reservas.Remove(reserva);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeleteReserva(int id)
+        {
+            try
+            {
+                context.Database.BeginTransactionAsync();
+                var reserva = await GetReserva(id);
+                if (reserva != null)
+                {
+                    var mensaje = $"Se eliminó OK la Reserva con " +
+                                  $"Id {reserva.Id}" +
+                                  $"NroReserva {reserva.NroReserva}" +
+                                  $"con sus renglones correspondientes.";
+                    // RestableceCantidad(reserva);
+                    RemoveObject(reserva);
+                    context.SaveChanges();
+                    context.Database.CommitTransactionAsync();
+                    return Ok(mensaje);
+                }
+                return NotFound($"No se encontró el Movimiento con el Id: {id}");
+            }
+            catch (Exception ex)
+            {
+                context.Database.RollbackTransactionAsync();
+                return BadRequest(ex.InnerException.Message);
             }
         }
 
@@ -103,10 +145,10 @@ namespace RossiEventos.Controllers
         {
             try
             {
-                var reservaDb = context.Reservas
-                                       .FirstOrDefault(t => t.Id == id);
+                Reserva reservaDb = await GetReserva(id);
                 var reserva = mapper.Map<CreateUpdateReservaDto, Reserva>(create, reservaDb);
                 HidrataPropFaltante(create, reserva);
+                context.Reservas.Update(reserva);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
             }
