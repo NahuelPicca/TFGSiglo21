@@ -78,7 +78,7 @@ namespace RossiEventos.Controllers
         {
             try
             {
-                context.Database.BeginTransactionAsync();
+                await context.Database.BeginTransactionAsync();
                 var reserva = await GetReserva(id);
                 if (reserva != null)
                 {
@@ -89,14 +89,14 @@ namespace RossiEventos.Controllers
                     // RestableceCantidad(reserva);
                     RemoveObject(reserva);
                     context.SaveChanges();
-                    context.Database.CommitTransactionAsync();
+                    await context.Database.CommitTransactionAsync();
                     return Ok(mensaje);
                 }
                 return NotFound($"No se encontró el Movimiento con el Id: {id}");
             }
             catch (Exception ex)
             {
-                context.Database.RollbackTransactionAsync();
+                await context.Database.RollbackTransactionAsync();
                 return BadRequest(ex.InnerException.Message);
             }
         }
@@ -105,7 +105,7 @@ namespace RossiEventos.Controllers
         public async Task<ActionResult<List<ReservaDto>>> GetListaResrvaDto()
         {
             logger.LogInformation("Lista de reservas");
-            var listReserva = GetListReserva();
+            var listReserva = await GetListReserva();
             return mapper.Map<List<ReservaDto>>(listReserva);
         }
 
@@ -125,17 +125,17 @@ namespace RossiEventos.Controllers
         {
             try
             {
-                context.Database.BeginTransactionAsync();
+                await context.Database.BeginTransactionAsync();
                 var reserva = mapper.Map<Reserva>(create);
                 HidrataPropFaltante(create, reserva);
                 context.Add(reserva);
                 var cambios = await context.SaveChangesAsync();
-                context.Database.CommitTransactionAsync();
+                await context.Database.CommitTransactionAsync();
                 return Ok(cambios);
             }
             catch (Exception ex)
             {
-                context.Database.RollbackTransactionAsync();
+                await context.Database.RollbackTransactionAsync();
                 return BadRequest(ex.InnerException.Message);
             }
         }

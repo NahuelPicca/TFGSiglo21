@@ -88,7 +88,7 @@ namespace RossiEventos.Controllers
         {
             try
             {
-                context.Database.BeginTransactionAsync();
+                await context.Database.BeginTransactionAsync();
                 var encab = await GetMovimiento(id);
                 if (encab != null)
                 {
@@ -99,14 +99,14 @@ namespace RossiEventos.Controllers
                     RestableceCantidad(encab);
                     RemoveObject(encab);
                     context.SaveChanges();
-                    context.Database.CommitTransactionAsync();
+                    await context.Database.CommitTransactionAsync();
                     return Ok(mensaje);
                 }
                 return NotFound($"No se encontró el Movimiento con el Id: {id}");
             }
             catch (Exception ex)
             {
-                context.Database.RollbackTransactionAsync();
+                await context.Database.RollbackTransactionAsync();
                 return BadRequest(ex.InnerException.Message);
             }
         }
@@ -136,17 +136,17 @@ namespace RossiEventos.Controllers
         {
             try
             {
-                context.Database.BeginTransactionAsync();
+                await context.Database.BeginTransactionAsync();
                 var mov = mapper.Map<EncabezadoMovStk>(create);
                 HidrataPropFaltante(create, mov);
                 context.Add(mov);
                 var cambios = await context.SaveChangesAsync();
-                context.Database.CommitTransactionAsync();
+                await context.Database.CommitTransactionAsync();
                 return Ok(cambios);
             }
             catch (Exception ex)
             {
-                context.Database.RollbackTransactionAsync();
+                await context.Database.RollbackTransactionAsync();
                 return BadRequest(ex.InnerException.Message);
             }
         }
