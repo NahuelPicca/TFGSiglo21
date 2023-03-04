@@ -3,6 +3,7 @@
 //using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Reflection.Metadata;
 
 namespace RossiEventos
 {
@@ -110,6 +111,13 @@ namespace RossiEventos
                         .Property(u => u.PrecioTotal)
                         .HasComputedColumnSql("Cantidad*PrecioUnit");
             //FIN campos calculados
+
+
+            //INI campos que aceptan NULL
+            modelBuilder.Entity<Pedido>()
+                        .Property(b => b.AsignacionId)
+                        .IsRequired(false);//optinal case
+            //INI campos que aceptan NULL
         }
         public DbSet<AsignacionVehicTransp> AsignacionVehicTransp { get; set; }
         public DbSet<Calidad> Calidad { get; set; }

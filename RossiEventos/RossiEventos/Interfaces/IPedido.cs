@@ -3,7 +3,7 @@
     public interface IPedido
     {
         AsignacionVehicTransp Asignacion { get; set; }
-        int AsignacionId { get; set; }
+        int? AsignacionId { get; set; }
         string Factura { get; set; }
         DateTime FechaPedido { get; set; }
         string NroPedido { get; set; }

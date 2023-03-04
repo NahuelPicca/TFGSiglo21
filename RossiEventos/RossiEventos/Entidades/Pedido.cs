@@ -5,8 +5,8 @@ namespace RossiEventos.Entidades
 {
     public class Pedido : Base, IPedido
     {
-        [Required]
-        public int AsignacionId { get; set; }
+        //[Required]
+        public int? AsignacionId { get; set; }
 
         [ForeignKey(nameof(AsignacionId))]
         public AsignacionVehicTransp Asignacion { get; set; }
