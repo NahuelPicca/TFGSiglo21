@@ -83,8 +83,60 @@ namespace RossiEventos.Controllers
         {
             if (pedido.Id > 0)
                 pedido.FechaModificacion = DateTime.Now;
-            pedido.Factura = Guid.NewGuid().ToString().Substring(1,13);
+            pedido.Factura = Guid.NewGuid().ToString().Substring(1, 13);
             pedido.NroPedido = Guid.NewGuid().ToString().Substring(1, 13);
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> PutPedidoDto(int id, [FromBody] CreateUpdatePedidoDto create)
+        {
+            try
+            {
+                Pedido pedidoDb = await GetPedido(id);
+                var pedido = mapper.Map<CreateUpdatePedidoDto, Pedido>(create, pedidoDb);
+                HidrataPropFaltante(create, pedido);
+                context.Pedidos.Update(pedido);
+                var aa = await context.SaveChangesAsync();
+                return Ok(aa);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
+        }
+
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeletePedido(int id)
+        {
+            try
+            {
+                await context.Database.BeginTransactionAsync();
+                var pedido = await GetPedido(id);
+                if (pedido != null)
+                {
+                    var mensaje = $"Se eliminó OK el pedido con " +
+                                  $"Id {pedido.Id}" +
+                                  $"NroPedido {pedido.NroPedido}";
+                    // RestableceCantidad(reserva);
+                    RemoveObject(pedido);
+                    context.SaveChanges();
+                    await context.Database.CommitTransactionAsync();
+                    return Ok(mensaje);
+                }
+                return NotFound($"No se encontró el Pedido con el Id: {id}");
+            }
+            catch (Exception ex)
+            {
+                await context.Database.RollbackTransactionAsync();
+                return BadRequest(ex.InnerException.Message);
+            }
+        }
+
+        void RemoveObject(Pedido pedido)
+        {
+            //Elimina el pedido.
+            context.Pedidos.Remove(pedido);
         }
     }
 }
