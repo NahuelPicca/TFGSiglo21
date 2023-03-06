@@ -12,8 +12,8 @@ namespace RossiEventos.Entidades
         [ForeignKey(nameof(PedidoId))]
         public Pedido Pedido { get; set; }
 
-        [Required]
-        public int ComproEntreId { get; set; }
+        //[Required]
+        public int? ComproEntreId { get; set; }
 
         [ForeignKey(nameof(ComproEntreId))]
         public ComprobanteEntrega ComprobanteEntre { get; set; }

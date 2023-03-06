@@ -117,6 +117,10 @@ namespace RossiEventos
             modelBuilder.Entity<Pedido>()
                         .Property(b => b.AsignacionId)
                         .IsRequired(false);//optinal case
+
+            modelBuilder.Entity<SeguimientoPedido>()
+                        .Property(b => b.ComproEntreId)
+                        .IsRequired(false);//optinal case
             //INI campos que aceptan NULL
         }
         public DbSet<AsignacionVehicTransp> AsignacionVehicTransp { get; set; }

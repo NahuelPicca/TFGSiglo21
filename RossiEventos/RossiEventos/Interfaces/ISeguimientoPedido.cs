@@ -3,7 +3,7 @@
     public interface ISeguimientoPedido
     {
         ComprobanteEntrega ComprobanteEntre { get; set; }
-        int ComproEntreId { get; set; }
+        int? ComproEntreId { get; set; }
         string Descripcion { get; set; }
         DateTime FechaEntrega { get; set; }
         DateTime FechaInicio { get; set; }
