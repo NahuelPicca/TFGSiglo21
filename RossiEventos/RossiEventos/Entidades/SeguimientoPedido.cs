@@ -26,8 +26,6 @@ namespace RossiEventos.Entidades
 
         [Required, StringLength(5000), Column(TypeName = "varchar")]
         public string Descripcion { get; set; }
-
-        [Required, StringLength(10), Column(TypeName = "varchar")]
-        public string Ubicacion { get; set; }//Nombre de la localidad o coordenadas-->Capaz que hay que agregar nuevos campos
+        public ICollection<Localizacion> Localizaciones { get; set; } = new HashSet<Localizacion>();
     }
 }

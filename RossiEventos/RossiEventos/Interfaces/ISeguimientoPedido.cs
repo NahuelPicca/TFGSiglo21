@@ -9,6 +9,5 @@
         DateTime FechaInicio { get; set; }
         Pedido Pedido { get; set; }
         int PedidoId { get; set; }
-        string Ubicacion { get; set; }
     }
 }
