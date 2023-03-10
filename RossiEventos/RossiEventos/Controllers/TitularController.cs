@@ -59,7 +59,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostTitularDto([FromBody] CreateUpdateTitularDto titularDto)
+        public async Task<ActionResult> PostTitularDto([FromBody] CUTitularDto titularDto)
         {
             try
             {
@@ -75,12 +75,12 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> PutTitularDto(int id, [FromBody] CreateUpdateTitularDto create)
+        public async Task<ActionResult> PutTitularDto(int id, [FromBody] CUTitularDto create)
         {
             try
             {
                 var titularDb = context.Titular.FirstOrDefault(t => t.Id == id);
-                var titular = mapper.Map<CreateUpdateTitularDto, Titular>(create, titularDb);
+                var titular = mapper.Map<CUTitularDto, Titular>(create, titularDb);
                 titular.FechaModificacion = DateTime.Now;
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);

@@ -32,7 +32,7 @@ namespace RossiEventos.Controllers
                                 .ToListAsync();
         }
 
-        void HidrataPropFaltante(CreateUpdateSaldoUbiDto saldoDto
+        void HidrataPropFaltante(CUSaldoUbiDto saldoDto
                                , SaldoUbicacion saldo)
         {
             saldo.Producto = context.Producto
@@ -63,7 +63,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostProductoDto([FromBody] CreateUpdateSaldoUbiDto saldoDto)
+        public async Task<ActionResult> PostProductoDto([FromBody] CUSaldoUbiDto saldoDto)
         {
             try
             {

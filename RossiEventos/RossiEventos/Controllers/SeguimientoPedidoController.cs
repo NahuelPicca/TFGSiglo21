@@ -58,7 +58,7 @@ namespace RossiEventos.Controllers
 
 
         [HttpPost()]
-        public async Task<ActionResult> PostSeguimientoDto([FromBody] CreateUpdateSeguimientoPedidoDto create)
+        public async Task<ActionResult> PostSeguimientoDto([FromBody] CUSeguimientoPedidoDto create)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace RossiEventos.Controllers
             }
         }
 
-        void HidrataPropFaltante(CreateUpdateSeguimientoPedidoDto create
+        void HidrataPropFaltante(CUSeguimientoPedidoDto create
                                , SeguimientoPedido seguimiento)
         {
             if (seguimiento.Id > 0)

@@ -33,7 +33,7 @@ namespace RossiEventos.Controllers
                                 .FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        void HidrataPropFaltante(CreateUpdateEncabezadoMovStkDto create
+        void HidrataPropFaltante(CUEncabezadoMovStkDto create
                                , EncabezadoMovStk mov)
         {
             if (mov.Id > 0)
@@ -51,7 +51,7 @@ namespace RossiEventos.Controllers
             }
         }
 
-        void DefineCantidad(CreateUpdateEncabezadoMovStkDto create
+        void DefineCantidad(CUEncabezadoMovStkDto create
                           , RenglonMovStk reng
                           , SaldoUbicacion saldo)
         {
@@ -132,7 +132,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostMovimentoDto([FromBody] CreateUpdateEncabezadoMovStkDto create)
+        public async Task<ActionResult> PostMovimentoDto([FromBody] CUEncabezadoMovStkDto create)
         {
             try
             {

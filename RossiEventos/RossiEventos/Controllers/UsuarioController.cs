@@ -57,7 +57,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostUsuarioDto([FromBody] CreateUpdateUsuarioDto usuarioDto)
+        public async Task<ActionResult> PostUsuarioDto([FromBody] CUUsuarioDto usuarioDto)
         {
             try
             {
@@ -74,12 +74,12 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPut("id:int")]
-        public async Task<ActionResult> PostUsuarioDto(int id, [FromBody] CreateUpdateUsuarioDto create)
+        public async Task<ActionResult> PostUsuarioDto(int id, [FromBody] CUUsuarioDto create)
         {
             try
             {
                 var usuarioDb = context.Usuario.FirstOrDefault(p => p.Id == id);
-                var usuario = mapper.Map<CreateUpdateUsuarioDto, Usuario>(create, usuarioDb);
+                var usuario = mapper.Map<CUUsuarioDto, Usuario>(create, usuarioDb);
                 usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuario.Contraseña);
                 usuario.FechaModificacion = DateTime.Now;
                 var aa = await context.SaveChangesAsync();

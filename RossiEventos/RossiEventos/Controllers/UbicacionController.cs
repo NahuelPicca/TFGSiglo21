@@ -60,7 +60,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostUbicacionDto([FromBody] CreateUpdateUbicacionDto create)
+        public async Task<ActionResult> PostUbicacionDto([FromBody] CUUbicacionDto create)
         {
             try
             {
@@ -76,14 +76,14 @@ namespace RossiEventos.Controllers
             }
         }
 
-        void HidrataPropFaltante(CreateUpdateUbicacionDto create, Ubicacion ubi)
+        void HidrataPropFaltante(CUUbicacionDto create, Ubicacion ubi)
         {
             if (ubi.Id > 0)
                 ubi.FechaModificacion = DateTime.Now;
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] CreateUpdateUbicacionDto create)
+        public async Task<ActionResult> Put(int id, [FromBody] CUUbicacionDto create)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace RossiEventos.Controllers
                                    .FirstOrDefault(c => c.Id == id);
                 if (ubiDb != null)
                 {
-                    var ubicacion = mapper.Map<CreateUpdateUbicacionDto, Ubicacion>(create, ubiDb);
+                    var ubicacion = mapper.Map<CUUbicacionDto, Ubicacion>(create, ubiDb);
                     HidrataPropFaltante(create, ubicacion);
                     var aa = await context.SaveChangesAsync();
                     return Ok(aa);

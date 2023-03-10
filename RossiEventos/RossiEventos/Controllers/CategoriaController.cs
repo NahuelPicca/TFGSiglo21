@@ -59,7 +59,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostCategoriaDto([FromBody] CreateUpdateCategoriaDto categoriaDto)
+        public async Task<ActionResult> PostCategoriaDto([FromBody] CUCategoriaDto categoriaDto)
         {
             try
             {
@@ -75,12 +75,12 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> PutCategoriaDto(int id, [FromBody] CreateUpdateCategoriaDto create)
+        public async Task<ActionResult> PutCategoriaDto(int id, [FromBody] CUCategoriaDto create)
         {
             try
             {
                 var categoriaDb = context.Categoria.FirstOrDefault(c => c.Id == id);
-                var categoria = mapper.Map<CreateUpdateCategoriaDto, Categoria>(create, categoriaDb);
+                var categoria = mapper.Map<CUCategoriaDto, Categoria>(create, categoriaDb);
                 categoria.FechaModificacion = DateTime.Now;
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RossiEventos.Dto
 {
-    public class CreateUpdateReservaDto
+    public class CUReservaDto
     {
         public DateTime FechaReserva { get; set; }     
         public string NroReserva { get; set; }// Ejemplo A20/A21/A22
@@ -15,7 +15,7 @@ namespace RossiEventos.Dto
         public string ProvinciaEvento { get; set; }
         public string CodigoPostal { get; set; }
         public int UsuarioId { get; set; }
-        public ICollection<CreateUpdateRenglonDeReservaDto> Renglones { get; set; }
-             = new HashSet<CreateUpdateRenglonDeReservaDto>();
+        public ICollection<CURenglonDeReservaDto> Renglones { get; set; }
+             = new HashSet<CURenglonDeReservaDto>();
     }
 }

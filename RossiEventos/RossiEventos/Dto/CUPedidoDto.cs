@@ -2,7 +2,7 @@
 
 namespace RossiEventos.Dto
 {
-    public class CreateUpdatePedidoDto
+    public class CUPedidoDto
     {
         public int? AsignacionId { get; set; }
     //    string Factura { get; set; }

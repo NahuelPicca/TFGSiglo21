@@ -2,7 +2,7 @@
 
 namespace RossiEventos.Dto
 {
-    public class CreateUpdateUsuarioDto
+    public class CUUsuarioDto
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }

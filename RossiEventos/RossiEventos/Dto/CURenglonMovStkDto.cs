@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RossiEventos.Dto
 {
-    public class CreateUpdateRenglonMovStkDto
+    public class CURenglonMovStkDto
     {
         public int MovimientoId { get; set; }
     //   public EncabezadoMovStk Encabezado { get; set; }

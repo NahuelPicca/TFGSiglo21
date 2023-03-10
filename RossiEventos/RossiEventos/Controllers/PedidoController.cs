@@ -60,7 +60,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostPedidoDto([FromBody] CreateUpdatePedidoDto create)
+        public async Task<ActionResult> PostPedidoDto([FromBody] CUPedidoDto create)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace RossiEventos.Controllers
             }
         }
 
-        void HidrataPropFaltante(CreateUpdatePedidoDto create, Pedido pedido)
+        void HidrataPropFaltante(CUPedidoDto create, Pedido pedido)
         {
             if (pedido.Id > 0)
                 pedido.FechaModificacion = DateTime.Now;
@@ -88,12 +88,12 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> PutPedidoDto(int id, [FromBody] CreateUpdatePedidoDto create)
+        public async Task<ActionResult> PutPedidoDto(int id, [FromBody] CUPedidoDto create)
         {
             try
             {
                 Pedido pedidoDb = await GetPedido(id);
-                var pedido = mapper.Map<CreateUpdatePedidoDto, Pedido>(create, pedidoDb);
+                var pedido = mapper.Map<CUPedidoDto, Pedido>(create, pedidoDb);
                 HidrataPropFaltante(create, pedido);
                 context.Pedidos.Update(pedido);
                 var aa = await context.SaveChangesAsync();

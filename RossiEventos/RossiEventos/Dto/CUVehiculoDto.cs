@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RossiEventos.Dto
 {
-    public class CreateUpdateVehiculoDto
+    public class CUVehiculoDto
     {
         public string Patente { get; set; }
         public string Marca { get; set; }

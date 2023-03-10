@@ -24,7 +24,7 @@ namespace RossiEventos.Controllers
             this.mapper = mapper;
         }
 
-        void HidrataPropFaltante(CreateUpdateAsignacionVehicTranspDto asigDto, AsignacionVehicTransp asig)
+        void HidrataPropFaltante(CUAsignacionVehicTranspDto asigDto, AsignacionVehicTransp asig)
         {
             var transp = context.Transportista.FirstOrDefault(t => t.Id == asigDto.TransportitaId);
             var vehiculo = context.Vehiculo.FirstOrDefault(v => v.Id == asigDto.VehiculoId);
@@ -78,7 +78,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostVehiculoDto([FromBody] CreateUpdateAsignacionVehicTranspDto create)
+        public async Task<ActionResult> PostVehiculoDto([FromBody] CUAsignacionVehicTranspDto create)
         {
             try
             {
@@ -95,12 +95,12 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] CreateUpdateAsignacionVehicTranspDto create)
+        public async Task<ActionResult> Put(int id, [FromBody] CUAsignacionVehicTranspDto create)
         {
             try
             {
                 var asignDb = context.AsignacionVehicTransp.FirstOrDefault(c => c.Id == id);
-                var asign = mapper.Map<CreateUpdateAsignacionVehicTranspDto, AsignacionVehicTransp>(create, asignDb);
+                var asign = mapper.Map<CUAsignacionVehicTranspDto, AsignacionVehicTransp>(create, asignDb);
                 HidrataPropFaltante(create, asign);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);

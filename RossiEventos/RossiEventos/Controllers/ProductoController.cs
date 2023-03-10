@@ -23,7 +23,7 @@ namespace RossiEventos.Controllers
             this.mapper = mapper;
         }
 
-        void HidrataPropFaltante(CreateUpdateProductoDto productoDto, Producto producto)
+        void HidrataPropFaltante(CUProductoDto productoDto, Producto producto)
         {
             var calidad = context.Calidad.FirstOrDefault(c => c.Id == productoDto.CalidadId);
             var tipo = context.TipoProducto.FirstOrDefault(c => c.Id == productoDto.TipoId);
@@ -73,7 +73,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostProductoDto([FromBody] CreateUpdateProductoDto productoDto)
+        public async Task<ActionResult> PostProductoDto([FromBody] CUProductoDto productoDto)
         {
             try
             {
@@ -90,13 +90,13 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> PutProductoDto(int id, [FromBody] CreateUpdateProductoDto create)
+        public async Task<ActionResult> PutProductoDto(int id, [FromBody] CUProductoDto create)
         {
             try
             {
                 var productDb = context.Producto.FirstOrDefault(p => p.Id == id);
 
-                var producto = mapper.Map<CreateUpdateProductoDto, Producto>(create, productDb);
+                var producto = mapper.Map<CUProductoDto, Producto>(create, productDb);
                 HidrataPropFaltante(create, producto);
                 //context.Entry = EntityState.Modified;
                 var aa = await context.SaveChangesAsync();

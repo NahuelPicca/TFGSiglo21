@@ -60,7 +60,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostVehiculoDto([FromBody] CreateUpdateDepositoDto create)
+        public async Task<ActionResult> PostVehiculoDto([FromBody] CUDepositoDto create)
         {
             try
             {
@@ -76,21 +76,21 @@ namespace RossiEventos.Controllers
             }
         }
 
-        void HidrataPropFaltante(CreateUpdateDepositoDto create, Deposito dep)
+        void HidrataPropFaltante(CUDepositoDto create, Deposito dep)
         {
             if (dep.Id > 0)
                 dep.FechaModificacion = DateTime.Now;
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] CreateUpdateDepositoDto create)
+        public async Task<ActionResult> Put(int id, [FromBody] CUDepositoDto create)
         {
             try
             {
                 var depDb = context.Deposito.FirstOrDefault(c => c.Id == id);
                 if (depDb != null)
                 {
-                    var deposito = mapper.Map<CreateUpdateDepositoDto, Deposito>(create, depDb);
+                    var deposito = mapper.Map<CUDepositoDto, Deposito>(create, depDb);
                     HidrataPropFaltante(create, deposito);
                     var aa = await context.SaveChangesAsync();
                     return Ok(aa);

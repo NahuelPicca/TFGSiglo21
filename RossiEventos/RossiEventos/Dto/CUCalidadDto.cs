@@ -1,6 +1,6 @@
 ﻿namespace RossiEventos.Dto
 {
-    public class CreateUpdateCalidadDto
+    public class CUCalidadDto
     {
         public string Codigo { get; set; }
         public string Nombre { get; set; }

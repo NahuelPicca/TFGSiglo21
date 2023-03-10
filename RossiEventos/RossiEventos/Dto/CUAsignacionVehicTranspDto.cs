@@ -1,6 +1,6 @@
 ﻿namespace RossiEventos.Dto
 {
-    public class CreateUpdateAsignacionVehicTranspDto
+    public class CUAsignacionVehicTranspDto
     {
         public int TransportitaId { get; set; }
         public int VehiculoId { get; set; }

@@ -64,7 +64,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostVehiculoDto([FromBody] CreateUpdateVehiculoDto vehiculoDto)
+        public async Task<ActionResult> PostVehiculoDto([FromBody] CUVehiculoDto vehiculoDto)
         {
             try
             {
@@ -80,12 +80,12 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] CreateUpdateVehiculoDto create)
+        public async Task<ActionResult> Put(int id, [FromBody] CUVehiculoDto create)
         {
             try
             {
                 var vehiculoDb = context.Vehiculo.FirstOrDefault(c => c.Id == id);
-                var vehiculo = mapper.Map<CreateUpdateVehiculoDto, Vehiculo>(create, vehiculoDb);
+                var vehiculo = mapper.Map<CUVehiculoDto, Vehiculo>(create, vehiculoDb);
                 HidrataPropiedadesFaltantes(vehiculo);
                 var cambios = await context.SaveChangesAsync();
                 return Ok(cambios);

@@ -43,13 +43,13 @@ namespace RossiEventos.Controllers
             return listReserva.FirstOrDefault(t => t.Id == id);
         }
 
-        Usuario GetUsuario(CreateUpdateReservaDto create)
+        Usuario GetUsuario(CUReservaDto create)
         {
             return context.Usuario
                           .FirstOrDefault(p => p.Id == create.UsuarioId);
         }
 
-        void HidrataPropFaltante(CreateUpdateReservaDto create
+        void HidrataPropFaltante(CUReservaDto create
                                , Reserva reserva)
         {
             if (reserva.Id > 0)
@@ -121,7 +121,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost()]
-        public async Task<ActionResult> PostReservaDto([FromBody] CreateUpdateReservaDto create)
+        public async Task<ActionResult> PostReservaDto([FromBody] CUReservaDto create)
         {
             try
             {
@@ -141,12 +141,12 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> PutReservaDto(int id, [FromBody] CreateUpdateReservaDto create)
+        public async Task<ActionResult> PutReservaDto(int id, [FromBody] CUReservaDto create)
         {
             try
             {
                 Reserva reservaDb = await GetReserva(id);
-                var reserva = mapper.Map<CreateUpdateReservaDto, Reserva>(create, reservaDb);
+                var reserva = mapper.Map<CUReservaDto, Reserva>(create, reservaDb);
                 HidrataPropFaltante(create, reserva);
                 context.Reservas.Update(reserva);
                 var aa = await context.SaveChangesAsync();
