@@ -86,5 +86,58 @@ namespace RossiEventos.Controllers
             foreach (var localiz in seguimiento.Localizaciones)
                 localiz.Seguimiento = seguimiento;
         }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromBody] CUSeguimientoPedidoDto create)
+        {
+            try
+            {
+                var seguimiento = await GetSeguimieto(id);
+                if (seguimiento != null)
+                {
+                    var seg = mapper.Map<CUSeguimientoPedidoDto, SeguimientoPedido>(create, seguimiento);
+                    HidrataPropFaltante(create, seg);
+                    var aa = await context.SaveChangesAsync();
+                    return Ok(aa);
+                }
+                return NotFound($"No se encontró el Seguimiento con el Id: {id}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
+        }
+
+        void RemoveObject(SeguimientoPedido seg)
+        {
+            //Limpia los renglones y el encabezado del contexto.
+            context.SeguimientoPedido.Remove(seg);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult> DeleteSeguimiento(int id)
+        {
+            try
+            {
+                await context.Database.BeginTransactionAsync();
+                var seg = await GetSeguimieto(id);
+                if (seg != null)
+                {
+                    var mensaje = $"Se eliminó OK el Seguimiento " +
+                                  $"Id {seg.Id}" +
+                                  $"con sus renglones localizaciones correspondientes.";
+                    RemoveObject(seg);
+                    context.SaveChanges();
+                    await context.Database.CommitTransactionAsync();
+                    return Ok(mensaje);
+                }
+                return NotFound($"No se encontró el Seguimiento con el Id: {id}");
+            }
+            catch (Exception ex)
+            {
+                await context.Database.RollbackTransactionAsync();
+                return BadRequest(ex.InnerException.Message);
+            }
+        }
     }
 }
