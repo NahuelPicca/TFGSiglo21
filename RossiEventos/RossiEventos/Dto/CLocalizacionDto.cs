@@ -5,11 +5,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RossiEventos.Dto
 {
-    public class CULocalizacionesDto
+    public class CLocalizacionDto
     {
         public Estado Estado { get; set; }
         public DateTime Fecha { get; set; }
         public string Descripcion { get; set; }
         public string Localidad { get; set; }
+        public int SeguimientoId { get; set; }
     }
 }

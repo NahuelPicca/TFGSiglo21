@@ -9,7 +9,7 @@ namespace RossiEventos.Dto
         public DateTime FechaEntrega { get; set; }
         public DateTime FechaInicio { get; set; }
         public int PedidoId { get; set; }
-        public ICollection<CULocalizacionesDto> Localizaciones { get; set; }
-            = new HashSet<CULocalizacionesDto>();
+        public ICollection<CLocalizacionDto> Localizaciones { get; set; }
+            = new HashSet<CLocalizacionDto>();
     }
 }

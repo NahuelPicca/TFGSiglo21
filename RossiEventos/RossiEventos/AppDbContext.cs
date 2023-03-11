@@ -116,11 +116,15 @@ namespace RossiEventos
             //INI campos que aceptan NULL
             modelBuilder.Entity<Pedido>()
                         .Property(b => b.AsignacionId)
-                        .IsRequired(false);//optinal case
+                        .IsRequired(false);
 
             modelBuilder.Entity<SeguimientoPedido>()
                         .Property(b => b.ComproEntreId)
-                        .IsRequired(false);//optinal case
+                        .IsRequired(false);
+
+            //modelBuilder.Entity<SeguimientoPedido>()
+            //        .Property(b => b.Localizaciones)
+            //        .IsRequired(false);
             //INI campos que aceptan NULL
         }
         public DbSet<AsignacionVehicTransp> AsignacionVehicTransp { get; set; }
@@ -142,6 +146,7 @@ namespace RossiEventos
         public DbSet<SaldoUbicacion> SaldoUbicacion { get; set; }
         public DbSet<RenglonMovStk> RenglonMov { get; set; }
         public DbSet<TipoProducto> TipoProducto { get; set; }
+        public DbSet<Localizacion> Localizacion { get; set; }
 
     }
 }

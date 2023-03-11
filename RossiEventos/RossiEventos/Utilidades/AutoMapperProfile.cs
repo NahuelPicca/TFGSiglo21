@@ -16,7 +16,8 @@ namespace RossiEventos.Utilidades
             CreateMap<CUCategoriaDto, Categoria>();
             CreateMap<CUDepositoDto, Deposito>();
             CreateMap<CUEncabezadoMovStkDto, EncabezadoMovStk>();
-            CreateMap<CULocalizacionesDto, Localizacion>();
+            CreateMap<CLocalizacionDto, Localizacion>();
+            CreateMap<ULocalizacionDto, Localizacion>();
             CreateMap<CUPedidoDto, Pedido>();
             CreateMap<CUProductoDto, Producto>();
             CreateMap<CURenglonDeReservaDto, RenglonReserva>();
