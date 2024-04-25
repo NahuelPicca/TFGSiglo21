@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using PeliculasAPI.BehaviorBadRequests;
+using PeliculasAPI.Filtros;
 using RossiEventos;
 using System.Text.Json.Serialization;
 
@@ -6,6 +8,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<AppDbContext>();
+
+builder.Services.AddControllers(o =>
+{
+    o.Filters.Add(typeof(FiltroDeExcepcion));
+    o.Filters.Add(typeof(ParsearBadRequests));
+}).ConfigureApiBehaviorOptions(BehaviorBadRequest.Parsear);
+
 builder.Services.AddAutoMapper(typeof(Program));
 var provider = builder.Services.BuildServiceProvider();
 var configuration = provider.GetRequiredService<IConfiguration>();
