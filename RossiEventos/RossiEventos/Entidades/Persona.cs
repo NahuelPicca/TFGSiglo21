@@ -14,9 +14,6 @@ namespace RossiEventos.Entidades
         [Required, StringLength(100), Column(TypeName = "varchar")]
         public string Apellido { get; set; }
 
-        [Required, StringLength(10), Column(TypeName = "varchar")]
-        public string TipoDni { get; set; }
-
         [Required]
         public int NroDni { get; set; }
 
