@@ -4,18 +4,21 @@
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Reflection.Metadata;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace RossiEventos
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext
     {
-        public AppDbContext(DbContextOptions options) : base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
 
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             // Configure Code First to ignore PluralizingTableName convention
             // If you keep this convention then the generated tables will have pluralized names.
             //modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -147,6 +150,5 @@ namespace RossiEventos
         public DbSet<RenglonMovStk> RenglonMov { get; set; }
         public DbSet<TipoProducto> TipoProducto { get; set; }
         public DbSet<Localizacion> Localizacion { get; set; }
-
     }
 }
