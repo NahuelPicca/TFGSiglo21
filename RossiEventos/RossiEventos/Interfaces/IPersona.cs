@@ -8,6 +8,7 @@ namespace RossiEventos.Interfaces
     {
         string Nombre { get; set; }
         string Apellido { get; set; }
+        DateTime FechaNacimiento { get; set; }
         int NroDni { get; set; }
         string Cuit { get; set; }
         string Direccion { get; set; }
