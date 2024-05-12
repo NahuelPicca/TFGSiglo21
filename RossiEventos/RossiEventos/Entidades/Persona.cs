@@ -17,8 +17,8 @@ namespace RossiEventos.Entidades
         [Required]
         public DateTime FechaNacimiento { get; set; }
 
-        [Required]
-        public int NroDni { get; set; }
+        [Required, StringLength(9), Column(TypeName = "varchar")]
+        public string NroDni { get; set; }
 
         [Required, StringLength(13), Column(TypeName = "varchar")]
         public string Cuit { get; set; }
@@ -39,6 +39,5 @@ namespace RossiEventos.Entidades
 
         [Required, StringLength(5), Column(TypeName = "varchar")]
         public string CodigoPostal { get; set; }
-
     }
 }
