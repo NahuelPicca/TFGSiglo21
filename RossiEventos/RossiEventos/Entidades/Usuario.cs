@@ -11,7 +11,7 @@ public class Usuario : Persona, IUsuario
     [Required]
     public TipoUsuario Tipo { get; set; }
 
-    [Required, StringLength(100), Column(TypeName = "varchar")]
+    [Required, Column(TypeName = "varchar(MAX)")]
     [PasswordPropertyText]
     public string Contraseña { get; set; } 
 
