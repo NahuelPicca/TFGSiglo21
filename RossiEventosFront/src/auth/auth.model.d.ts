@@ -21,11 +21,13 @@ export interface usuarioDTO{
 export interface registroUsuario{
     nombre: string;
     apellido: string;
-    nroDni:string;
+    nroDni: string;
+    cuit: string;
     direccion: string;
     telefono: string;
     codigoPostal: string;
     localidad: string;
     email: string;
-    password: string;
+    contraseña: string;
+    edad: Date;
 }
