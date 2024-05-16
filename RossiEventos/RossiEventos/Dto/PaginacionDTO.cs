@@ -1,4 +1,4 @@
-﻿namespace PeliculasAPI.Dto
+﻿namespace RossiEventos.Dto
 {
     public class PaginacionDTO
     {
