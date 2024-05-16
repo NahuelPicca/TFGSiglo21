@@ -1,9 +1,13 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RossiEventos.Dto;
-using RossiEventos.Entidades;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace RossiEventos.Controllers
 {
@@ -11,17 +15,26 @@ namespace RossiEventos.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        private readonly AppDbContext context;
-        private readonly ILogger<UsuarioController> logger;
-        private readonly IMapper mapper;
+        readonly AppDbContext context;
+        readonly ILogger<UsuarioController> logger;
+        readonly IMapper mapper;
+        readonly UserManager<IdentityUser> userManager;
+        readonly IConfiguration configuration;
+        readonly SignInManager<IdentityUser> singInManager;
 
         public UsuarioController(ILogger<UsuarioController> logger,
                                 AppDbContext context,
-                                IMapper mapper)
+                                IMapper mapper,
+                                UserManager<IdentityUser> userManeger,
+                                IConfiguration configuration,
+                                SignInManager<IdentityUser> singInManager)
         {
             this.logger = logger;
             this.context = context;
             this.mapper = mapper;
+            this.userManager = userManeger;
+            this.configuration = configuration;
+            this.singInManager = singInManager;
         }
 
         [HttpDelete("{id:int}")]
@@ -56,21 +69,77 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el usuario con el Id: {id}");
         }
 
-        [HttpPost()]
+        [HttpPost("")]
         public async Task<ActionResult> PostUsuarioDto([FromBody] CUUsuarioDto usuarioDto)
         {
             try
             {
-                var usuario = mapper.Map<Usuario>(usuarioDto);
-                usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuarioDto.Contraseña);
-                context.Add(usuario);
-                var aa = await context.SaveChangesAsync();
+                int aa = await GuardaUsuario(usuarioDto);
                 return Ok(aa);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.InnerException.Message);
             }
+        }
+
+        async Task<int> GuardaUsuario(CUUsuarioDto usuarioDto)
+        {
+            var usuario = mapper.Map<Usuario>(usuarioDto);
+            usuario.Contraseña = BCrypt.Net.BCrypt.HashPassword(usuarioDto.Contraseña);
+            context.Add(usuario);
+            var aa = await context.SaveChangesAsync();
+            return aa;
+        }
+
+        async Task<int> GuardaUsuario(CredencialesUsuarioDTO credenciales)
+        {
+            var usuario = mapper.Map<Usuario>(credenciales);
+            var usuarioIdentity = await userManager.FindByEmailAsync(credenciales.Email);
+            usuario.Contraseña = usuarioIdentity.PasswordHash;
+            context.Add(usuario);
+            return await context.SaveChangesAsync();
+        }
+
+        [HttpPost("crear")]
+        public async Task<ActionResult<RespuestaAutenticacionDTO>> Crear([FromBody] CredencialesUsuarioDTO credenciales)
+        {
+            var usuario = new IdentityUser { UserName = credenciales.Email, Email = credenciales.Email };
+            var resultado = await userManager.CreateAsync(usuario, credenciales.Contraseña);
+            if (resultado.Succeeded)
+            {
+                var respuesta = await ConstruirToken(credenciales);
+                await GuardaUsuario(credenciales);
+                return respuesta;
+            }
+            else
+                return BadRequest(resultado.Errors);
+        }
+
+        async Task<RespuestaAutenticacionDTO> ConstruirToken(CredencialesUsuarioDTO credenciales)
+        {
+            var claims = new List<Claim>()
+            {
+                new Claim(nameof(credenciales.Email), credenciales.Email)
+            };
+
+            var usuario = await userManager.FindByEmailAsync(credenciales.Email);
+            var claimsDB = await userManager.GetClaimsAsync(usuario);
+            claims.AddRange(claimsDB);
+
+            var llave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["llavejwt"]));
+            var creds = new SigningCredentials(llave, SecurityAlgorithms.HmacSha256);
+            var expiracion = DateTime.UtcNow.AddYears(1);
+            var token = new JwtSecurityToken(issuer: null
+                                           , audience: null
+                                           , claims: claims
+                                           , expires: expiracion
+                                           , signingCredentials: creds);
+            return new RespuestaAutenticacionDTO()
+            {
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Expiracion = expiracion
+            };
         }
 
         [HttpPut("id:int")]
