@@ -49,6 +49,7 @@ namespace RossiEventos.Utilidades
             CreateMap<Ubicacion, UbicacionDto>().ReverseMap();
             CreateMap<Usuario, UsuarioDto>().ReverseMap();
             CreateMap<Vehiculo, VehiculoDto>().ReverseMap();
+            CreateMap<CredencialesUsuarioDTO, Usuario>().ReverseMap();
         }
     }
 }
