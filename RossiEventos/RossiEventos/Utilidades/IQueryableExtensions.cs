@@ -1,4 +1,4 @@
-﻿using PeliculasAPI.Dto;
+﻿using RossiEventos.Dto;
 
 namespace PeliculasAPI.Utilidades
 {
