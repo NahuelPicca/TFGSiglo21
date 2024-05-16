@@ -29,5 +29,5 @@ export interface registroUsuario{
     localidad: string;
     email: string;
     contraseña: string;
-    edad: Date;
+    fechaNacimiento: string;
 }
