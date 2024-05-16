@@ -10,7 +10,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var myDirectionOriginal = "directionName";
 // Add services to the container.
 builder.Services.AddScoped<AppDbContext>();
 
@@ -42,6 +42,19 @@ builder.Services
            ClockSkew = TimeSpan.Zero
        });
 
+//Establece la autorizacion para el usuario EsAdmin para que tenga acceso a todo.
+builder.Services.AddAuthorization(opc => opc.AddPolicy("EsAdmin", pol => pol.RequireClaim("role", "admin")));
+
+builder.Services.AddCors(opt =>
+{
+    // var frontUrl = configuration.GetValue<string>("frontend_url");
+    //Permite que escuche a cualquier direccion de API 
+    opt.AddPolicy(myDirectionOriginal, p => p.AllowAnyOrigin()
+                                             .AllowAnyMethod()
+                                             .AllowAnyHeader()
+                                             .WithExposedHeaders(new string[] { "cantidadTotalRegistros" }));
+});
+
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
@@ -60,7 +73,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseRouting();
+app.UseCors(myDirectionOriginal);
 app.UseAuthorization();
 
 app.MapControllers();
