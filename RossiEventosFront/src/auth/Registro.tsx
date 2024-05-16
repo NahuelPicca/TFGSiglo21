@@ -2,23 +2,24 @@ import axios from "axios";
 import { registroUsuario, respuestaAutenticacion } from "./auth.model";
 import { useContext, useState } from "react";
 import MostrarErrores from "../utils/MostrarErrores";
-// import { guardarTokenLocalStorage, obtenerClaims } from "./manejadorJWT";
-// import AutenticacionContext from "./AutenticacionContext";
 import { useNavigate } from "react-router-dom";
 import FormularioRegistro from "./FormularioRegistro";
 import { urlUsuarios } from "../utils/endpoints";
+import { guardarTokenLocalStorage, obtenerClaims } from "./manejadorJWT";
+import AutenticacionContext from "./AutenticacionContext";
 
 //Falta ver el temal grabado e identity con jwt.
 export default function Registro() {
-    //const { actualizar } = useContext(AutenticacionContext);
+    const { actualizar } = useContext(AutenticacionContext);
     const [errores, setErrores] = useState<string[]>([]);
     const navigate = useNavigate()
+
     async function registrar(registro: registroUsuario) {
         try {
             const respuesta = await axios
                 .post<respuestaAutenticacion>(`${urlUsuarios}/crear`, registro);
-            //guardarTokenLocalStorage(respuesta.data);
-            //actualizar(obtenerClaims());
+            guardarTokenLocalStorage(respuesta.data);
+            actualizar(obtenerClaims());
             console.log(respuesta.data)
             navigate("/");
         } catch (error: any) {
@@ -31,10 +32,10 @@ export default function Registro() {
             <h3>Registro</h3>
             <MostrarErrores errores={errores} />
             <FormularioRegistro modelo={{
-                nombre: '', apellido: '',
+                nombre: '', apellido: '', cuit: '',
                 nroDni: '', direccion: '', telefono: '',
                 codigoPostal: '', localidad: '',
-                email: '', password: ''
+                email: '', contraseña: '', fechaNacimiento: ''
             }}
                 onSubmit={valores => registrar(valores)}
             />
