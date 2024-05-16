@@ -34,6 +34,7 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
                     .matches(/^\d{10}$/, "El teléfono tiene que tener hasta 10 números."),
                 codigoPostal: Yup.string().required('El código postal es requerido.'),
                 localidad: Yup.string().required('La localidad es requerido.'),
+                fechaNacimiento: Yup.date().required('La fecha es requerido.')
             })}
         >
             {formikProps => (
@@ -63,7 +64,11 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
                         campo='localidad'
                         type="text" />
                     <FormGroupText label="Email"
-                        campo="email" />
+                        campo="email"
+                        type="text" />
+                    <FormGroupText label="Fecha Nacimiento"
+                        campo="fechaNacimiento"
+                        type="date" />
                     <FormGroupText label="Contraseña"
                         campo='contraseña'
                         type="password" />
