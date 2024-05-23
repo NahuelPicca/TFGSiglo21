@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RossiEventos.Entidades;
+using System.ComponentModel.DataAnnotations;
 
 namespace RossiEventos.Dto
 {
@@ -36,5 +37,8 @@ namespace RossiEventos.Dto
 
         [Required]
         public DateTime FechaNacimiento { get; set; }
+
+        [Required]
+        public TipoUsuario Tipo { get; set; }
     }
 }
