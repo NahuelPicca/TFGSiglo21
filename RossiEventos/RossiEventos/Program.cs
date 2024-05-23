@@ -27,7 +27,22 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
             opt.UseSqlServer(configuration.GetConnectionString("RossiEventoDb")));
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(
+    opt =>
+    {
+        //Password
+        opt.Password.RequireDigit = true;
+        opt.Password.RequireLowercase = true;
+        opt.Password.RequireUppercase = true;
+        opt.Password.RequireNonAlphanumeric = true;
+
+        //Require Email confirmed
+        opt.SignIn.RequireConfirmedEmail = false;
+
+        //Bloqueo de cuenta
+        opt.Lockout.AllowedForNewUsers = true;
+        opt.Lockout.MaxFailedAccessAttempts = 5;
+    })
                 .AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<AppDbContext>();
 builder.Services
