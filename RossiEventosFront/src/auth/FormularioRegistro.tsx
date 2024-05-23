@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import FormGroupText from "../utils/FormGroupText";
 import Button from "../utils/Button";
 import { Link } from "react-router-dom";
+//import ChecksUsuarios from "./ChecksUsuarios";
+//import MiComponente from "./Micomponente";
 
 export default function FormularioRegistro(props: formularioRegistroProps) {
 
@@ -26,8 +28,8 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
                 confirmaPassword: Yup.string().oneOf([Yup.ref("contraseña")], "No coinciden las contraseñas."),
                 nombre: Yup.string().required('El nombre es requerido.'),
                 apellido: Yup.string().required('El apellido es requerido.'),
-                nroDni: Yup.string().required('El DNI es requerido.'),
-                cuit: Yup.string().required('El CUIT es requerido.'),
+                nroDni: Yup.string().required('El DNI es requerido.').max(9, 'No puede superar 9 carácteres.'),
+                cuit: Yup.string().required('El CUIT es requerido.').max(12, 'No puede superar 12 carácteres.'),
                 direccion: Yup.string().required('La dirección es requerida.'),
                 telefono: Yup.string()
                     .required('El teléfono es requerido.')
@@ -35,6 +37,8 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
                 codigoPostal: Yup.string().required('El código postal es requerido.'),
                 localidad: Yup.string().required('La localidad es requerido.'),
                 fechaNacimiento: Yup.date().required('La fecha es requerido.')
+                    .min(new Date(1920, 1, 1), 'La fecha debe ser mayor a 1920.')
+                    .max(new Date(), 'La fecha debe menor a la de hoy.')
             })}
         >
             {formikProps => (
@@ -75,6 +79,8 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
                     <FormGroupText label="Confirmar Contraseña"
                         campo='confirmaPassword'
                         type="password" />
+                    {/* <ChecksUsuarios modelo={props.modelo} /> */}
+                    {/* <MiComponente objeto={{ nombre: 'perez' }} /> */}
                     <Button disabled={formikProps.isSubmitting}
                         type="submit">
                         Enviar
