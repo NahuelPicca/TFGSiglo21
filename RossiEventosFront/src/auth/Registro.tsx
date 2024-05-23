@@ -35,7 +35,8 @@ export default function Registro() {
                 nombre: '', apellido: '', cuit: '',
                 nroDni: '', direccion: '', telefono: '',
                 codigoPostal: '', localidad: '',
-                email: '', contraseña: '', fechaNacimiento: ''
+                email: '', contraseña: '', fechaNacimiento: '',
+                tipo: 4
             }}
                 onSubmit={valores => registrar(valores)}
             />
