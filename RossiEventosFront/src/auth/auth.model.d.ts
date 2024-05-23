@@ -30,4 +30,5 @@ export interface registroUsuario{
     email: string;
     contraseña: string;
     fechaNacimiento: string;
+    tipo: number;
 }
