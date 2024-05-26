@@ -5,40 +5,41 @@ namespace RossiEventos.Dto
 {
     public class CredencialesUsuarioDTO
     {
-        [Required]
+       [Required]
         public string Nombre { get; set; }
 
-        [Required]
+       [Required]
         public string Apellido { get; set; }
 
-        [Required]
+       [Required]
         public string Cuit { get; set; }
 
-        [Required]
+       [Required]
         public string NroDni { get; set; }
 
-        [Required]
+       [Required]
         public string CodigoPostal { get; set; }
 
-        [Required]
+       [Required]
         public string Direccion { get; set; }
 
-        [Required]
+       [Required]
         public string Localidad { get; set; }
+       
         [Required]
         public string Telefono { get; set; }
 
-        [EmailAddress]
-        [Required]
+       [EmailAddress]
+       [Required]
         public string Email { get; set; }
 
-        [Required]
+       [Required]
         public string Contraseña { get; set; }
 
-        [Required]
+       [Required]
         public DateTime FechaNacimiento { get; set; }
 
-        [Required]
+       [Required]
         public TipoUsuario Tipo { get; set; }
     }
 }
