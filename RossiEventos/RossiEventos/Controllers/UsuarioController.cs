@@ -116,6 +116,27 @@ namespace RossiEventos.Controllers
                 return BadRequest(resultado.Errors);
         }
 
+        [HttpPost("login")]
+        public async Task<ActionResult<RespuestaAutenticacionDTO>> Login([FromBody] LogeoUsuarioDto logeo)
+        {
+            var resultado = await singInManager.PasswordSignInAsync(logeo.Email
+                                                                  , logeo.Password
+                                                                  , false, false);
+            if (resultado.Succeeded)
+                return await GetConstruirTokenLogueo(logeo);
+            else
+                return BadRequest("Login incorrecto");
+        }
+
+        async Task<RespuestaAutenticacionDTO> GetConstruirTokenLogueo(LogeoUsuarioDto credenciales)
+        {
+            return await ConstruirToken(new CredencialesUsuarioDTO
+            {
+                Email = credenciales.Email,
+                Contraseña = credenciales.Password
+            });
+        }
+
         async Task<RespuestaAutenticacionDTO> ConstruirToken(CredencialesUsuarioDTO credenciales)
         {
             var claims = new List<Claim>()
