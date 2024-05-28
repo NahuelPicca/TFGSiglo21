@@ -59,7 +59,7 @@ namespace RossiEventos.Controllers
             return mapper.Map<List<CalidadDto>>(list);
         }
 
-        [HttpPost()]
+        [HttpPost("crear")]
         public async Task<ActionResult> PostCalidadDto([FromBody] CUCalidadDto calidadDto)
         {
             try
