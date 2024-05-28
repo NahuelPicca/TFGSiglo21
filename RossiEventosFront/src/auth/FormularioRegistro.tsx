@@ -26,16 +26,16 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
                     .matches(/[A-Z]/, "La contraseña debe contener letras mayúsculas.")
                     .matches(/[a-z]/, "La contraseña debe contener letras minúsculas."),
                 confirmaPassword: Yup.string().oneOf([Yup.ref("contraseña")], "No coinciden las contraseñas."),
-                nombre: Yup.string().required('El nombre es requerido.'),
-                apellido: Yup.string().required('El apellido es requerido.'),
+                nombre: Yup.string().required('El nombre es requerido.').primeraLetraMayuscula(),
+                apellido: Yup.string().required('El apellido es requerido.').primeraLetraMayuscula(),
                 nroDni: Yup.string().required('El DNI es requerido.').max(9, 'No puede superar 9 carácteres.'),
                 cuit: Yup.string().required('El CUIT es requerido.').max(12, 'No puede superar 12 carácteres.'),
-                direccion: Yup.string().required('La dirección es requerida.'),
+                direccion: Yup.string().required('La dirección es requerida.').primeraLetraMayuscula(),
                 telefono: Yup.string()
                     .required('El teléfono es requerido.')
                     .matches(/^\d{10}$/, "El teléfono tiene que tener hasta 10 números."),
                 codigoPostal: Yup.string().required('El código postal es requerido.'),
-                localidad: Yup.string().required('La localidad es requerido.'),
+                localidad: Yup.string().required('La localidad es requerido.').primeraLetraMayuscula(),
                 fechaNacimiento: Yup.date().required('La fecha es requerido.')
                     .min(new Date(1920, 1, 1), 'La fecha debe ser mayor a 1920.')
                     .max(new Date(), 'La fecha debe menor a la de hoy.')
