@@ -64,6 +64,12 @@ export default function Menu() {
                                 Contacto
                             </NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink className={({ isActive }) => { return isActive ? 'nav-link' : 'nav-link' }}
+                                to='/calidad'>
+                                Calidad
+                            </NavLink>
+                        </li>
                         {/* } /> */}
                     </ul>
                     <div className="d-flex">
