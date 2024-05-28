@@ -7,7 +7,7 @@ import {
   BrowserRouter
 } from "react-router-dom";
 import rutas from './route-config';
-import validaciones from './validaciones';
+import validaciones from './validaciones/validaciones';
 
 validaciones();
 
