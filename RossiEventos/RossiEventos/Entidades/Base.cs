@@ -12,7 +12,7 @@ namespace RossiEventos.Entidades
         public DateTime FechaModificacion { get; set; } = new DateTime(1990, 01, 01);
         
         [Column(TypeName ="varchar(100)")]
-        public string UsuarioInserto { get; set; } = "";
+        public string UsuarioInserto { get; set; } = "SYSTEM";
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
