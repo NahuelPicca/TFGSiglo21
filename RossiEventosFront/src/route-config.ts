@@ -1,5 +1,8 @@
 //import { LandingPage } from "./LandingPage";
+//import CrearCalidad from "./Calidad/CrearCalidad";
 import CrearCalidad from "./Calidad/CrearCalidad";
+import EditarCalidad from "./Calidad/EditarCalidad";
+import IndiceCalidad from "./Calidad/IndiceCalidad";
 import RedireccionarALanding from "./RedireccionarALanding";
 // import Registro from "./auth/Registro";
  import Login from "./auth/Login";
@@ -12,8 +15,10 @@ import Registro from "./auth/Registro";
 const rutas = [
      {path: '/registro', componente: Registro},
      {path: '/login', componente: Login},
-     {path: '/calidad', componente: CrearCalidad, esAdmin: true},
 
+    {path: '/calidad', componente: IndiceCalidad, esAdmin: true},
+    {path: '/calidad/crear', componente: CrearCalidad, esAdmin: true},
+    {path: '/calidad/editar/:id', componente: EditarCalidad, esAdmin: true},
     // {path: '/', componente: LandingPage, exact: true},
     {path: '*', componente: RedireccionarALanding}
 ]
