@@ -59,8 +59,8 @@ namespace RossiEventos.Controllers
             return mapper.Map<List<DepositoDto>>(listDepositos);
         }
 
-        [HttpPost()]
-        public async Task<ActionResult> PostVehiculoDto([FromBody] CUDepositoDto create)
+        [HttpPost("crear")]
+        public async Task<ActionResult> PostDepositoDto([FromBody] CUDepositoDto create)
         {
             try
             {
