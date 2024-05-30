@@ -3,6 +3,9 @@
 import CrearCalidad from "./Calidad/CrearCalidad";
 import EditarCalidad from "./Calidad/EditarCalidad";
 import IndiceCalidad from "./Calidad/IndiceCalidad";
+import CrearDeposito from "./Deposito/CrearDeposito";
+import EditarDeposito from "./Deposito/EditarDeposito";
+import IndiceDeposito from "./Deposito/IndiceDeposito";
 import RedireccionarALanding from "./RedireccionarALanding";
 // import Registro from "./auth/Registro";
  import Login from "./auth/Login";
@@ -19,6 +22,10 @@ const rutas = [
     {path: '/calidad', componente: IndiceCalidad, esAdmin: true},
     {path: '/calidad/crear', componente: CrearCalidad, esAdmin: true},
     {path: '/calidad/editar/:id', componente: EditarCalidad, esAdmin: true},
+
+    {path: '/deposito', componente: IndiceDeposito, esAdmin: true},
+    {path: '/deposito/crear', componente: CrearDeposito, esAdmin: true},
+    {path: '/deposito/editar/:id', componente: EditarDeposito, esAdmin: true},
     // {path: '/', componente: LandingPage, exact: true},
     {path: '*', componente: RedireccionarALanding}
 ]
