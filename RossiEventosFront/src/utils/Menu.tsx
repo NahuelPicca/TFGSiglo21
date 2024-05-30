@@ -70,6 +70,12 @@ export default function Menu() {
                                 Calidad
                             </NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink className={({ isActive }) => { return isActive ? 'nav-link' : 'nav-link' }}
+                                to='/deposito'>
+                                Depositos
+                            </NavLink>
+                        </li>
                         {/* } /> */}
                     </ul>
                     <div className="d-flex">
