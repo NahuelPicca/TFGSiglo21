@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import FormGroupText from "../utils/FormGroupText";
 import Button from "../utils/Button";
 import { Link } from "react-router-dom";
-import { calidadDTO } from "../Modelo/rossiEventos.modelo";
+import { calidadCreacionDTO } from "./calidad.modulo";
 
 export default function FormularioCalidad(props: formularioCalidadProps) {
     return (
@@ -38,7 +38,7 @@ export default function FormularioCalidad(props: formularioCalidadProps) {
 }
 
 interface formularioCalidadProps {
-    modelo: calidadDTO;
-    onSubmit(valores: calidadDTO,
-        acciones: FormikHelpers<calidadDTO>): void;
+    modelo: calidadCreacionDTO;
+    onSubmit(valores: calidadCreacionDTO,
+        acciones: FormikHelpers<calidadCreacionDTO>): void;
 }
