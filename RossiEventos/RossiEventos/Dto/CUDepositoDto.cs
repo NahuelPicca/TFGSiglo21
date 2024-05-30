@@ -12,6 +12,5 @@ namespace RossiEventos.Dto
         public string Localidad { get; set; }
         public string Provincia { get; set; }
         public bool Habilitado { get; set; }
-        public string UsuarioInserto { get; set; } = "";
     }
 }
