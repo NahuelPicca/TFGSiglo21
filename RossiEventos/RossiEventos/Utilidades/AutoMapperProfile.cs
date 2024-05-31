@@ -11,6 +11,7 @@ namespace RossiEventos.Utilidades
             CreateMap<AsignacionVehicTransp, AsignacionVehicTranspDto>().ReverseMap();
             CreateMap<Calidad, CalidadDto>().ReverseMap();
             CreateMap<Categoria, CategoriaDto>().ReverseMap();
+            CreateMap<Categoria, CUCategoriaDto>().ReverseMap();
             CreateMap<ComprobanteEntrega, ComprobanteEntregaDto>().ReverseMap();
             CreateMap<CUAsignacionVehicTranspDto, AsignacionVehicTransp>();
             CreateMap<CUCalidadDto, Calidad>();
