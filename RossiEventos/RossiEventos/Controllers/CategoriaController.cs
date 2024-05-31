@@ -27,16 +27,23 @@ namespace RossiEventos.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteCategoria(int id)
         {
-            var titular = await context.Categoria
+            var categoria = await context.Categoria
                                        .FirstOrDefaultAsync(u => u.Id == id);
-            if (titular != null)
+            try
             {
-                context.Categoria.Remove(titular);
-                var aa = context.SaveChanges();
-                return Ok($"Se eliminó OK la categoria " +
-                          $"{titular.Nombre}");
+                if (categoria != null)
+                {
+                    context.Categoria.Remove(categoria);
+                    var aa = context.SaveChanges();
+                    return Ok($"Se eliminó OK la categoria " +
+                              $"{categoria.Nombre}");
+                }
+                return NotFound($"No se encontró la Categoria con el Id: {id}");
             }
-            return NotFound($"No se encontró la Categoria con el Id: {id}");
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException.Message);
+            }
         }
 
         [HttpGet("{id:int}")]
@@ -58,12 +65,12 @@ namespace RossiEventos.Controllers
             return mapper.Map<List<CategoriaDto>>(listCategoria);
         }
 
-        [HttpPost()]
+        [HttpPost("crear")]
         public async Task<ActionResult> PostCategoriaDto([FromBody] CUCategoriaDto categoriaDto)
         {
             try
             {
-                var categoria = mapper.Map<CategoriaDto>(categoriaDto);
+                var categoria = mapper.Map<Categoria>(categoriaDto);
                 context.Add(categoria);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
