@@ -3,7 +3,7 @@ import { urlCalidad } from "../utils/endpoints";
 import FormularioCalidad from "./FormularioCalidad";
 import { calidadCreacionDTO, calidadDTO } from "./calidad.modulo";
 
-export default function EditarCines() {
+export default function EditarCalidad() {
     return (
         <EditarEntidad<calidadCreacionDTO, calidadDTO>
             url={urlCalidad} urlIndice="/calidad" nombreEntidad="Calidad"

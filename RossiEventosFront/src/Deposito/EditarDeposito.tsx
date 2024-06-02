@@ -3,7 +3,7 @@ import { urlDeposito } from "../utils/endpoints";
 import FormularioDeposito from "./FormularioDeposito";
 import { creacionDepositoDTO, depositoDTO } from "./deposito.modulo";
 
-export default function EditarCines() {
+export default function EditarDeposito() {
     return (
         <EditarEntidad<creacionDepositoDTO, depositoDTO>
             url={urlDeposito} urlIndice="/deposito" nombreEntidad="Deposito"
