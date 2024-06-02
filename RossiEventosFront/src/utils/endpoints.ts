@@ -3,6 +3,6 @@ export const urlUsuarios = `${apiURL}/usuarios`
 export const urlCalidad = `${apiURL}/calidad`
 export const urlDeposito = `${apiURL}/deposito`
 export const urlCategoria = `${apiURL}/categoria`
-// export const urlPeliculas = `${apiURL}/peliculas`
+export const urlUbicacion = `${apiURL}/ubicacion`
 // export const urlCuentas = `${apiURL}/cuentas`
 // export const urlRatings = `${apiURL}/rating`
