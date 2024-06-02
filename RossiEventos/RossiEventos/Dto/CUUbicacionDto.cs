@@ -10,6 +10,5 @@ namespace RossiEventos.Dto
         public string Estante { get; set; }
         public string Fila { get; set; }
         public bool Habilitado { get; set; }
-        public string UsuarioInserto { get; set; }
     }
 }
