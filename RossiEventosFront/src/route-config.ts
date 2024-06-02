@@ -10,6 +10,9 @@ import CrearDeposito from "./Deposito/CrearDeposito";
 import EditarDeposito from "./Deposito/EditarDeposito";
 import IndiceDeposito from "./Deposito/IndiceDeposito";
 import RedireccionarALanding from "./RedireccionarALanding";
+import CrearUbicacion from "./Ubicacion/CrearUbicacion";
+import EditarUbicacion from "./Ubicacion/EditarUbicacion";
+import IndiceUbicacion from "./Ubicacion/IndiceUbicacion";
 // import Registro from "./auth/Registro";
  import Login from "./auth/Login";
 import Registro from "./auth/Registro";
@@ -34,6 +37,9 @@ const rutas = [
     {path: '/categoria/crear', componente: CrearCategoria, esAdmin: true},
     {path: '/categoria/editar/:id', componente: EditarCategoria, esAdmin: true},
 
+    {path: '/ubicacion', componente: IndiceUbicacion, esAdmin: true},
+    {path: '/ubicacion/crear', componente: CrearUbicacion, esAdmin: true},
+    {path: '/ubicacion/editar/:id', componente: EditarUbicacion, esAdmin: true},
     // {path: '/', componente: LandingPage, exact: true},
     {path: '*', componente: RedireccionarALanding}
 ]
