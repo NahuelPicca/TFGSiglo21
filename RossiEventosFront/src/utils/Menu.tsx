@@ -82,7 +82,12 @@ export default function Menu() {
                                 Categoría
                             </NavLink>
                         </li>
-
+                        <li className="nav-item">
+                            <NavLink className={({ isActive }) => { return isActive ? 'nav-link' : 'nav-link' }}
+                                to='/ubicacion'>
+                                Ubicaciones
+                            </NavLink>
+                        </li>
                         {/* } /> */}
                     </ul>
                     <div className="d-flex">
