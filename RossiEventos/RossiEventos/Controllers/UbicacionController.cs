@@ -24,7 +24,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public async Task<ActionResult> DeleteDeposito(int id)
+        public async Task<ActionResult> DeleteUbicacion(int id)
         {
             var ubicacion = await context.Ubicacion
                                          .FirstOrDefaultAsync(u => u.Id == id);
@@ -59,7 +59,7 @@ namespace RossiEventos.Controllers
             return mapper.Map<List<UbicacionDto>>(listUbicaciones);
         }
 
-        [HttpPost()]
+        [HttpPost("crear")]
         public async Task<ActionResult> PostUbicacionDto([FromBody] CUUbicacionDto create)
         {
             try
