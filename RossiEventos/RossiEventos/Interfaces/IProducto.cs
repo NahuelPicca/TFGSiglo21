@@ -4,7 +4,7 @@ namespace RossiEventos.Interfaces
 {
     public interface IProducto
     {
-        DateTime Año { get; set; }
+        DateTime Anio { get; set; }
         Calidad Calidad { get; set; }
         int CalidadId { get; set; }
         string Codigo { get; set; }

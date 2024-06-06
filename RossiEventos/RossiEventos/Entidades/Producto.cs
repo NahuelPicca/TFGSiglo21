@@ -18,7 +18,7 @@ namespace RossiEventos.Entidades
         public string Marca { get; set; }
 
         [Required]
-        public DateTime Año { get; set; }
+        public DateTime Anio { get; set; }
 
         [Required]
         public bool Habilitado { get; set; }
