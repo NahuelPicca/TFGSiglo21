@@ -9,6 +9,10 @@ import IndiceCategoria from "./Categoria/IndiceCategoria";
 import CrearDeposito from "./Deposito/CrearDeposito";
 import EditarDeposito from "./Deposito/EditarDeposito";
 import IndiceDeposito from "./Deposito/IndiceDeposito";
+import CrearMovimiento from "./Movimientos/CrearMovimiento";
+import CrearProducto from "./Productos/CrearProducto";
+import EditarProducto from "./Productos/EditarProducto";
+import IndiceProducto from "./Productos/IndiceProducto";
 import RedireccionarALanding from "./RedireccionarALanding";
 import CrearUbicacion from "./Ubicacion/CrearUbicacion";
 import EditarUbicacion from "./Ubicacion/EditarUbicacion";
@@ -40,6 +44,13 @@ const rutas = [
     {path: '/ubicacion', componente: IndiceUbicacion, esAdmin: true},
     {path: '/ubicacion/crear', componente: CrearUbicacion, esAdmin: true},
     {path: '/ubicacion/editar/:id', componente: EditarUbicacion, esAdmin: true},
+
+    {path: '/movimiento', componente: IndiceUbicacion, esAdmin: true},
+    {path: '/movimiento/crear', componente: CrearMovimiento, esAdmin: true},
+
+    {path: '/producto', componente: IndiceProducto, esAdmin: true},
+    {path: '/producto/crear', componente: CrearProducto, esAdmin: true},
+    {path: '/producto/editar/:id', componente: EditarProducto, esAdmin: true},
     // {path: '/', componente: LandingPage, exact: true},
     {path: '*', componente: RedireccionarALanding}
 ]
