@@ -18,7 +18,9 @@ interface formGroupTextProps {
     campo: string;
     label?: string;
     placeholder?: string;
-    type: 'text' | 'password' | 'date';
+    type: 'text' |
+    'password' |
+    'number';
 }
 
 FormGroupText.defaultProps = {
