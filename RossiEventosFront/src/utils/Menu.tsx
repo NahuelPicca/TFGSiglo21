@@ -26,7 +26,7 @@ export default function Menu() {
                     style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <ul className="nav justify-content-end">
                         <li className="nav-item">
-                            <NavLink className={({ isActive }) => { return isActive ? 'nav-link' : 'nav-link' }}
+                            <NavLink className='nav-link'
                                 to='/reservas'>
                                 Reservas
                             </NavLink>
@@ -34,8 +34,7 @@ export default function Menu() {
                         {/* <Autorizado role="admin" */}
                         {/* autorizado={ */}
                         <li className="nav-item">
-                            <NavLink className={({ isActive }) => { return isActive ? 'nav-link' : 'nav-link' }}
-                                to='/pedidos'>
+                            <NavLink className='nav-link' to='/pedidos'>
                                 {/* ClassName de NavLink lo dejamos asi por las dudas, pero ese condicional no iría o hay que cambiarlo */}
                                 Pedidos
                             </NavLink>
@@ -86,6 +85,12 @@ export default function Menu() {
                             <NavLink className={({ isActive }) => { return isActive ? 'nav-link' : 'nav-link' }}
                                 to='/ubicacion'>
                                 Ubicaciones
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink className={({ isActive }) => { return isActive ? 'nav-link' : 'nav-link' }}
+                                to='/producto'>
+                                Productos
                             </NavLink>
                         </li>
                         {/* } /> */}
