@@ -47,7 +47,7 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el Tipo de Producto con el Id: {id}");
         }
 
-        [HttpGet()]
+        [HttpGet("todos")]
         public async Task<ActionResult<List<TipoProductoDto>>> GetListTipoProductoDto()
         {
             logger.LogInformation("Lista de tipo de productos");
