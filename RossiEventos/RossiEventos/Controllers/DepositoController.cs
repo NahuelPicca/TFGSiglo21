@@ -50,8 +50,19 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el Depósito con el Id: {id}");
         }
 
+        [HttpGet("todos")]
+        public async Task<ActionResult<List<DepositoDto>>> GetListDepDtoTodos()
+        {
+            return await GetListaDeposito();
+        }
+
         [HttpGet()]
         public async Task<ActionResult<List<DepositoDto>>> GetListDepDto()
+        {
+            return await GetListaDeposito();
+        }
+
+        async Task<ActionResult<List<DepositoDto>>> GetListaDeposito()
         {
             logger.LogInformation("Lista de depositos");
             var listDepositos = await context.Deposito
