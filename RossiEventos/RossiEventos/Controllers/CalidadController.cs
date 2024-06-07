@@ -53,10 +53,21 @@ namespace RossiEventos.Controllers
         [HttpGet()]
         public async Task<ActionResult<List<CalidadDto>>> GetListCalidadDto()
         {
+            return await GetListaCalidad();
+        }
+
+        async Task<ActionResult<List<CalidadDto>>> GetListaCalidad()
+        {
             logger.LogInformation("Lista de calidades");
             var list = await context.Calidad
                                     .ToListAsync();
             return mapper.Map<List<CalidadDto>>(list);
+        }
+
+        [HttpGet("todos")]
+        public async Task<ActionResult<List<CalidadDto>>> GetListCalidadDtoTodos()
+        {
+            return await GetListaCalidad();
         }
 
         [HttpPost("crear")]
