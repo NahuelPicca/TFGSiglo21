@@ -8,14 +8,14 @@
 
         public string Marca { get; set; }
 
-        public DateTime Año { get; set; }
+        public DateTime Anio { get; set; }
 
         public bool Habilitado { get; set; }
+        public decimal Precio { get; set; }
 
         public int CalidadId { get; set; }
 
-        public int TipoId { get; set; }
+        public int TipoProductoId { get; set; }
 
-        public string UsuarioInserto { get; set; }
     }
 }
