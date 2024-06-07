@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
 using RossiEventos.Interfaces;
 
 namespace RossiEventos.Entidades
@@ -30,9 +29,9 @@ namespace RossiEventos.Entidades
         public virtual Calidad? Calidad { get; set; }
 
         [Required]
-        public int TipoId { get; set; }
+        public int TipoProductoId { get; set; }
 
-        [ForeignKey(nameof(TipoId))]
+        [ForeignKey(nameof(TipoProductoId))]
         public virtual TipoProducto? Tipo { get; set; }
 
         [Required]

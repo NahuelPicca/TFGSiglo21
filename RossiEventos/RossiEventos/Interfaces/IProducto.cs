@@ -12,7 +12,7 @@ namespace RossiEventos.Interfaces
         bool Habilitado { get; set; }
         string Marca { get; set; }
         TipoProducto Tipo { get; set; }
-        int TipoId { get; set; }
+        int TipoProductoId { get; set; }
         decimal Precio { get; set; }
     }
 }
