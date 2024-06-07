@@ -26,9 +26,10 @@ namespace RossiEventos.Controllers
         void HidrataPropFaltante(CUProductoDto productoDto, Producto producto)
         {
             var calidad = context.Calidad.FirstOrDefault(c => c.Id == productoDto.CalidadId);
-            var tipo = context.TipoProducto.FirstOrDefault(c => c.Id == productoDto.TipoId);
+            var tipo = context.TipoProducto.FirstOrDefault(c => c.Id == productoDto.TipoProductoId);
             producto.Calidad = calidad;
             producto.Tipo = tipo;
+            producto.TipoProductoId = productoDto.TipoProductoId;
             if (producto.Id > 0)
                 producto.FechaModificacion = DateTime.Now;
         }
@@ -72,7 +73,7 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el producto con el Id: {id}");
         }
 
-        [HttpPost()]
+        [HttpPost("crear")]
         public async Task<ActionResult> PostProductoDto([FromBody] CUProductoDto productoDto)
         {
             try
