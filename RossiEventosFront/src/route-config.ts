@@ -9,7 +9,7 @@ import IndiceCategoria from "./Categoria/IndiceCategoria";
 import CrearDeposito from "./Deposito/CrearDeposito";
 import EditarDeposito from "./Deposito/EditarDeposito";
 import IndiceDeposito from "./Deposito/IndiceDeposito";
-import CrearMovimiento from "./Movimientos/CrearMovimiento";
+//import CrearMovimiento from "./Movimientos/CrearMovimiento";
 import CrearProducto from "./Productos/CrearProducto";
 import EditarProducto from "./Productos/EditarProducto";
 import IndiceProducto from "./Productos/IndiceProducto";
@@ -45,8 +45,8 @@ const rutas = [
     {path: '/ubicacion/crear', componente: CrearUbicacion, esAdmin: true},
     {path: '/ubicacion/editar/:id', componente: EditarUbicacion, esAdmin: true},
 
-    {path: '/movimiento', componente: IndiceUbicacion, esAdmin: true},
-    {path: '/movimiento/crear', componente: CrearMovimiento, esAdmin: true},
+    //{path: '/movimiento', componente: IndiceUbicacion, esAdmin: true},
+    //{path: '/movimiento/crear', componente: CrearMovimiento, esAdmin: true},
 
     {path: '/producto', componente: IndiceProducto, esAdmin: true},
     {path: '/producto/crear', componente: CrearProducto, esAdmin: true},
