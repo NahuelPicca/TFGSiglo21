@@ -9,6 +9,7 @@ import IndiceCategoria from "./Categoria/IndiceCategoria";
 import CrearDeposito from "./Deposito/CrearDeposito";
 import EditarDeposito from "./Deposito/EditarDeposito";
 import IndiceDeposito from "./Deposito/IndiceDeposito";
+import { LandingPage } from "./LandingPage/LandingPage";
 //import CrearMovimiento from "./Movimientos/CrearMovimiento";
 import CrearProducto from "./Productos/CrearProducto";
 import EditarProducto from "./Productos/EditarProducto";
@@ -20,6 +21,7 @@ import IndiceUbicacion from "./Ubicacion/IndiceUbicacion";
 // import Registro from "./auth/Registro";
  import Login from "./auth/Login";
 import Registro from "./auth/Registro";
+//import Menu from "./utils/Menu";
 // import IndiceUsuarios from "./auth/IndiceUsuarios";
 
 //:id(\\d+) Se usa para poder recibir en la ruta relativa un ID de tipo
@@ -51,7 +53,8 @@ const rutas = [
     {path: '/producto', componente: IndiceProducto, esAdmin: true},
     {path: '/producto/crear', componente: CrearProducto, esAdmin: true},
     {path: '/producto/editar/:id', componente: EditarProducto, esAdmin: true},
-    // {path: '/', componente: LandingPage, exact: true},
+
+    {path: '/', componente: LandingPage, exact: true},
     {path: '*', componente: RedireccionarALanding}
 ]
 
