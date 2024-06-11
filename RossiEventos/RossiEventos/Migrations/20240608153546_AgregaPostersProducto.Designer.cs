@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RossiEventos;
 
@@ -11,9 +12,11 @@ using RossiEventos;
 namespace RossiEventos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240608153546_AgregaPostersProducto")]
+    partial class AgregaPostersProducto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -741,15 +744,15 @@ namespace RossiEventos.Migrations
 
                     b.Property<string>("Poster1")
                         .IsRequired()
-                        .HasColumnType("varchar(MAX)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Poster2")
                         .IsRequired()
-                        .HasColumnType("varchar(MAX)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Poster3")
                         .IsRequired()
-                        .HasColumnType("varchar(MAX)");
+                        .HasColumnType("varchar");
 
                     b.Property<decimal>("Precio")
                         .HasPrecision(15, 2)
