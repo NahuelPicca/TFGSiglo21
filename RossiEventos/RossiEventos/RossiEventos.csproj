@@ -25,6 +25,7 @@
     <Folder Include="Migrations\" />
     <Folder Include="Filtros\" />
     <Folder Include="Validaciones\" />
+    <Folder Include="wwwroot\productos\" />
   </ItemGroup>
 
 </Project>
