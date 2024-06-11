@@ -38,7 +38,16 @@ namespace RossiEventos.Utilidades
             CreateMap<EncabezadoMovStkDto, EncabezadoMovStk>().ReverseMap();
             CreateMap<LocalizacionDto, Localizacion>().ReverseMap();
             CreateMap<Pedido, PedidoDto>().ReverseMap();
-            CreateMap<Producto, ProductoDto>().ReverseMap();
+            CreateMap<Producto, ProductoDto>()
+                .ReverseMap()
+                .ForMember(x => x.Poster1, opc => opc.Ignore())
+                .ForMember(x => x.Poster2, opc => opc.Ignore())
+                .ForMember(x => x.Poster3, opc => opc.Ignore());
+            CreateMap<CUProductoDto, Producto>()
+                .ReverseMap()
+                .ForMember(x => x.Poster1, opc => opc.Ignore())
+                .ForMember(x => x.Poster2, opc => opc.Ignore())
+                .ForMember(x => x.Poster3, opc => opc.Ignore());
             CreateMap<RenglonMovStk, RenglonMovStkDto>().ReverseMap();
             CreateMap<RenglonReserva, RenglonReservaDto>().ReverseMap();
             CreateMap<Reserva, ReservaDto>().ReverseMap();
