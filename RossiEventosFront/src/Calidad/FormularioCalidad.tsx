@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import FormGroupText from "../utils/FormGroupText";
 import Button from "../utils/Button";
 import { Link } from "react-router-dom";
-import { calidadCreacionDTO } from "./calidad.modulo";
+import { calidadCreacionDTO, calidadDTO } from "./calidad.modulo";
 
 export default function FormularioCalidad(props: formularioCalidadProps) {
     return (
