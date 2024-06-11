@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RossiEventos.Dto;
 using RossiEventos.Entidades;
+using RossiEventos.Utilidades;
 
 namespace RossiEventos.Controllers
 {
@@ -10,20 +11,26 @@ namespace RossiEventos.Controllers
     [ApiController]
     public class ProductoController : ControllerBase
     {
-        private readonly AppDbContext context;
-        private readonly ILogger<ProductoController> logger;
-        private readonly IMapper mapper;
+        readonly AppDbContext context;
+        readonly ILogger<ProductoController> logger;
+        readonly IMapper mapper;
+        readonly IAlmacenadorArchivos almacenamietoArchivos;
+        readonly string contenedor = "productos";
 
         public ProductoController(ILogger<ProductoController> logger,
                                  AppDbContext context,
-                                 IMapper mapper)
+                                 IMapper mapper,
+                                 IAlmacenadorArchivos almacenamietoArchivos)
         {
             this.logger = logger;
             this.context = context;
             this.mapper = mapper;
+            this.almacenamietoArchivos = almacenamietoArchivos;
         }
 
-        void HidrataPropFaltante(CUProductoDto productoDto, Producto producto)
+        async void HidrataPropFaltante(CUProductoDto productoDto
+                                     , Producto producto
+                                     , bool modifica = false)
         {
             var calidad = context.Calidad.FirstOrDefault(c => c.Id == productoDto.CalidadId);
             var tipo = context.TipoProducto.FirstOrDefault(c => c.Id == productoDto.TipoProductoId);
@@ -32,6 +39,28 @@ namespace RossiEventos.Controllers
             producto.TipoProductoId = productoDto.TipoProductoId;
             if (producto.Id > 0)
                 producto.FechaModificacion = DateTime.Now;
+
+            if(modifica)
+            {
+                if (productoDto.Poster1 != null)
+                    producto.Poster1 = await almacenamietoArchivos.EditarArchivo(contenedor
+                                                                              , productoDto.Poster1
+                                                                              , producto.Poster1);
+                else
+                    producto.Poster1 = "";
+                if (productoDto.Poster2 != null)
+                    producto.Poster2 = await almacenamietoArchivos.EditarArchivo(contenedor
+                                                                              , productoDto.Poster2
+                                                                              , producto.Poster2);
+                else
+                    producto.Poster2 = "";
+                if (productoDto.Poster3 != null)
+                    producto.Poster3 = await almacenamietoArchivos.EditarArchivo(contenedor
+                                                                              , productoDto.Poster3
+                                                                              , producto.Poster3);
+                else
+                    producto.Poster3 = "";
+            }
         }
 
         [HttpDelete("{id:int}")]
@@ -74,12 +103,13 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPost("crear")]
-        public async Task<ActionResult> PostProductoDto([FromBody] CUProductoDto productoDto)
+        public async Task<ActionResult> PostProductoDto([FromForm] CUProductoDto productoDto)
         {
             try
             {
                 var producto = mapper.Map<Producto>(productoDto);
                 HidrataPropFaltante(productoDto, producto);
+                await HidrataPosts(productoDto, producto);
                 context.Add(producto);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
@@ -90,15 +120,28 @@ namespace RossiEventos.Controllers
             }
         }
 
+        async Task HidrataPosts(CUProductoDto productoDto, Producto producto)
+        {
+            if (productoDto.Poster1 != null)
+                producto.Poster1 = await almacenamietoArchivos.GuardarArchivo(contenedor, productoDto.Poster1);
+            if (productoDto.Poster2 != null)
+                producto.Poster2 = await almacenamietoArchivos.GuardarArchivo(contenedor, productoDto.Poster2);
+            if (productoDto.Poster3 != null)
+                producto.Poster3 = await almacenamietoArchivos.GuardarArchivo(contenedor, productoDto.Poster3);
+        }
+
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> PutProductoDto(int id, [FromBody] CUProductoDto create)
+        public async Task<ActionResult> PutProductoDto(int id, [FromForm] CUProductoDto create)
         {
             try
             {
                 var productDb = context.Producto.FirstOrDefault(p => p.Id == id);
+                
+                if (productDb == null)
+                    return NotFound();
 
                 var producto = mapper.Map<CUProductoDto, Producto>(create, productDb);
-                HidrataPropFaltante(create, producto);
+                HidrataPropFaltante(create, producto, true);
                 //context.Entry = EntityState.Modified;
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
