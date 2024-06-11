@@ -11,6 +11,7 @@ import { urlCalidad, urlTipoProducto } from "../utils/endpoints";
 import axios, { AxiosResponse } from "axios";
 import { creacionProductoDTO } from "./producto.modulo";
 import FormGroupFecha from "../utils/FormGroupFecha";
+import FormGroupImagen from "../utils/FormGroupImagen";
 
 export default function FormularioProducto(props: formularioProductoProps) {
 
@@ -88,6 +89,15 @@ export default function FormularioProducto(props: formularioProductoProps) {
                                 value={tipoProducto.id}>{tipoProducto.nombre}</option>)}
                         </select>
                     </div>
+                    <FormGroupImagen label='Poster Nº1'
+                        campo='poster1'
+                        imagenURL={props.modelo.posterURL1} />
+                    <FormGroupImagen label='Poster Nº2'
+                        campo='poster2'
+                        imagenURL={props.modelo.posterURL2} />
+                    <FormGroupImagen label='Poster Nº3'
+                        campo='poster3'
+                        imagenURL={props.modelo.posterURL3} />
                     <Button disabled={formikProps.isSubmitting}
                         type="submit">
                         Aceptar
