@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using PeliculasAPI.BehaviorBadRequests;
 using PeliculasAPI.Filtros;
 using RossiEventos;
+using RossiEventos.Utilidades;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -70,6 +71,7 @@ builder.Services.AddCors(opt =>
                                              .WithExposedHeaders(new string[] { "cantidadTotalRegistros" }));
 });
 
+builder.Services.AddTransient<IAlmacenadorArchivos, AlmacenadorArchivosLocal>();
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
