@@ -36,5 +36,14 @@ namespace RossiEventos.Entidades
 
         [Required]
         public decimal Precio { get; set; }
+
+        [Required, Column(TypeName = "varchar(MAX)")]
+        public string Poster1 { get; set; } = "";
+
+        [Required, Column(TypeName = "varchar(MAX)")]
+        public string Poster2 { get; set; } = "";
+
+        [Required, Column(TypeName = "varchar(MAX)")]
+        public string Poster3 { get; set; } = "";
     }
 }
