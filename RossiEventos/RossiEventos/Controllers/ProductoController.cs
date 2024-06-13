@@ -37,6 +37,10 @@ namespace RossiEventos.Controllers
             producto.Calidad = calidad;
             producto.Tipo = tipo;
             producto.TipoProductoId = productoDto.TipoProductoId;
+            producto.Poster1 = !string.IsNullOrEmpty(producto.Poster1) ? producto.Poster1 : string.Empty;
+            producto.Poster2 = !string.IsNullOrEmpty(producto.Poster2) ? producto.Poster2 : string.Empty;
+            producto.Poster3 = !string.IsNullOrEmpty(producto.Poster3) ? producto.Poster3 : string.Empty;
+
             if (producto.Id > 0)
                 producto.FechaModificacion = DateTime.Now;
 
@@ -46,20 +50,14 @@ namespace RossiEventos.Controllers
                     producto.Poster1 = await almacenamietoArchivos.EditarArchivo(contenedor
                                                                               , productoDto.Poster1
                                                                               , producto.Poster1);
-                else
-                    producto.Poster1 = "";
                 if (productoDto.Poster2 != null)
                     producto.Poster2 = await almacenamietoArchivos.EditarArchivo(contenedor
                                                                               , productoDto.Poster2
                                                                               , producto.Poster2);
-                else
-                    producto.Poster2 = "";
                 if (productoDto.Poster3 != null)
                     producto.Poster3 = await almacenamietoArchivos.EditarArchivo(contenedor
                                                                               , productoDto.Poster3
                                                                               , producto.Poster3);
-                else
-                    producto.Poster3 = "";
             }
         }
 
