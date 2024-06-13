@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import EditarEntidad from "../utils/EditarEntidades";
 import { urlProducto } from "../utils/endpoints";
 import FormularioProducto from "./FormularioProducto";
 import { creacionProductoDTO, productoDTO } from "./producto.modulo";
