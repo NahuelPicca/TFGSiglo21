@@ -93,6 +93,12 @@ export default function Menu() {
                                 Productos
                             </NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink className={({ isActive }) => { return isActive ? 'nav-link' : 'nav-link' }}
+                                to='/tipoProducto'>
+                                Tipos de Productos
+                            </NavLink>
+                        </li>
                         {/* } /> */}
                     </ul>
                     <div className="d-flex">
