@@ -48,12 +48,23 @@ namespace RossiEventos.Controllers
         }
 
         [HttpGet("todos")]
-        public async Task<ActionResult<List<TipoProductoDto>>> GetListTipoProductoDto()
+        public async Task<ActionResult<List<TipoProductoDto>>> GetListTodosTipoProductoDto()
+        {
+            return await GetTipoProducto();
+        }
+
+        async Task<ActionResult<List<TipoProductoDto>>> GetTipoProducto()
         {
             logger.LogInformation("Lista de tipo de productos");
             var listTipoProducto = await context.TipoProducto
                                                 .ToListAsync();
             return mapper.Map<List<TipoProductoDto>>(listTipoProducto);
+        }
+
+        [HttpGet()]
+        public async Task<ActionResult<List<TipoProductoDto>>> GetListTipoProductoDto()
+        {
+            return await GetTipoProducto();
         }
 
         [HttpGet("{id:int}")]
@@ -67,7 +78,7 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el tipo de producto con el Id: {id}");
         }
 
-        [HttpPost()]
+        [HttpPost("crear")]
         public async Task<ActionResult> PostTipoProductoDto([FromBody] CUTipoDeProductoDto tipoProductoDto)
         {
             try
@@ -84,8 +95,9 @@ namespace RossiEventos.Controllers
             }
         }
 
-        [HttpPut()]
-        public async Task<ActionResult> PostTipoProductoDto(int id, [FromBody] CUTipoDeProductoDto tipoProductoDto)
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> PutTipoProductoDto(int id
+                                                        , [FromBody] CUTipoDeProductoDto tipoProductoDto)
         {
             try
             {
