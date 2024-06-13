@@ -57,12 +57,23 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró la categoria con el Id: {id}");
         }
 
-        [HttpGet()]
-        public async Task<ActionResult<List<CategoriaDto>>> GetListCategoriaDto()
+        [HttpGet("todos")]
+        public async Task<ActionResult<List<CategoriaDto>>> GetListCategoriaDtoTodos()
+        {
+            return await GetListaCategoria();
+        }
+
+        async Task<ActionResult<List<CategoriaDto>>> GetListaCategoria()
         {
             logger.LogInformation("Lista de categoria");
             var listCategoria = await context.Categoria.ToListAsync();
             return mapper.Map<List<CategoriaDto>>(listCategoria);
+        }
+
+        [HttpGet()]
+        public async Task<ActionResult<List<CategoriaDto>>> GetListCategoriaDto()
+        {
+            return await GetListaCategoria();
         }
 
         [HttpPost("crear")]
