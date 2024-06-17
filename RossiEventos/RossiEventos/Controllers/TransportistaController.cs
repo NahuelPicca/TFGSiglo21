@@ -41,6 +41,17 @@ namespace RossiEventos.Controllers
         [HttpGet()]
         public async Task<ActionResult<List<TransportistaDto>>> GetListTransportistaDto()
         {
+            return await GetTransportistas();
+        }
+
+        [HttpGet("todos")]
+        public async Task<ActionResult<List<TransportistaDto>>> GetListTransportistaDtoTodos()
+        {
+            return await GetTransportistas();
+        }
+
+        async Task<ActionResult<List<TransportistaDto>>> GetTransportistas()
+        {
             logger.LogInformation("Lista de transportistas");
             var listTransportistas = await context.Transportista.ToListAsync();
             return mapper.Map<List<TransportistaDto>>(listTransportistas);
@@ -57,7 +68,7 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el transportista con el Id: {id}");
         }
 
-        [HttpPost()]
+        [HttpPost("crear")]
         public async Task<ActionResult> PostTransportistaDto([FromBody] CUTransportistaDto transportistaDto)
         {
             try
@@ -79,8 +90,8 @@ namespace RossiEventos.Controllers
             try
             {
                 var transportistaDb = context.Transportista.FirstOrDefault(c => c.Id == id);
-                var calidad = mapper.Map<CUTransportistaDto, Transportista>(create, transportistaDb);
-                calidad.FechaModificacion = DateTime.Now;
+                var transportista = mapper.Map<CUTransportistaDto, Transportista>(create, transportistaDb);
+                transportista.FechaModificacion = DateTime.Now;
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
             }
