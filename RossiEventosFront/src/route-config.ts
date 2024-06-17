@@ -18,6 +18,9 @@ import RedireccionarALanding from "./RedireccionarALanding";
 import CrearTipoProducto from "./TipoProducto/CrearTipoProducto";
 import EditarTipoProducto from "./TipoProducto/EditarTipoProducto";
 import IndiceTipoProducto from "./TipoProducto/IndiceTipoProducto";
+import CrearTransportista from "./Transportista/CrearTransportista";
+import EditarTransportista from "./Transportista/EditarTransportista";
+import IndiceTransportista from "./Transportista/IndiceTransportista";
 import CrearUbicacion from "./Ubicacion/CrearUbicacion";
 import EditarUbicacion from "./Ubicacion/EditarUbicacion";
 import IndiceUbicacion from "./Ubicacion/IndiceUbicacion";
@@ -60,6 +63,10 @@ const rutas = [
     {path: '/tipoProducto', componente: IndiceTipoProducto, esAdmin: true},
     {path: '/tipoProducto/crear', componente: CrearTipoProducto, esAdmin: true},
     {path: '/tipoProducto/editar/:id', componente: EditarTipoProducto, esAdmin: true},
+
+    {path: '/transportista', componente: IndiceTransportista, esAdmin: true},
+    {path: '/transportista/crear', componente: CrearTransportista, esAdmin: true},
+    {path: '/transportista/editar/:id', componente: EditarTransportista, esAdmin: true},
 
     {path: '/', componente: LandingPage, exact: true},
     {path: '*', componente: RedireccionarALanding}
