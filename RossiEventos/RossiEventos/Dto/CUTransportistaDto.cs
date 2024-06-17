@@ -8,7 +8,6 @@ namespace RossiEventos.Dto
     {
         public string Nombre { get; set; }
         public string Apellido { get; set; }
-        public string TipoDni { get; set; }
         public int NroDni { get; set; }
         public string Cuit { get; set; }
         public string Direccion { get; set; }
@@ -16,8 +15,8 @@ namespace RossiEventos.Dto
         public string Localidad { get; set; }
         public string Email { get; set; }
         public string CodigoPostal { get; set; }
-        public string UsuarioInserto { get; set; }
         public DateTime FechaVencLicencia { get; set; }
+        public DateTime FechaNacimiento { get; set; }
         public string Licencia { get; set; }
         public bool Habilitado { get; set; }
     }
