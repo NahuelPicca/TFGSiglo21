@@ -17,6 +17,9 @@ namespace RossiEventos.Entidades
         public string Marca { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [Column(TypeName = "Date")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime Anio { get; set; }
 
         [Required]
