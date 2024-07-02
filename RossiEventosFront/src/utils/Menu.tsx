@@ -53,7 +53,7 @@ export default function Menu() {
               <li><a className="dropdown-item" href="/calidad">Calidad</a></li>
               <li><a className="dropdown-item" href="/tipoProducto">Tipo de producto</a></li>
               <li><a className="dropdown-item" href="/categoria">Categoría</a></li>
-              <li><a className="dropdown-item" href="#">Vehiculos</a></li>
+              <li><a className="dropdown-item" href="/vehiculo">Vehiculos</a></li>
               <li><a className="dropdown-item" href="/transportista">Transportista</a></li>
               <li><a className="dropdown-item" href="#">Asignar Vehiculos</a></li>
               <li><a className="dropdown-item" href="/usuario">Usuarios</a></li>
@@ -89,3 +89,4 @@ export default function Menu() {
   // )
 }
 //activeclassNameNameNameNameName = {}
+
