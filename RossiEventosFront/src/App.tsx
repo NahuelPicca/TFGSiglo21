@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import rutas from './route-config';
 import validaciones from './validaciones/validaciones';
+import 'primeicons/primeicons.css';
+//import 'primeflex/primeflex.css';
 
 validaciones();
 
@@ -36,19 +38,19 @@ function App() {
           </Routes >
         </div >
         <div className="container">
-  <footer className="d-flex flex-wrap justify-content-between align-items-center py-5">
-    <div className="col-md-4 d-flex align-items-center">
-      <a href="/" className="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
-      <img src="https://startbootstrap.com/assets/img/sb-logo.svg" width="100" height="50"></img>
-      </a>
-      <span className="mb-3 mb-md-0 text-body-secondary">© 2024 Rossi Eventos</span>
-    </div>
+          <footer className="d-flex flex-wrap justify-content-between align-items-center py-5">
+            <div className="col-md-4 d-flex align-items-center">
+              <a href="/" className="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                <img src="https://startbootstrap.com/assets/img/sb-logo.svg" width="100" height="50"></img>
+              </a>
+              <span className="mb-3 mb-md-0 text-body-secondary">© 2024 Rossi Eventos</span>
+            </div>
 
-    <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
-    <li className="ms-3"><a className="text-body-secondary" href="#"><i className="fa-brands fa-facebook"></i></a></li>
-    <li className="ms-3"><a className="text-body-secondary" href="#"><i className="fa-brands fa-instagram"></i></a></li></ul>
-  </footer>
-</div>
+            <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
+              <li className="ms-3"><a className="text-body-secondary" href="#"><i className="fa-brands fa-facebook"></i></a></li>
+              <li className="ms-3"><a className="text-body-secondary" href="#"><i className="fa-brands fa-instagram"></i></a></li></ul>
+          </footer>
+        </div>
       </BrowserRouter >
     </>
   );
