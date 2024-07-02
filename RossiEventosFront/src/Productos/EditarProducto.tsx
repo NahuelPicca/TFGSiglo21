@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { urlProducto } from "../utils/endpoints";
-import FormularioProducto from "./FormularioProducto";
+import FormularioProducto from "./FormularioProductoSuplente";
 import { creacionProductoDTO, productoDTO } from "./producto.modulo";
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
@@ -30,7 +30,8 @@ export default function EditarProducto() {
                     habilitado: respuesta.data.habilitado,
                     precio: respuesta.data.precio,
                     calidadId: respuesta.data.calidadId,
-                    tipoProductoId: respuesta.data.tipoProductoId
+                    tipoProductoId: respuesta.data.tipoProductoId,
+                    codigoCalidad: respuesta.data.codigoCalidad
                 }
                 setProductoCreacionDTO(modelo);
                 setProducto(respuesta.data);
