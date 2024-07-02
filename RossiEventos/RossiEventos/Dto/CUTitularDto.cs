@@ -12,6 +12,5 @@
         public string Localidad { get; set; }
         public string Email { get; set; }
         public string CodigoPostal { get; set; }
-        public string UsuarioInserto { get; set; }
     }
 }
