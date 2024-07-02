@@ -8,5 +8,6 @@ export const urlMovimiento = `${apiURL}/movimiento`
 export const urlProducto = `${apiURL}/producto`
 export const urlTipoProducto = `${apiURL}/tipoProducto`
 export const urlTransportista = `${apiURL}/transportista`
+export const urlVehiculo = `${apiURL}/vehiculos`
 // export const urlCuentas = `${apiURL}/cuentas`
 // export const urlRatings = `${apiURL}/rating`
