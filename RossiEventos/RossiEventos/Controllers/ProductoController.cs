@@ -44,7 +44,7 @@ namespace RossiEventos.Controllers
             if (producto.Id > 0)
                 producto.FechaModificacion = DateTime.Now;
 
-            if(modifica)
+            if (modifica)
             {
                 if (productoDto.Poster1 != null)
                     producto.Poster1 = await almacenamietoArchivos.EditarArchivo(contenedor
@@ -76,6 +76,29 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el producto con el Id: {id}");
         }
 
+        [HttpDelete()]
+        public async Task<ActionResult> DeleteProductos([FromBody] List<DeleteProductoDTO> lista)
+        {
+            var cantidadRegistros = lista.Count;
+            var contador = 0;
+            foreach (var item in lista)
+            {
+                var producto = await context.Producto
+                                            .FirstOrDefaultAsync(u => u.Id == item.Id);
+                contador++;
+                if (producto != null)
+                {
+                    context.Producto.Remove(producto);
+                    if (contador == cantidadRegistros)
+                    {
+                        context.SaveChanges();
+                        return Ok($"Se eliminó el rango de productos seleccionado.");
+                    }
+                }
+            }
+            return NotFound($"No se pudo borrar el rango de productos.");
+        }
+
         [HttpGet()]
         public async Task<ActionResult<List<ProductoDto>>> GetListProductosDto()
         {
@@ -88,7 +111,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<ProductoDto>> GetProductoDto(int id)
+        public async Task<ActionResult<ProductoEditarDto>> GetProductoDto(int id)
         {
             logger.LogInformation("Obtiene un producto");
             var producto = await context.Producto
@@ -96,7 +119,26 @@ namespace RossiEventos.Controllers
                                         .Include(c => c.Tipo)
                                         .FirstOrDefaultAsync(u => u.Id == id);
             if (producto != null)
-                return mapper.Map<ProductoDto>(producto);
+            {
+                var proctoEditar = new ProductoEditarDto
+                {
+                    Id = producto.Id.ToString(),
+                    Codigo = producto.Codigo,
+                    Descripcion = producto.Descripcion,
+                    Marca = producto.Marca,
+                    Poster1 = producto.Poster1,
+                    Poster2 = producto.Poster2,
+                    Poster3 = producto.Poster3,
+                    Anio = producto.Anio,
+                    Habilitado = producto.Habilitado,
+                    CalidadId = producto.CalidadId,
+                    CodigoCalidad = producto.Calidad.Codigo,
+                    TipoProductoId = producto.TipoProductoId,
+                    Precio = producto.Precio
+                };
+                return proctoEditar;
+            }
+            //return mapper.Map<ProductoEditarDto>(producto);
             return NotFound($"No se encontró el producto con el Id: {id}");
         }
 
@@ -134,7 +176,7 @@ namespace RossiEventos.Controllers
             try
             {
                 var productDb = context.Producto.FirstOrDefault(p => p.Id == id);
-                
+
                 if (productDb == null)
                     return NotFound();
 
