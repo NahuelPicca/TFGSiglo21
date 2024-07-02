@@ -54,6 +54,17 @@ namespace RossiEventos.Controllers
         [HttpGet()]
         public async Task<ActionResult<List<UsuarioDto>>> GetListUsuario()
         {
+            return await GetUsuariosTodos();
+        }
+
+        [HttpGet("todos")]
+        public async Task<ActionResult<List<UsuarioDto>>> GetListUsuarioTodos()
+        {
+            return await GetUsuariosTodos();
+        }
+
+        async Task<ActionResult<List<UsuarioDto>>> GetUsuariosTodos()
+        {
             logger.LogInformation("Lista de usuarios");
             var listUsuario = await context.Usuario.ToListAsync();
             return mapper.Map<List<UsuarioDto>>(listUsuario);
