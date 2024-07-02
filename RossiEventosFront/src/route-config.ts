@@ -13,6 +13,8 @@ import { LandingPage } from "./LandingPage/LandingPage";
 //import CrearMovimiento from "./Movimientos/CrearMovimiento";
 import CrearProducto from "./Productos/CrearProducto";
 import EditarProducto from "./Productos/EditarProducto";
+import FormularioProducto from "./Productos/FormularioProducto";
+import ProductsDemo from "./Productos/FormularioProducto";
 import IndiceProducto from "./Productos/IndiceProducto";
 import RedireccionarALanding from "./RedireccionarALanding";
 import CrearTipoProducto from "./TipoProducto/CrearTipoProducto";
@@ -24,6 +26,9 @@ import IndiceTransportista from "./Transportista/IndiceTransportista";
 import CrearUbicacion from "./Ubicacion/CrearUbicacion";
 import EditarUbicacion from "./Ubicacion/EditarUbicacion";
 import IndiceUbicacion from "./Ubicacion/IndiceUbicacion";
+import CrearVehiculo from "./Vehiculo/CrearVehiculo";
+import EditarVehiculo from "./Vehiculo/EditarVehiculo";
+import IndiceVehiculo from "./Vehiculo/IndiceVehiculo";
 // import Registro from "./auth/Registro";
  import Login from "./auth/Login";
 import Registro from "./auth/Registro";
@@ -56,9 +61,9 @@ const rutas = [
     //{path: '/movimiento', componente: IndiceUbicacion, esAdmin: true},
     //{path: '/movimiento/crear', componente: CrearMovimiento, esAdmin: true},
 
-    {path: '/producto', componente: IndiceProducto, esAdmin: true},
-    {path: '/producto/crear', componente: CrearProducto, esAdmin: true},
-    {path: '/producto/editar/:id', componente: EditarProducto, esAdmin: true},
+    // {path: '/producto', componente: IndiceProducto, esAdmin: true},
+    // {path: '/producto/crear', componente: CrearProducto, esAdmin: true},
+    // {path: '/producto/editar/:id', componente: EditarProducto, esAdmin: true},
 
     {path: '/tipoProducto', componente: IndiceTipoProducto, esAdmin: true},
     {path: '/tipoProducto/crear', componente: CrearTipoProducto, esAdmin: true},
@@ -67,6 +72,12 @@ const rutas = [
     {path: '/transportista', componente: IndiceTransportista, esAdmin: true},
     {path: '/transportista/crear', componente: CrearTransportista, esAdmin: true},
     {path: '/transportista/editar/:id', componente: EditarTransportista, esAdmin: true},
+
+    {path: '/vehiculo', componente: IndiceVehiculo, esAdmin: true},
+    {path: '/vehiculo/crear', componente: CrearVehiculo, esAdmin: true},
+    {path: '/vehiculo/editar/:id', componente: EditarVehiculo, esAdmin: true},
+
+    {path: '/producto', componente: FormularioProducto, esAdmin: true},
 
     {path: '/', componente: LandingPage, exact: true},
     {path: '*', componente: RedireccionarALanding}
