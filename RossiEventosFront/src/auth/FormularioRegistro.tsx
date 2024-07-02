@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import FormGroupText from "../utils/FormGroupText";
 import Button from "../utils/Button";
 import { Link } from "react-router-dom";
+import FormGroupFecha from "../utils/FormGroupFecha";
 //import ChecksUsuarios from "./ChecksUsuarios";
 //import MiComponente from "./Micomponente";
 
@@ -13,9 +14,6 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
         <Formik initialValues={props.modelo}
             onSubmit={props.onSubmit}
             validationSchema={Yup.object({
-                email: Yup.string()
-                    .required('El email es requerido.')
-                    .email('Debe colocar un email válido.'),
                 contraseña: Yup.string().required('La contraseña es requerido.')
                     .min(8, 'La contraseña debe tener como mínimo 8 carácteres.')
                     .matches(
@@ -26,6 +24,9 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
                     .matches(/[A-Z]/, "La contraseña debe contener letras mayúsculas.")
                     .matches(/[a-z]/, "La contraseña debe contener letras minúsculas."),
                 confirmaPassword: Yup.string().oneOf([Yup.ref("contraseña")], "No coinciden las contraseñas."),
+                email: Yup.string()
+                    .required('El email es requerido.')
+                    .email('Debe colocar un email válido.'),
                 nombre: Yup.string().required('El nombre es requerido.').primeraLetraMayuscula(),
                 apellido: Yup.string().required('El apellido es requerido.').primeraLetraMayuscula(),
                 nroDni: Yup.string().required('El DNI es requerido.').max(9, 'No puede superar 9 carácteres.'),
@@ -70,9 +71,8 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
                     <FormGroupText label="Email"
                         campo="email"
                         type="text" />
-                    <FormGroupText label="Fecha Nacimiento"
-                        campo="fechaNacimiento"
-                        type="date" />
+                    <FormGroupFecha label="Fecha Nacimiento"
+                        campo="fechaNacimiento" />
                     <FormGroupText label="Contraseña"
                         campo='contraseña'
                         type="password" />
