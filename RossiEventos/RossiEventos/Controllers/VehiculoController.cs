@@ -47,6 +47,17 @@ namespace RossiEventos.Controllers
         [HttpGet()]
         public async Task<ActionResult<List<VehiculoDto>>> GetListVehiculoDto()
         {
+            return await GetListaVehiculos();
+        }
+
+        [HttpGet("todos")]
+        public async Task<ActionResult<List<VehiculoDto>>> GetListVehiculoDtoTodos()
+        {
+            return await GetListaVehiculos();
+        }
+
+        async Task<ActionResult<List<VehiculoDto>>> GetListaVehiculos()
+        {
             logger.LogInformation("Lista de vehiculo");
             var listVehiculo = await context.Vehiculo.ToListAsync();
             return mapper.Map<List<VehiculoDto>>(listVehiculo);
