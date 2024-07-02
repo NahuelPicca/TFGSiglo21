@@ -13,6 +13,5 @@ namespace RossiEventos.Dto
         public string NroPoliza { get; set; }
         public int TitularId { get; set; }
         public bool Habilitado { get; set; }
-        public string UsuarioInserto { get; set; }
     }
 }
