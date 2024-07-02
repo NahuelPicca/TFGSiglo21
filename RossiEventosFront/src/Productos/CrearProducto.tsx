@@ -3,7 +3,7 @@ import { useState } from "react";
 import MostrarErrores from "../utils/MostrarErrores";
 import { useNavigate } from "react-router-dom";
 import { urlProducto } from "../utils/endpoints";
-import FormularioProducto from "./FormularioProducto";
+import FormularioProducto from "./FormularioProductoSuplente";
 import { creacionProductoDTO } from "./producto.modulo";
 import { convertirProductoAFormData } from "./baseFormDataProducto";
 //import { convertirPeliculaAFormData } from "../utils/formDataUtils";
@@ -49,7 +49,8 @@ export default function CrearProducto() {
                     calidadId: 0,
                     tipoProductoId: 0,
                     precio: 0,
-                    habilitado: true
+                    habilitado: true,
+                    codigoCalidad: ''
                 }}
                 onSubmit={async valores => await crear(valores)} />
         </>
