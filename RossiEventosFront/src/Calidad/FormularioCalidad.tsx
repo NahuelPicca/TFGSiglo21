@@ -303,7 +303,7 @@ export default function FormularioCalidad() {
                     <label htmlFor="nombre" className="font-bold">
                         Nombre
                     </label>
-                    <InputTextarea id="nombre" value={calidad.nombre} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onInputTextAreaChange(e, 'nombre')} required rows={3} cols={20} />
+                    <InputText id="nombre" value={calidad.nombre} onChange={(e) => onInputChange(e, 'nombre')} required autoFocus className={classNames({ 'p-invalid': submitted && !calidad.nombre })} />
                 </div>
                 <div className="field">
                     <label htmlFor="descripcion" className="font-bold">
