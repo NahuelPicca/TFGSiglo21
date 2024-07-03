@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import MostrarErrores from "../utils/MostrarErrores";
 import { useNavigate } from "react-router-dom";
-import FormularioCalidad from "./FormularioCalidad";
+import FormularioCalidad from "./FormularioCalidadSecundario";
 import { urlCalidad } from "../utils/endpoints";
 import { calidadCreacionDTO } from "./calidad.modulo";
 

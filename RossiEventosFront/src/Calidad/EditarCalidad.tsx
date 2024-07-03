@@ -1,6 +1,6 @@
 import EditarEntidad from "../utils/EditarEntidades";
 import { urlCalidad } from "../utils/endpoints";
-import FormularioCalidad from "./FormularioCalidad";
+import FormularioCalidad from "./FormularioCalidadSecundario";
 import { calidadCreacionDTO, calidadDTO } from "./calidad.modulo";
 
 export default function EditarCalidad() {
