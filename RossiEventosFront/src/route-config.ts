@@ -2,6 +2,7 @@
 //import CrearCalidad from "./Calidad/CrearCalidad";
 import CrearCalidad from "./Calidad/CrearCalidad";
 import EditarCalidad from "./Calidad/EditarCalidad";
+import FormularioCalidad from "./Calidad/FormularioCalidadPrincipal";
 import IndiceCalidad from "./Calidad/IndiceCalidad";
 import CrearCategoria from "./Categoria/CrearCategoria";
 import EditarCategoria from "./Categoria/EditarCategoria";
@@ -42,9 +43,9 @@ const rutas = [
      {path: '/registro', componente: Registro},
      {path: '/login', componente: Login},
 
-    {path: '/calidad', componente: IndiceCalidad, esAdmin: true},
-    {path: '/calidad/crear', componente: CrearCalidad, esAdmin: true},
-    {path: '/calidad/editar/:id', componente: EditarCalidad, esAdmin: true},
+    {path: '/calidad', componente: FormularioCalidad, esAdmin: true},
+    // {path: '/calidad/crear', componente: CrearCalidad, esAdmin: true},
+    // {path: '/calidad/editar/:id', componente: EditarCalidad, esAdmin: true},
 
     {path: '/deposito', componente: IndiceDeposito, esAdmin: true},
     {path: '/deposito/crear', componente: CrearDeposito, esAdmin: true},
