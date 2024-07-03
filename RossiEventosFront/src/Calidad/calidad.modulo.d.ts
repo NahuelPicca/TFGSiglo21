@@ -10,3 +10,15 @@ export interface calidadCreacionDTO{
     nombre: string;
     descripcion: string;
 }
+
+export interface deleteCalidadDTO{
+    id: number;
+    codigo: string;
+}
+
+export interface calidadEditarDTO{
+    id: number;
+    codigo: string;
+    nombre: string;
+    descripcion: string;
+}
