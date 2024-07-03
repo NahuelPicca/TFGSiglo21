@@ -39,6 +39,29 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el tipo de CALIDAD con el Id: {id}");
         }
 
+        [HttpDelete()]
+        public async Task<ActionResult> DeleteCalidades([FromBody] List<DeleteCalidadDto> lista)
+        {
+            var cantidadRegistros = lista.Count;
+            var contador = 0;
+            foreach (var item in lista)
+            {
+                var calidad = await context.Calidad
+                                            .FirstOrDefaultAsync(u => u.Id == item.Id);
+                contador++;
+                if (calidad != null)
+                {
+                    context.Calidad.Remove(calidad);
+                    if (contador == cantidadRegistros)
+                    {
+                        context.SaveChanges();
+                        return Ok($"Se eliminó el rango de calidades seleccionados.");
+                    }
+                }
+            }
+            return NotFound($"No se pudo borrar el rango de calidades.");
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<CalidadDto>> GetCalidadDto(int id)
         {
