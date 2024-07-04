@@ -1,6 +1,6 @@
 import EditarEntidad from "../utils/EditarEntidades";
 import { urlCategoria } from "../utils/endpoints";
-import FormularioCategoria from "./FormularioCategoria";
+import FormularioCategoria from "./FormularioCategoriaSecundario";
 import { categoriaDTO, creacionCategoriaDTO } from "./categoria.modulo";
 
 export default function EditarCategoria() {
