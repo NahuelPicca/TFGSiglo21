@@ -4,7 +4,7 @@ import MostrarErrores from "../utils/MostrarErrores";
 import { useNavigate } from "react-router-dom";
 import { urlCategoria } from "../utils/endpoints";
 import { creacionCategoriaDTO } from "./categoria.modulo";
-import FormularioCategoria from "./FormularioCategoria";
+import FormularioCategoria from "./FormularioCategoriaSecundario";
 
 export default function CrearCategoria() {
 
