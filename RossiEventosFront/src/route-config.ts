@@ -1,22 +1,13 @@
 //import { LandingPage } from "./LandingPage";
 //import CrearCalidad from "./Calidad/CrearCalidad";
-import CrearCalidad from "./Calidad/CrearCalidad";
-import EditarCalidad from "./Calidad/EditarCalidad";
 import FormularioCalidad from "./Calidad/FormularioCalidad";
-import IndiceCalidad from "./Calidad/IndiceCalidad";
-import CrearCategoria from "./Categoria/CrearCategoria";
-import EditarCategoria from "./Categoria/EditarCategoria";
-import IndiceCategoria from "./Categoria/IndiceCategoria";
+import FormularioCategoria from "./Categoria/FormularioCategoria";
 import CrearDeposito from "./Deposito/CrearDeposito";
 import EditarDeposito from "./Deposito/EditarDeposito";
 import IndiceDeposito from "./Deposito/IndiceDeposito";
 import { LandingPage } from "./LandingPage/LandingPage";
 //import CrearMovimiento from "./Movimientos/CrearMovimiento";
-import CrearProducto from "./Productos/CrearProducto";
-import EditarProducto from "./Productos/EditarProducto";
 import FormularioProducto from "./Productos/FormularioProducto";
-import ProductsDemo from "./Productos/FormularioProducto";
-import IndiceProducto from "./Productos/IndiceProducto";
 import RedireccionarALanding from "./RedireccionarALanding";
 import CrearTipoProducto from "./TipoProducto/CrearTipoProducto";
 import EditarTipoProducto from "./TipoProducto/EditarTipoProducto";
@@ -51,9 +42,10 @@ const rutas = [
     {path: '/deposito/crear', componente: CrearDeposito, esAdmin: true},
     {path: '/deposito/editar/:id', componente: EditarDeposito, esAdmin: true},
 
-    {path: '/categoria', componente: IndiceCategoria, esAdmin: true},
-    {path: '/categoria/crear', componente: CrearCategoria, esAdmin: true},
-    {path: '/categoria/editar/:id', componente: EditarCategoria, esAdmin: true},
+     {path: '/categoria', componente: FormularioCategoria, esAdmin: true},
+    // {path: '/categoria', componente: IndiceCategoria, esAdmin: true},
+    // {path: '/categoria/crear', componente: CrearCategoria, esAdmin: true},
+    // {path: '/categoria/editar/:id', componente: EditarCategoria, esAdmin: true},
 
     {path: '/ubicacion', componente: IndiceUbicacion, esAdmin: true},
     {path: '/ubicacion/crear', componente: CrearUbicacion, esAdmin: true},
