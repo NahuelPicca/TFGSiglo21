@@ -8,3 +8,7 @@ export interface creacionCategoriaDTO{
     nombre: string;
     descripcion: string;
 }
+
+export interface deleteCategoriaDTO{
+    id: number;
+}
