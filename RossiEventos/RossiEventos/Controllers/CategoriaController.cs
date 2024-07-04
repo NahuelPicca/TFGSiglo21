@@ -46,6 +46,29 @@ namespace RossiEventos.Controllers
             }
         }
 
+        [HttpDelete()]
+        public async Task<ActionResult> DeleteCategorias([FromBody] List<DeleteCategoriaDto> lista)
+        {
+            var cantidadRegistros = lista.Count;
+            var contador = 0;
+            foreach (var item in lista)
+            {
+                var categoria = await context.Categoria
+                                            .FirstOrDefaultAsync(u => u.Id == item.Id);
+                contador++;
+                if (categoria != null)
+                {
+                    context.Categoria.Remove(categoria);
+                    if (contador == cantidadRegistros)
+                    {
+                        context.SaveChanges();
+                        return Ok($"Se eliminó el rango de categorias seleccionadas.");
+                    }
+                }
+            }
+            return NotFound($"No se pudo borrar el rango de categorias.");
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<CategoriaDto>> GetCategoriaDto(int id)
         {
