@@ -32,6 +32,29 @@ namespace RossiEventos.Controllers
                 tipoDto.FechaModificacion = DateTime.Now;
         }
 
+        [HttpDelete()]
+        public async Task<ActionResult> DeleteCategorias([FromBody] List<DeleteTipoProductoDto> lista)
+        {
+            var cantidadRegistros = lista.Count;
+            var contador = 0;
+            foreach (var item in lista)
+            {
+                var tipo = await context.TipoProducto
+                                        .FirstOrDefaultAsync(u => u.Id == item.Id);
+                contador++;
+                if (tipo != null)
+                {
+                    context.TipoProducto.Remove(tipo);
+                    if (contador == cantidadRegistros)
+                    {
+                        context.SaveChanges();
+                        return Ok($"Se eliminó el rango de tipo de productos seleccionadas.");
+                    }
+                }
+            }
+            return NotFound($"No se pudo borrar el rango de tipo de productos.");
+        }
+
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeleteTipoProduto(int id)
         {
