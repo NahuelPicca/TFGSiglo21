@@ -1,8 +1,7 @@
 ﻿namespace RossiEventos.Dto
 {
-    public class DeleteProductoDTO
+    public class DeleteProductoDTO : DeleteBaseDto
     {
-        public int Id { get; set; }
         public string Codigo { get; set; }
     }
 }
