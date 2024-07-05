@@ -10,3 +10,7 @@ export interface creacionTipoProductoDTO{
     descripcion: string;
     categoriaId: int;
 }
+
+export interface deleteTipoProductoDTO{
+    id: number;
+}
