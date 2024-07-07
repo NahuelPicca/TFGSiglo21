@@ -38,6 +38,29 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el Transportista con el Id: {id}");
         }
 
+        [HttpDelete()]
+        public async Task<ActionResult> DeleteTransportistas([FromBody] List<DeleteTransportistaDto> lista)
+        {
+            var cantidadRegistros = lista.Count;
+            var contador = 0;
+            foreach (var item in lista)
+            {
+                var categoria = await context.Transportista
+                                            .FirstOrDefaultAsync(u => u.Id == item.Id);
+                contador++;
+                if (categoria != null)
+                {
+                    context.Transportista.Remove(categoria);
+                    if (contador == cantidadRegistros)
+                    {
+                        context.SaveChanges();
+                        return Ok($"Se eliminó el rango de transportistas seleccionadas.");
+                    }
+                }
+            }
+            return NotFound($"No se pudo borrar el rango de transportistas.");
+        }
+
         [HttpGet()]
         public async Task<ActionResult<List<TransportistaDto>>> GetListTransportistaDto()
         {
