@@ -15,6 +15,8 @@ import FormularioTipoProducto from "./TipoProducto/FormularioTipoProducto";
 import IndiceTipoProducto from "./TipoProducto/IndiceTipoProducto";
 import CrearTransportista from "./Transportista/CrearTransportista";
 import EditarTransportista from "./Transportista/EditarTransportista";
+import FormularioTransportistaPrincipal from "./Transportista/FormularioTransportista";
+import FormularioTransportista from "./Transportista/FormularioTransportistaSecundario";
 import IndiceTransportista from "./Transportista/IndiceTransportista";
 import CrearUbicacion from "./Ubicacion/CrearUbicacion";
 import EditarUbicacion from "./Ubicacion/EditarUbicacion";
@@ -64,9 +66,10 @@ const rutas = [
     // {path: '/tipoProducto/crear', componente: CrearTipoProducto, esAdmin: true},
     // {path: '/tipoProducto/editar/:id', componente: EditarTipoProducto, esAdmin: true},
 
-    {path: '/transportista', componente: IndiceTransportista, esAdmin: true},
-    {path: '/transportista/crear', componente: CrearTransportista, esAdmin: true},
-    {path: '/transportista/editar/:id', componente: EditarTransportista, esAdmin: true},
+    {path: '/transportista', componente: FormularioTransportistaPrincipal, esAdmin: true},
+    // {path: '/transportista', componente: IndiceTransportista, esAdmin: true},
+    // {path: '/transportista/crear', componente: CrearTransportista, esAdmin: true},
+    // {path: '/transportista/editar/:id', componente: EditarTransportista, esAdmin: true},
 
     {path: '/vehiculo', componente: IndiceVehiculo, esAdmin: true},
     {path: '/vehiculo/crear', componente: CrearVehiculo, esAdmin: true},
