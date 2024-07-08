@@ -39,6 +39,30 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el Ubicación con el Id: {id}");
         }
 
+        [HttpDelete()]
+        public async Task<ActionResult> DeleteUbicaciones([FromBody] List<DeleteUbicacionDto> lista)
+        {
+            var cantidadRegistros = lista.Count;
+            var contador = 0;
+            foreach (var item in lista)
+            {
+                var categoria = await context.Ubicacion
+                                            .FirstOrDefaultAsync(u => u.Id == item.Id);
+                contador++;
+                if (categoria != null)
+                {
+                    context.Ubicacion.Remove(categoria);
+                    if (contador == cantidadRegistros)
+                    {
+                        context.SaveChanges();
+                        return Ok($"Se eliminó el rango de ubicaciones seleccionados.");
+                    }
+                }
+            }
+            return NotFound($"No se pudo borrar el rango de ubicaciones.");
+        }
+
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<UbicacionDto>> GetUbicacionDto(int id)
         {
@@ -49,6 +73,17 @@ namespace RossiEventos.Controllers
                 return mapper.Map<UbicacionDto>(ubicacion);
             return NotFound($"No se encontró la Ubicación con el Id: {id}");
         }
+
+        //[HttpGet("{codDeposito:string}")]
+        //public async Task<ActionResult<UbicacionDto>> GetUbicacionDto(string codDeposito)
+        //{
+        //    logger.LogInformation("Obtiene una Ubicación");
+        //    var ubicacion = await context.Ubicacion
+        //                                .FirstOrDefaultAsync(u => u.Id == id);
+        //    if (ubicacion != null)
+        //        return mapper.Map<UbicacionDto>(ubicacion);
+        //    return NotFound($"No se encontró la Ubicación con el Id: {id}");
+        //}
 
         [HttpGet()]
         public async Task<ActionResult<List<UbicacionDto>>> GetListUbicacionesDto()
