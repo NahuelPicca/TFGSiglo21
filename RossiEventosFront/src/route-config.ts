@@ -2,26 +2,14 @@
 //import CrearCalidad from "./Calidad/CrearCalidad";
 import FormularioCalidad from "./Calidad/FormularioCalidad";
 import FormularioCategoria from "./Categoria/FormularioCategoria";
-import CrearDeposito from "./Deposito/CrearDeposito";
-import EditarDeposito from "./Deposito/EditarDeposito";
 import FormularioDeposito from "./Deposito/FormularioDeposito";
-import IndiceDeposito from "./Deposito/IndiceDeposito";
 import { LandingPage } from "./LandingPage/LandingPage";
 //import CrearMovimiento from "./Movimientos/CrearMovimiento";
 import FormularioProducto from "./Productos/FormularioProducto";
 import RedireccionarALanding from "./RedireccionarALanding";
-import CrearTipoProducto from "./TipoProducto/CrearTipoProducto";
-import EditarTipoProducto from "./TipoProducto/EditarTipoProducto";
 import FormularioTipoProducto from "./TipoProducto/FormularioTipoProducto";
-import IndiceTipoProducto from "./TipoProducto/IndiceTipoProducto";
-import CrearTransportista from "./Transportista/CrearTransportista";
-import EditarTransportista from "./Transportista/EditarTransportista";
 import FormularioTransportistaPrincipal from "./Transportista/FormularioTransportista";
-import FormularioTransportista from "./Transportista/FormularioTransportistaSecundario";
-import IndiceTransportista from "./Transportista/IndiceTransportista";
-import CrearUbicacion from "./Ubicacion/CrearUbicacion";
-import EditarUbicacion from "./Ubicacion/EditarUbicacion";
-import IndiceUbicacion from "./Ubicacion/IndiceUbicacion";
+import FormularioUbicacion from "./Ubicacion/FormularioUbicacion";
 import CrearVehiculo from "./Vehiculo/CrearVehiculo";
 import EditarVehiculo from "./Vehiculo/EditarVehiculo";
 import IndiceVehiculo from "./Vehiculo/IndiceVehiculo";
@@ -52,13 +40,15 @@ const rutas = [
     // {path: '/categoria/crear', componente: CrearCategoria, esAdmin: true},
     // {path: '/categoria/editar/:id', componente: EditarCategoria, esAdmin: true},
 
-    {path: '/ubicacion', componente: IndiceUbicacion, esAdmin: true},
-    {path: '/ubicacion/crear', componente: CrearUbicacion, esAdmin: true},
-    {path: '/ubicacion/editar/:id', componente: EditarUbicacion, esAdmin: true},
+     {path: '/ubicacion', componente: FormularioUbicacion, esAdmin: true},
+    // {path: '/ubicacion', componente: IndiceUbicacion, esAdmin: true},
+    // {path: '/ubicacion/crear', componente: CrearUbicacion, esAdmin: true},
+    // {path: '/ubicacion/editar/:id', componente: EditarUbicacion, esAdmin: true},
 
     //{path: '/movimiento', componente: IndiceUbicacion, esAdmin: true},
     //{path: '/movimiento/crear', componente: CrearMovimiento, esAdmin: true},
 
+    {path: '/producto', componente: FormularioProducto, esAdmin: true},
     // {path: '/producto', componente: IndiceProducto, esAdmin: true},
     // {path: '/producto/crear', componente: CrearProducto, esAdmin: true},
     // {path: '/producto/editar/:id', componente: EditarProducto, esAdmin: true},
@@ -76,8 +66,6 @@ const rutas = [
     {path: '/vehiculo', componente: IndiceVehiculo, esAdmin: true},
     {path: '/vehiculo/crear', componente: CrearVehiculo, esAdmin: true},
     {path: '/vehiculo/editar/:id', componente: EditarVehiculo, esAdmin: true},
-
-    {path: '/producto', componente: FormularioProducto, esAdmin: true},
 
     {path: '/', componente: LandingPage, exact: true},
     {path: '*', componente: RedireccionarALanding}
