@@ -1,5 +1,5 @@
 export interface ubicacionDTO{
-    id:number;
+    id: number;
     codigo: string;
     nombre: string;
     columna: string;
@@ -15,4 +15,8 @@ export interface creacionUbicacionDTO{
     estante: string;
     fila: string;
     habilitado: boolean;
+}
+
+export interface deleteUbicacionDTO{
+    id: number;
 }
