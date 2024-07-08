@@ -16,3 +16,7 @@ export interface creacionDepositoDTO{
     provincia: string;
     habilitado: boolean;
 }
+
+export interface deleteDepositoDTO{
+    id: number;
+}
