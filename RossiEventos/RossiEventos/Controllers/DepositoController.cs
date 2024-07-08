@@ -39,6 +39,29 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el Depósito con el Id: {id}");
         }
 
+        [HttpDelete()]
+        public async Task<ActionResult> DeleteTransportistas([FromBody] List<DeleteDepositoDto> lista)
+        {
+            var cantidadRegistros = lista.Count;
+            var contador = 0;
+            foreach (var item in lista)
+            {
+                var categoria = await context.Deposito
+                                            .FirstOrDefaultAsync(u => u.Id == item.Id);
+                contador++;
+                if (categoria != null)
+                {
+                    context.Deposito.Remove(categoria);
+                    if (contador == cantidadRegistros)
+                    {
+                        context.SaveChanges();
+                        return Ok($"Se eliminó el rango de depositos seleccionados.");
+                    }
+                }
+            }
+            return NotFound($"No se pudo borrar el rango de depositos.");
+        }
+
         [HttpGet("{id:int}")]
         public async Task<ActionResult<DepositoDto>> GetDepositoDto(int id)
         {
