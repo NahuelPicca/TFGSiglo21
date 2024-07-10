@@ -39,11 +39,51 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el Titular con el Id: {id}");
         }
 
-        [HttpGet()]
+        [HttpDelete()]
+        public async Task<ActionResult> DeleteTitulares([FromBody] List<DeleteBaseDto> lista)
+        {
+            var cantidadRegistros = lista.Count;
+            var contador = 0;
+            foreach (var item in lista)
+            {
+                var producto = await context.Titular
+                                            .FirstOrDefaultAsync(u => u.Id == item.Id);
+                contador++;
+                if (producto != null)
+                {
+                    context.Titular.Remove(producto);
+                    if (contador == cantidadRegistros)
+                    {
+                        context.SaveChanges();
+                        return Ok($"Se eliminó el rango de titulares seleccionado.");
+                    }
+                }
+            }
+            return NotFound($"No se pudo borrar el rango de titulares.");
+        }
+
+        [HttpGet("")]
         public async Task<ActionResult<List<TitularDto>>> GetListTitularesDto()
         {
+            return await GetTitulares();
+        }
+
+        [HttpGet("combo")]
+        public async Task<ActionResult<List<TitularComboDto>>> GetListTitularesTodosDto()
+        {
+            var listaFinal = new List<TitularComboDto>();
+            var lista = await GetTitulares();
+            foreach (TitularDto item in lista)
+            {
+                var titular = new TitularComboDto { Id = item.Id, CuitApellidoNombre = item.Cuit + " " + item.Apellido + " " + item.Nombre};
+                listaFinal.Add(titular);
+            }
+            return listaFinal;
+        }
+        async Task<List<TitularDto>> GetTitulares()
+        {
             logger.LogInformation("Lista de titulares");
-            var listTitular = await context.Transportista.ToListAsync();
+            var listTitular = await context.Titular.ToListAsync();
             return mapper.Map<List<TitularDto>>(listTitular);
         }
 
