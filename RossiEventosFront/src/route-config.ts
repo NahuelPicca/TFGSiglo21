@@ -12,6 +12,7 @@ import FormularioTransportistaPrincipal from "./Transportista/FormularioTranspor
 import FormularioUbicacion from "./Ubicacion/FormularioUbicacion";
 import CrearVehiculo from "./Vehiculo/CrearVehiculo";
 import EditarVehiculo from "./Vehiculo/EditarVehiculo";
+import FormularioVehiculo from "./Vehiculo/FormularioVehiculoPrincipal";
 import IndiceVehiculo from "./Vehiculo/IndiceVehiculo";
 // import Registro from "./auth/Registro";
  import Login from "./auth/Login";
@@ -63,9 +64,10 @@ const rutas = [
     // {path: '/transportista/crear', componente: CrearTransportista, esAdmin: true},
     // {path: '/transportista/editar/:id', componente: EditarTransportista, esAdmin: true},
 
-    {path: '/vehiculo', componente: IndiceVehiculo, esAdmin: true},
-    {path: '/vehiculo/crear', componente: CrearVehiculo, esAdmin: true},
-    {path: '/vehiculo/editar/:id', componente: EditarVehiculo, esAdmin: true},
+      {path: '/vehiculo', componente: FormularioVehiculo, esAdmin: true},
+    // {path: '/vehiculo', componente: IndiceVehiculo, esAdmin: true},
+    // {path: '/vehiculo/crear', componente: CrearVehiculo, esAdmin: true},
+    // {path: '/vehiculo/editar/:id', componente: EditarVehiculo, esAdmin: true},
 
     {path: '/', componente: LandingPage, exact: true},
     {path: '*', componente: RedireccionarALanding}
