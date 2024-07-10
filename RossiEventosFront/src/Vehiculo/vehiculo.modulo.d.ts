@@ -3,7 +3,7 @@ export interface vehiculoDTO{
     patente: string; 
     marca : string;
     modelo: string;
-    fechaVencPoliza?: Date; 
+    fechaVencPoliza: Date; 
     nroPoliza: string;
     titularId: number;
     habilitado: bool;
@@ -19,3 +19,6 @@ export interface creacionVehiculoDTO{
     habilitado: bool;
 }
 
+export interface deleteVehiculoDTO{
+    id: number;
+}
