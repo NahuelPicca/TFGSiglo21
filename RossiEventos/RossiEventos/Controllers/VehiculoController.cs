@@ -44,6 +44,29 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el Vehiculo con el Id: {id}");
         }
 
+        [HttpDelete()]
+        public async Task<ActionResult> DeleteVehiculos([FromBody] List<DeleteBaseDto> lista)
+        {
+            var cantidadRegistros = lista.Count;
+            var contador = 0;
+            foreach (var item in lista)
+            {
+                var producto = await context.Vehiculo
+                                            .FirstOrDefaultAsync(u => u.Id == item.Id);
+                contador++;
+                if (producto != null)
+                {
+                    context.Vehiculo.Remove(producto);
+                    if (contador == cantidadRegistros)
+                    {
+                        context.SaveChanges();
+                        return Ok($"Se eliminó el rango de vehiculos seleccionados.");
+                    }
+                }
+            }
+            return NotFound($"No se pudo borrar el rango de vehiculos.");
+        }
+
         [HttpGet()]
         public async Task<ActionResult<List<VehiculoDto>>> GetListVehiculoDto()
         {
@@ -74,7 +97,7 @@ namespace RossiEventos.Controllers
             return NotFound($"No se encontró el vehiculo con el Id: {id}");
         }
 
-        [HttpPost()]
+        [HttpPost("crear")]
         public async Task<ActionResult> PostVehiculoDto([FromBody] CUVehiculoDto vehiculoDto)
         {
             try
