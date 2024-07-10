@@ -2,6 +2,7 @@
 {
     public class CUTitularDto
     {
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string TipoDni { get; set; }
