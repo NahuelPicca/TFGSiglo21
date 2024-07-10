@@ -1,5 +1,5 @@
 import axios from "axios";
-import { urlUsuarios } from "../utils/endpoints";
+import { urlUsuario } from "../utils/endpoints";
 import FormularioAuth from "./FormularoAuth";
 import { credencialesUsuario } from "./auth.model";
 import { useState } from "react";
@@ -14,7 +14,7 @@ export default function Login() {
     const navigate = useNavigate();
     async function login(credenciales: credencialesUsuario) {
         try {
-            const resultado = await axios.post(`${urlUsuarios}/login`, credenciales)
+            const resultado = await axios.post(`${urlUsuario}/login`, credenciales)
             //guardarTokenLocalStorage(resultado.data);
             //actualizar(obtenerClaims());
             console.log(resultado);
