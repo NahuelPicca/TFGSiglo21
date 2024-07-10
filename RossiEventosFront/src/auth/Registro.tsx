@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import MostrarErrores from "../utils/MostrarErrores";
 import { useNavigate } from "react-router-dom";
 import FormularioRegistro from "./FormularioRegistro";
-import { urlUsuarios } from "../utils/endpoints";
+import { urlUsuario } from "../utils/endpoints";
 import { guardarTokenLocalStorage, obtenerClaims } from "./manejadorJWT";
 import AutenticacionContext from "./AutenticacionContext";
 
@@ -17,7 +17,7 @@ export default function Registro() {
     async function registrar(registro: registroUsuario) {
         try {
             const respuesta = await axios
-                .post<respuestaAutenticacion>(`${urlUsuarios}/crear`, registro);
+                .post<respuestaAutenticacion>(`${urlUsuario}/crear`, registro);
             guardarTokenLocalStorage(respuesta.data);
             actualizar(obtenerClaims());
             console.log(respuesta.data)
