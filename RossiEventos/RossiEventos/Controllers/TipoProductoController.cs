@@ -33,7 +33,7 @@ namespace RossiEventos.Controllers
         }
 
         [HttpDelete()]
-        public async Task<ActionResult> DeleteCategorias([FromBody] List<DeleteTipoProductoDto> lista)
+        public async Task<ActionResult> DeleteTipoProducto([FromBody] List<DeleteTipoProductoDto> lista)
         {
             var cantidadRegistros = lista.Count;
             var contador = 0;
