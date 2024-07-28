@@ -312,8 +312,8 @@ export default function FormularioTipoProducto() {
                     <InputTextarea id="descripcion" value={tipoProducto.descripcion} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onInputTextAreaChange(e, 'descripcion')} required rows={3} cols={20} />
                 </div>
                 <div className="field col">
-                    <label htmlFor="calidad" className="font-bold">
-                        Calidad del producto
+                    <label htmlFor="categoriaId" className="font-bold">
+                        Categoría
                     </label>
                     <Dropdown id="categoriaId" onChange={(e: any) => onInputChange(e, 'categoriaId')}
                         options={categorias} optionLabel="nombre" optionValue='id' placeholder="Seleccione la categoría del tipo de producto"
