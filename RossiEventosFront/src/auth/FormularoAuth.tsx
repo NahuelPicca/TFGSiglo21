@@ -17,18 +17,23 @@ export default function FormularioAuth(props: formularioAuthProps) {
             })}
         >
             {formikProps => (
-                <Form>
-                    <FormGroupText label="Email"
-                        campo="email" />
-                    <FormGroupText label="Password"
-                        campo='password'
-                        type="password" />
-                    <Button disabled={formikProps.isSubmitting}
-                        type="submit">
-                        Enviar
-                    </Button>
-                    <Link className="btn btn-secondary" to="/">Cancelar</Link>
-                </Form>
+                <>
+                    <div className="form-container">
+                        <h3>Inicio de sesión</h3>
+                        <Form>
+                            <FormGroupText label="Email"
+                                campo="email" />
+                            <FormGroupText label="Password"
+                                campo='password'
+                                type="password" />
+                            <Button disabled={formikProps.isSubmitting}
+                                type="submit">
+                                Enviar
+                            </Button>
+                            <Link className="btn btn-secondary" to="/">Cancelar</Link>
+                        </Form>
+                    </div>
+                </>
             )}
         </Formik>
     )
