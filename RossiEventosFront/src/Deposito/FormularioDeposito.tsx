@@ -285,92 +285,94 @@ export default function FormularioDeposito() {
     );
 
     return (
-        <div>
-            <MostrarErrores errores={errores} />
-            <Toast ref={toast} />
-            <div className="card">
-                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
-                <DataTable ref={dt} value={depositos} selection={selectedDepositos}
-                    onSelectionChange={(e) => {
-                        if (Array.isArray(e.value)) {
-                            setSelectedDepositos(e.value);
-                        }
-                    }}
-                    dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
-                    paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-                    currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} depositos" globalFilter={globalFilter} header={header}
-                    selectionMode="multiple"
-                >
-                    <Column selectionMode="multiple" exportable={false}></Column>
-                    <Column field="codigo" header="Codigo" sortable style={{ minWidth: '12rem' }}></Column>
-                    <Column field="localidad" header="Localidad" sortable style={{ minWidth: '16rem' }}></Column>
-                    <Column field="provincia" header="Provincia" sortable style={{ minWidth: '16rem' }}></Column>
-                    <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
-                </DataTable>
-            </div>
-            <Dialog visible={depositoDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle del deposito" modal className="p-fluid" footer={depositoDialogFooter} onHide={hideDialog}>
-                <div className="field">
-                    <label htmlFor="codigo" className="font-bold">
-                        Código
-                    </label>
-                    <InputText id="codigo" value={deposito.codigo} onChange={(e) => onInputChange(e, 'codigo')} required autoFocus className={classNames({ 'p-invalid': submitted && !deposito.codigo })} />
-                    {submitted && !deposito.codigo && <small className="p-error">El código es requerido.</small>}
+        <>
+            <div>
+                <MostrarErrores errores={errores} />
+                <Toast ref={toast} />
+                <div className="card">
+                    <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                    <DataTable ref={dt} value={depositos} selection={selectedDepositos}
+                        onSelectionChange={(e) => {
+                            if (Array.isArray(e.value)) {
+                                setSelectedDepositos(e.value);
+                            }
+                        }}
+                        dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
+                        currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} depositos" globalFilter={globalFilter} header={header}
+                        selectionMode="multiple"
+                    >
+                        <Column selectionMode="multiple" exportable={false}></Column>
+                        <Column field="codigo" header="Codigo" sortable style={{ minWidth: '12rem' }}></Column>
+                        <Column field="localidad" header="Localidad" sortable style={{ minWidth: '16rem' }}></Column>
+                        <Column field="provincia" header="Provincia" sortable style={{ minWidth: '16rem' }}></Column>
+                        <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
+                    </DataTable>
                 </div>
-                <div className="field">
-                    <label htmlFor="descripcion" className="font-bold">
-                        Descripción
-                    </label>
-                    <InputTextarea id="descripcion" value={deposito.descripcion} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onInputTextAreaChange(e, 'descripcion')} required autoFocus className={classNames({ 'p-invalid': submitted && !deposito.descripcion })} />
-                </div>
-                <div className="field">
-                    <label htmlFor="direccion" className="font-bold">
-                        Dirección
-                    </label>
-                    <InputText id="direccion" value={deposito.direccion} onChange={(e) => onInputChange(e, 'direccion')} required autoFocus className={classNames({ 'p-invalid': submitted && !deposito.direccion })} />
-                </div>
-                <div className="field">
-                    <label htmlFor="localidad" className="font-bold">
-                        Localidad
-                    </label>
-                    <InputText id="localidad" value={deposito.localidad} onChange={(e) => onInputChange(e, 'localidad')} required autoFocus className={classNames({ 'p-invalid': submitted && !deposito.localidad })} />
-                </div>
-                <div className="field">
-                    <label htmlFor="provincia" className="font-bold">
-                        Provincia
-                    </label>
-                    <InputText id="provincia" value={deposito.provincia} onChange={(e) => onInputChange(e, 'provincia')} required autoFocus className={classNames({ 'p-invalid': submitted && !deposito.provincia })} />
-                </div>
-                <div className="field co">
-                    <label htmlFor="habilitado" className="font-bold">
-                        Habilitado
-                    </label>
-                    <Checkbox name="habilitado" onChange={e => onCheckBoxChangeHabilitado(e)} checked={deposito.habilitado} />
-                </div>
-            </Dialog>
+                <Dialog visible={depositoDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle del deposito" modal className="p-fluid" footer={depositoDialogFooter} onHide={hideDialog}>
+                    <div className="field">
+                        <label htmlFor="codigo" className="font-bold">
+                            Código
+                        </label>
+                        <InputText id="codigo" value={deposito.codigo} onChange={(e) => onInputChange(e, 'codigo')} required autoFocus className={classNames({ 'p-invalid': submitted && !deposito.codigo })} />
+                        {submitted && !deposito.codigo && <small className="p-error">El código es requerido.</small>}
+                    </div>
+                    <div className="field">
+                        <label htmlFor="descripcion" className="font-bold">
+                            Descripción
+                        </label>
+                        <InputTextarea id="descripcion" value={deposito.descripcion} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onInputTextAreaChange(e, 'descripcion')} required autoFocus className={classNames({ 'p-invalid': submitted && !deposito.descripcion })} />
+                    </div>
+                    <div className="field">
+                        <label htmlFor="direccion" className="font-bold">
+                            Dirección
+                        </label>
+                        <InputText id="direccion" value={deposito.direccion} onChange={(e) => onInputChange(e, 'direccion')} required autoFocus className={classNames({ 'p-invalid': submitted && !deposito.direccion })} />
+                    </div>
+                    <div className="field">
+                        <label htmlFor="localidad" className="font-bold">
+                            Localidad
+                        </label>
+                        <InputText id="localidad" value={deposito.localidad} onChange={(e) => onInputChange(e, 'localidad')} required autoFocus className={classNames({ 'p-invalid': submitted && !deposito.localidad })} />
+                    </div>
+                    <div className="field">
+                        <label htmlFor="provincia" className="font-bold">
+                            Provincia
+                        </label>
+                        <InputText id="provincia" value={deposito.provincia} onChange={(e) => onInputChange(e, 'provincia')} required autoFocus className={classNames({ 'p-invalid': submitted && !deposito.provincia })} />
+                    </div>
+                    <div className="field co">
+                        <label htmlFor="habilitado" className="font-bold">
+                            Habilitado
+                        </label>
+                        <Checkbox name="habilitado" onChange={e => onCheckBoxChangeHabilitado(e)} checked={deposito.habilitado} />
+                    </div>
+                </Dialog>
 
-            <Dialog visible={deleteDepositoDialog} style={{ width: '32rem' }}
-                breakpoints={{ '960px': '75vw', '641px': '90vw' }}
-                header="Confirma"
-                modal footer={deleteDepositoDialogFooter} onHide={hideDeleteProductDialog}>
-                <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                    {deposito && (
-                        <span>
-                            ¿Quieres borrar el depósito con el código <b>{deposito.codigo}</b>?
-                        </span>
-                    )}
-                </div>
-            </Dialog>
+                <Dialog visible={deleteDepositoDialog} style={{ width: '32rem' }}
+                    breakpoints={{ '960px': '75vw', '641px': '90vw' }}
+                    header="Confirma"
+                    modal footer={deleteDepositoDialogFooter} onHide={hideDeleteProductDialog}>
+                    <div className="confirmation-content">
+                        <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
+                        {deposito && (
+                            <span>
+                                ¿Quieres borrar el depósito con el código <b>{deposito.codigo}</b>?
+                            </span>
+                        )}
+                    </div>
+                </Dialog>
 
-            <Dialog visible={deleteDepositosDialog} style={{ width: '32rem' }}
-                breakpoints={{ '960px': '75vw', '641px': '90vw' }}
-                header="Confirma"
-                modal footer={deleteDepositosDialogFooter} onHide={hideDeleteProductsDialog}>
-                <div className="confirmation-content">
-                    <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
-                    {deposito && <span>¿Quieres borrar los depositos seleccionados?</span>}
-                </div>
-            </Dialog>
-        </div >
+                <Dialog visible={deleteDepositosDialog} style={{ width: '32rem' }}
+                    breakpoints={{ '960px': '75vw', '641px': '90vw' }}
+                    header="Confirma"
+                    modal footer={deleteDepositosDialogFooter} onHide={hideDeleteProductsDialog}>
+                    <div className="confirmation-content">
+                        <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
+                        {deposito && <span>¿Quieres borrar los depositos seleccionados?</span>}
+                    </div>
+                </Dialog>
+            </div >
+        </>
     );
-}
+}   
