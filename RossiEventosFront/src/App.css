@@ -4,3 +4,146 @@
   height: 50px;
   margin-left: 1rem;
 }
+
+footer {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  z-index: 99999;
+}
+
+.titulo {
+  color: black;
+  font-size: 4rem;
+  font-weight: 800;
+}
+
+.boton-violeta {
+  background-color: #8c30f5;
+  color: white;
+  border-radius: 4px;
+  border: 0;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin-left: 3px;
+}
+
+.boton-violeta-ini-sesion {
+  background-color: #f1e4ff;
+  color: #8c30f5;
+  border-radius: 4px;
+  border: 0;
+  padding: 10px 20px;
+  text-decoration: none;
+  margin-right: 3px;
+}
+
+.background-images {
+  position: relative;
+  height: 100vh; /* Altura de la ventana visible */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Oculta el contenido que se desborda */
+}
+
+.nahuel {
+  background-image: url("/img/circulo.png"); /* Ruta de la imagen de fondo */
+  background-size: cover;
+  background-position: revert;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 300px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.container2 {
+  position: absolute;
+  z-index: 1;
+  top: 80px;
+}
+
+.col {
+  color: white;
+}
+
+.background-image-container {
+  position: absolute;
+  width: 50%; /* Ancho del contenedor */
+  height: 100%; /* Alto del contenedor */
+  top: 0;
+}
+
+.background-image {
+  position: absolute;
+  top: 0;
+  /* width: 75%;
+  height: 55%;*/
+  width: 600px;
+  height: 500px;
+  background-size: cover; /* Ajusta el tamaño de la imagen */
+  background-repeat: no-repeat; /* Evita la repetición de la imagen */
+}
+
+.background-image.left {
+  top: 375px;
+  right: 480px;
+  background-image: url("/img/copadevino.jpg");
+  transform: rotate(354deg);
+}
+
+.background-image.right {
+  right: -300px;
+  top: 275px;
+  background-image: url("/img/evento-sociales.jpeg"); /* URL de la segunda imagen */
+  transform: rotate(354deg);
+}
+
+.footer-with-circle {
+  position: relative;
+}
+
+/* .circle {
+  position: absolute;
+  bottom: -150px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  background-color: violet;
+  border-radius: 50%;
+  z-index: 1;
+} */
+
+.form-container {
+  display: flex;
+  height: 80vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.container-fluid {
+  border: 1px solid #ccc; /* Borde alrededor del contenedor */
+  border-radius: 0; /* Opcional: quita el borde redondeado si lo hay */
+}
+
+.h4-RossiEvento {
+  font-size: 1.5rem;
+  align-content: center;
+  font-weight: 700;
+  margin: 5px 5px 5px 5px;
+}
+
+.test {
+  display: block;
+}
