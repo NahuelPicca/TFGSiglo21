@@ -1,6 +1,7 @@
-import { Link, NavLink, Navigate, useNavigate } from "react-router-dom";
+import { Link, NavLink, Navigate, useLocation, useNavigate } from "react-router-dom";
 //import Autorizado from "../auth/Autorizado";
-import Button from "./Button";
+import { useEffect, useState } from "react";
+
 //mport { logout } from "../auth/manejadorJWT";
 //import { useContext } from "react";
 //import AutenticacionContext from "../auth/AutenticacionContext";
@@ -18,55 +19,84 @@ export default function Menu() {
     logueado ? navegar('/Login') : navegar('/Registro')
   }
 
+  const [showMenu, setShowMenu] = useState(false);
+  const [hidePedidosLink, setHidePedidosLink] = useState(false);
+
+  useEffect(() => {
+    // Verificar la URL actual
+    const currentUrl = window.location.href;
+    if (currentUrl.toUpperCase().includes('/REGISTRO') ||
+      currentUrl.toUpperCase().includes('/LOGIN') ||
+      currentUrl.toLowerCase() === 'http://localhost:5173/') {
+      setShowMenu(true);
+      setHidePedidosLink(true);
+    } else {
+      setShowMenu(false);
+      setHidePedidosLink(false);
+    }
+  }, []);
+
   return (
-    <div className="container">
-      <nav className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3">
-        <div className="col-md-3 mb-2 mb-md-0">
-          <a href="/" className="d-inline-flex link-body-emphasis text-decoration-none">
-            <img src="https://startbootstrap.com/assets/img/sb-logo.svg" width="100" height="50"></img>
-          </a>
-        </div>
+    <>
+      <div className="container-full border-bottom">
+        <div className="container">
+          <nav className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-1">
+            <div className="col-md-3 mb-2 mb-md-0">
+              <a href="/" className="d-inline-flex link-body-emphasis text-decoration-none">
+                <img src="/img/rossilogowhite.png" width="50" height="50" />
+                <h4 className="h4-RossiEvento">Rossi eventos</h4>
+              </a>
+            </div>
 
-        <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="/" className="nav-link px-2 link-secondary">Home</a></li>
-          <li><a href="/reservas" className="nav-link px-2">Reservas</a></li>
-          <li><a href="/pedidos" className="nav-link px-2">Pedidos</a></li>
-
-
-          <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Stock
-            </a>
-            <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="/deposito">Depositos</a></li>
-              <li><a className="dropdown-item" href="/ubicacion">Ubicación</a></li>
-              <li><a className="dropdown-item" href="#">Movimiento de Stock</a></li>
-              <li><a className="dropdown-item" href="/producto">Productos</a></li>
-              <li><a className="dropdown-item" href="#">Saldos Ubicación</a></li>
+            <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 align-items-center ">
+              <li><a href="/" className="nav-link px-2 link-secondary text-black">Inicio</a></li>
+              {showMenu && (
+                <>
+                  <li><strong><a href="/reservas" className="nav-link px-2 text-black">Reservas</a></strong></li>
+                  <li><a href="/contacto" className="nav-link px-2 text-black">Contacto</a></li>
+                  <li><i className="fa-solid fa-cart-shopping"></i></li>
+                </>
+              )}
+              {!hidePedidosLink && (
+                <>
+                  <li><a href="/pedidos" className="nav-link px-2 text-black">Pedidos</a></li>
+                  <li className="nav-item dropdown">
+                    <a className="nav-link px-2 text-black" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Stock
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li><a className="dropdown-item" href="/deposito">Depositos</a></li>
+                      <li><a className="dropdown-item" href="/ubicacion">Ubicación</a></li>
+                      <li><a className="dropdown-item" href="#">Movimiento de Stock</a></li>
+                      <li><a className="dropdown-item" href="/producto">Productos</a></li>
+                      <li><a className="dropdown-item" href="#">Saldos Ubicación</a></li>
+                    </ul>
+                  </li>
+                  <li className="nav-item dropdown">
+                    <a className="nav-link px-2 text-black" href="/gestion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Gestión
+                    </a>
+                    <ul className="dropdown-menu">
+                      <li><a className="dropdown-item" href="/calidad">Calidad</a></li>
+                      <li><a className="dropdown-item" href="/tipoProducto">Tipo de producto</a></li>
+                      <li><a className="dropdown-item" href="/categoria">Categoría</a></li>
+                      <li><a className="dropdown-item" href="/vehiculo">Vehiculos</a></li>
+                      <li><a className="dropdown-item" href="/transportista">Transportista</a></li>
+                      <li><a className="dropdown-item" href="#">Asignar Vehiculos</a></li>
+                      <li><a className="dropdown-item" href="/usuario">Usuarios</a></li>
+                    </ul>
+                  </li>
+                </>
+              )}
             </ul>
-          </li>
-          <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="/gestion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Gestión
-            </a>
-            <ul className="dropdown-menu">
-              <li><a className="dropdown-item" href="/calidad">Calidad</a></li>
-              <li><a className="dropdown-item" href="/tipoProducto">Tipo de producto</a></li>
-              <li><a className="dropdown-item" href="/categoria">Categoría</a></li>
-              <li><a className="dropdown-item" href="/vehiculo">Vehiculos</a></li>
-              <li><a className="dropdown-item" href="/transportista">Transportista</a></li>
-              <li><a className="dropdown-item" href="#">Asignar Vehiculos</a></li>
-              <li><a className="dropdown-item" href="/usuario">Usuarios</a></li>
-            </ul>
-          </li>
-        </ul>
-
-        <div className="col-md-3 text-end">
-          <a href="/Login" className="btn btn-outline-primary me-2" role="button" aria-pressed="true">Iniciar Sesión</a>
-          <a href="/registro" className="btn btn-primary" role="button" aria-pressed="true">Registro</a>
+            <div className="col-md-3 text-end">
+              <a href="/Login" className="boton-violeta-ini-sesion" role="button" aria-pressed="true">Iniciar Sesión</a>
+              <a href="/registro" className="boton-violeta" role="button" aria-pressed="true">Registrarse</a>
+            </div>
+          </nav>
         </div>
-      </nav>
-    </div>
+      </div>
+    </>
   )
   // return (
   //     <>
