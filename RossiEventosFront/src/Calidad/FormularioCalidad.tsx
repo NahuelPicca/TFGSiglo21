@@ -272,7 +272,7 @@ export default function FormularioCalidad() {
             <MostrarErrores errores={errores} />
             <Toast ref={toast} />
             <div className="card">
-                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
                 <DataTable ref={dt} value={calidades} selection={selectedCalidades}
                     onSelectionChange={(e) => {
                         if (Array.isArray(e.value)) {

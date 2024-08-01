@@ -268,7 +268,7 @@ export default function FormularioCategoria() {
             <MostrarErrores errores={errores} />
             <Toast ref={toast} />
             <div className="card">
-                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
                 <DataTable ref={dt} value={categorias} selection={selectedCategorias}
                     onSelectionChange={(e) => {
                         if (Array.isArray(e.value)) {

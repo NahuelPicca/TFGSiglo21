@@ -243,9 +243,9 @@ export default function FormularioDeposito() {
         );
     };
 
-    const rightToolbarTemplate = () => {
-        return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
-    };
+    // const rightToolbarTemplate = () => {
+    //     return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
+    // };
 
     const actionBodyTemplate = (rowData: depositoDTO) => {
         return (
@@ -290,7 +290,7 @@ export default function FormularioDeposito() {
                 <MostrarErrores errores={errores} />
                 <Toast ref={toast} />
                 <div className="card">
-                    <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                    <Toolbar className="mb-4" left={leftToolbarTemplate}> </Toolbar>
                     <DataTable ref={dt} value={depositos} selection={selectedDepositos}
                         onSelectionChange={(e) => {
                             if (Array.isArray(e.value)) {
