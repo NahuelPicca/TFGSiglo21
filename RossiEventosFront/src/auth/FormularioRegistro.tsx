@@ -3,10 +3,7 @@ import { registroUsuario } from "./auth.model";
 import * as Yup from 'yup';
 import FormGroupText from "../utils/FormGroupText";
 import Button from "../utils/Button";
-import { Link } from "react-router-dom";
 import FormGroupFecha from "../utils/FormGroupFecha";
-//import ChecksUsuarios from "./ChecksUsuarios";
-//import MiComponente from "./Micomponente";
 
 export default function FormularioRegistro(props: formularioRegistroProps) {
 
@@ -44,50 +41,55 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
                 })}
             >
                 {formikProps => (
-                    <Form>
-                        <FormGroupText label="Nombre"
-                            campo='nombre'
-                            type="text" />
-                        <FormGroupText label="Apellido"
-                            campo='apellido'
-                            type="text" />
-                        <FormGroupText label="Nro Dni"
-                            campo='nroDni'
-                            type="text" />
-                        <FormGroupText label="Cuit"
-                            campo='cuit'
-                            type="text" />
-                        <FormGroupText label="Dirección"
-                            campo='direccion'
-                            type="text" />
-                        <FormGroupText label="Teléfono"
-                            campo='telefono'
-                            type="text" />
-                        <FormGroupText label="Codigo Postal"
-                            campo='codigoPostal'
-                            type="text" />
-                        <FormGroupText label="Localidad"
-                            campo='localidad'
-                            type="text" />
-                        <FormGroupText label="Email"
-                            campo="email"
-                            type="text" />
-                        <FormGroupFecha label="Fecha Nacimiento"
-                            campo="fechaNacimiento" />
-                        <FormGroupText label="Contraseña"
-                            campo='contraseña'
-                            type="password" />
-                        <FormGroupText label="Confirmar Contraseña"
-                            campo='confirmaPassword'
-                            type="password" />
-                        {/* <ChecksUsuarios modelo={props.modelo} /> */}
-                        {/* <MiComponente objeto={{ nombre: 'perez' }} /> */}
-                        <Button disabled={formikProps.isSubmitting}
-                            type="submit">
-                            Enviar
-                        </Button>
-                        <Link className="btn btn-secondary" to="/">Cancelar</Link>
-                    </Form>
+                    <>
+                        <div className="form-container">
+                            <h3 className="h3-Registro">Registro de usuario</h3>
+                            <Form>
+                                <FormGroupText label="Nombre"
+                                    campo='nombre'
+                                    type="text"
+                                    witdh="300px" />
+                                <FormGroupText label="Apellido"
+                                    campo='apellido'
+                                    type="text" />
+                                <FormGroupText label="Nro Dni"
+                                    campo='nroDni'
+                                    type="text" />
+                                <FormGroupText label="Cuit"
+                                    campo='cuit'
+                                    type="text" />
+                                <FormGroupText label="Dirección"
+                                    campo='direccion'
+                                    type="text" />
+                                <FormGroupText label="Teléfono"
+                                    campo='telefono'
+                                    type="text" />
+                                <FormGroupText label="Codigo Postal"
+                                    campo='codigoPostal'
+                                    type="text" />
+                                <FormGroupText label="Localidad"
+                                    campo='localidad'
+                                    type="text" />
+                                <FormGroupText label="Email"
+                                    campo="email"
+                                    type="text" />
+                                <FormGroupFecha label="Fecha Nacimiento"
+                                    campo="fechaNacimiento" />
+                                <FormGroupText label="Contraseña"
+                                    campo='contraseña'
+                                    type="password" />
+                                <FormGroupText label="Confirmar Contraseña"
+                                    campo='confirmaPassword'
+                                    type="password" />
+                                {/* <ChecksUsuarios modelo={props.modelo} /> */}
+                                {/* <MiComponente objeto={{ nombre: 'perez' }} /> */}
+                                <Button disabled={formikProps.isSubmitting}
+                                    type="submit" className="boton-violeta-IniSReg">
+                                    Continuar
+                                </Button>
+                            </Form>
+                        </div>
+                    </>
                 )}
             </Formik>
         </div>
