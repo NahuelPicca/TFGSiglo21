@@ -29,7 +29,6 @@ export default function Registro() {
 
     return (
         <>
-            <h3>Registro</h3>
             <MostrarErrores errores={errores} />
             <FormularioRegistro modelo={{
                 nombre: '', apellido: '', cuit: '',
