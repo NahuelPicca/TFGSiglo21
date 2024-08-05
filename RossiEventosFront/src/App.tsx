@@ -9,18 +9,45 @@ import {
 import rutas from './route-config';
 import validaciones from './validaciones/validaciones';
 import 'primeicons/primeicons.css';
+import { useEffect, useState } from 'react';
+import { obtenerClaims } from './auth/manejadorJWT';
+import { claim } from './auth/auth.model';
+import AutenticacionContext from './auth/AutenticacionContext';
 //import 'primeflex/primeflex.css';
 
 validaciones();
 
 function App() {
+
+  const [claims, setClaims] = useState<claim[]>([]);
+
+  useEffect(() => {
+    setClaims(obtenerClaims())
+  }, [])
+
+  function actualizar(claims: claim[]) {
+    setClaims(claims)
+  }
+
+  function esAdmin() {
+    return claims.findIndex(claim => claim.nombre === 'role' && claim.valor === 'admin') > -1;
+  }
+
   return (
     <>
       <BrowserRouter>
+        {/* <AutenticacionContext.Provider value={{ claims, actualizar }}> */}
         <Menu />
-        <div className='container  vh-100'>
+        <div className='container vh-100'>
           <Routes>
             {rutas.map(ruta =>
+              // <Route key={ruta.path}
+              //   path={ruta.path} element={
+              //     ruta.esAdmin && !esAdmin() ? <>
+              //       No tiene permiso para acceder a este componente
+              //     </> : <ruta.componente />
+              //   }>
+              // </Route>
               <Route key={ruta.path}
                 path={ruta.path} element={
                   <ruta.componente />
@@ -28,13 +55,13 @@ function App() {
               </Route>
             )}
             {/* 
-                        <Route path='/generos' element={
-                            <>
-                                <IndiceGeneros />
-                            </>
-                        }>
+                          <Route path='/generos' element={
+                              <>
+                                  <IndiceGeneros />
+                              </>
+                          }>
 
-                      </Route> */}
+                        </Route> */}
           </Routes >
         </div >
         <footer className="bg-black text-light py-4">
@@ -60,44 +87,10 @@ function App() {
             </div>
           </div>
         </footer>
+        {/* </AutenticacionContext.Provider> */}
       </BrowserRouter >
     </>
   );
 }
 
 export default App;
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
-
-// function App() {
-//   const [count, setCount] = useState(0)
-
-//   return (
-//     <>
-//       <div>
-//         <a href="https://vitejs.dev" target="_blank">
-//           <img src={viteLogo} classNameNameNameName="logo" alt="Vite logo" />
-//         </a>
-//         <a href="https://react.dev" target="_blank">
-//           <img src={reactLogo} classNameNameNameName="logo react" alt="React logo" />
-//         </a>
-//       </div>
-//       <h1>Vite + React</h1>
-//       <div classNameNameNameName="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to test HMR
-//         </p>
-//       </div>
-//       <p classNameNameNameName="read-the-docs">
-//         Click on the Vite and React logos to learn more
-//       </p>
-//     </>
-//   )
-// }
-
-// export default App
