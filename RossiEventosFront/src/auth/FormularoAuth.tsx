@@ -23,7 +23,7 @@ export default function FormularioAuth(props: formularioAuthProps) {
                         <Form>
                             <FormGroupText label="Email"
                                 campo="email" />
-                            <FormGroupText label="Password"
+                            <FormGroupText label="Constraseña"
                                 campo='password'
                                 type="password" />
                             <Link to='../' className="label-olvidarContrasena">Olvidaste tu contraseña</Link>
