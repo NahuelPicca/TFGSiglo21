@@ -1,6 +1,8 @@
 import { Link, NavLink, Navigate, useLocation, useNavigate } from "react-router-dom";
 //import Autorizado from "../auth/Autorizado";
 import { useEffect, useState } from "react";
+import Autorizado from "../auth/Autorizado";
+import { logout } from "../auth/manejadorLogin";
 
 //mport { logout } from "../auth/manejadorJWT";
 //import { useContext } from "react";
@@ -21,6 +23,8 @@ export default function Menu() {
 
   const [showMenu, setShowMenu] = useState(false);
   const [hidePedidosLink, setHidePedidosLink] = useState(false);
+  const [hideRegIniSesion, setHideRegIniSesion] = useState(false);
+  const [sesionActiva, setSesionActiva] = useState(false);
 
   useEffect(() => {
     // Verificar la URL actual
@@ -30,11 +34,15 @@ export default function Menu() {
       currentUrl.toLowerCase() === 'http://localhost:5173/') {
       setShowMenu(true);
       setHidePedidosLink(true);
+      setSesionActiva(true);
+      setHideRegIniSesion(false);
     } else {
       setShowMenu(false);
       setHidePedidosLink(false);
+      setSesionActiva(false);
+      setHideRegIniSesion(true);
     }
-  }, []);
+  });
 
   return (
     <>
@@ -51,48 +59,78 @@ export default function Menu() {
             <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 align-items-center ">
               <li><a href="/" className="nav-link px-2 link-secondary text-black">Inicio</a></li>
               {showMenu && (
+                // <Autorizado
+                //   autorizado={<></>}
+                //   noAutorizado={
                 <>
                   <li><strong><a href="/reservas" className="nav-link px-2 text-black">Reservas</a></strong></li>
                   <li><a href="/contacto" className="nav-link px-2 text-black">Contacto</a></li>
                   <li><i className="fa-solid fa-cart-shopping"></i></li>
                 </>
+                //} />
               )}
               {!hidePedidosLink && (
                 <>
-                  <li><a href="/pedidos" className="nav-link px-2 text-black">Pedidos</a></li>
-                  <li className="nav-item dropdown">
-                    <a className="nav-link px-2 text-black" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Stock
-                    </a>
-                    <ul className="dropdown-menu">
-                      <li><a className="dropdown-item" href="/deposito">Depositos</a></li>
-                      <li><a className="dropdown-item" href="/ubicacion">Ubicación</a></li>
-                      <li><a className="dropdown-item" href="#">Movimiento de Stock</a></li>
-                      <li><a className="dropdown-item" href="/producto">Productos</a></li>
-                      <li><a className="dropdown-item" href="#">Saldos Ubicación</a></li>
-                    </ul>
-                  </li>
-                  <li className="nav-item dropdown">
-                    <a className="nav-link px-2 text-black" href="/gestion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Gestión
-                    </a>
-                    <ul className="dropdown-menu">
-                      <li><a className="dropdown-item" href="/calidad">Calidad</a></li>
-                      <li><a className="dropdown-item" href="/tipoProducto">Tipo de producto</a></li>
-                      <li><a className="dropdown-item" href="/categoria">Categoría</a></li>
-                      <li><a className="dropdown-item" href="/vehiculo">Vehiculos</a></li>
-                      <li><a className="dropdown-item" href="/transportista">Transportista</a></li>
-                      <li><a className="dropdown-item" href="#">Asignar Vehiculos</a></li>
-                      <li><a className="dropdown-item" href="/usuario">Usuarios</a></li>
-                    </ul>
-                  </li>
+                  {/* <Autorizado role="admin"
+                    autorizado={ */}
+                  <>
+                    <li><a className="nav-link px-2 text-black" href="">Pedidos</a></li>
+                    <li className="nav-item dropdown">
+                      <a className="nav-link px-2 text-black" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Stock
+                      </a>
+                      <ul className="dropdown-menu">
+                        <li><a className="dropdown-item" href="/deposito">Depositos</a></li>
+                        <li><a className="dropdown-item" href="/ubicacion">Ubicación</a></li>
+                        <li><a className="dropdown-item" href="#">Movimiento de Stock</a></li>
+                        <li><a className="dropdown-item" href="/producto">Productos</a></li>
+                        <li><a className="dropdown-item" href="#">Saldos Ubicación</a></li>
+                      </ul>
+                    </li>
+                    <li className="nav-item dropdown">
+                      <a className="nav-link px-2 text-black" href="/gestion" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Gestión
+                      </a>
+                      <ul className="dropdown-menu">
+                        <li><a className="dropdown-item" href="/calidad">Calidad</a></li>
+                        <li><a className="dropdown-item" href="/tipoProducto">Tipo de producto</a></li>
+                        <li><a className="dropdown-item" href="/categoria">Categoría</a></li>
+                        <li><a className="dropdown-item" href="/vehiculo">Vehiculos</a></li>
+                        <li><a className="dropdown-item" href="/transportista">Transportista</a></li>
+                        <li><a className="dropdown-item" href="">Asig. vehículo</a></li>
+                        <li><a className="dropdown-item" href="">Usuarios</a></li>
+                      </ul>
+                    </li>
+                  </>
+                  {/* } /> */}
                 </>
               )}
             </ul>
-            <div className="col-md-3 text-end">
-              <a href="/Login" className="boton-violeta-ini-sesion" role="button" aria-pressed="true">Iniciar Sesión</a>
-              <a href="/registro" className="boton-violeta" role="button" aria-pressed="true">Registrarse</a>
-            </div>
+            {!hideRegIniSesion &&
+              <div className="col-md-3 text-end">
+                <a href="/Login" className="boton-violeta-ini-sesion" role="button" aria-pressed="true">Iniciar Sesión</a>
+                <a href="/registro" className="boton-violeta" role="button" aria-pressed="true">Registrarse</a>
+              </div>
+            }
+            {!sesionActiva &&
+              <div className="col-md-3 text-end">
+                <div className="d-flex align-items-center">
+                  <i className="fa-solid fa-user custom-icon me-1 "></i>
+                  <div className="dropdown">
+                    <button className="btn btn-dropdown dropdown" type="button"
+                      id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                      Picca, Marcelo José
+                    </button>
+                    <p className="dropdown-subtitle">(Administrador)</p>
+                    <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a className="dropdown-item" href="/.">Mis datos</a></li>
+                      <li><a className="dropdown-item" href="/.">Pedidos</a></li>
+                      <li><a className="dropdown-item" href="/." onClick={logout}>Cerrar sesión</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            }
           </nav>
         </div>
       </div>
