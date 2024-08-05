@@ -171,3 +171,68 @@ footer {
   text-decoration: none;
   color: black;
 }
+
+/* Son los estilos del dropdown del perfil*/
+/* .btn-dropdown {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+}
+
+.btn-dropdown:hover,
+.btn-dropdown:focus {
+  background-color: transparent;
+  color: inherit;
+  box-shadow: none;
+}
+
+.dropdown-menu {
+  background-color: white; 
+  border: 1px solid #ddd; 
+}
+
+.dropdown-item {
+  color: #000; 
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa; 
+} */
+.btn-dropdown {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  padding: 0;
+}
+
+.btn-dropdown:hover,
+.btn-dropdown:focus {
+  background-color: transparent;
+  color: inherit;
+  box-shadow: none;
+}
+
+.dropdown-menu {
+  background-color: white; /* Color de fondo del menú desplegable */
+  border: 1px solid #ddd; /* Color del borde del menú desplegable */
+}
+
+.dropdown-item {
+  color: #000; /* Color del texto de los ítems del menú */
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa; /* Color de fondo al pasar el ratón por encima */
+}
+
+.dropdown-subtitle {
+  font-size: 0.6rem; /* Tamaño del texto pequeño */
+  color: #000; /* Color de texto secundario */
+  margin: 0; /* Elimina márgenes por defecto */
+  padding: 0; /* Elimina padding para alinear el texto más cerca del botón */
+  text-align: left;
+}
+
+.custom-icon {
+  font-size: 23px; /* Ajusta el tamaño según tus necesidades */
+}
