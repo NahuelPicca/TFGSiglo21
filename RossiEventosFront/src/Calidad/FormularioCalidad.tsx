@@ -241,7 +241,7 @@ export default function FormularioCalidad() {
 
     const header = (
         <div className="flex flex-wrap gap-2 align-items-center justify-content-between">
-            <h4 className="m-0">Listado de tipo de calidades</h4>
+            <h4 className="m-0">Calidades</h4>
             <IconField iconPosition="left">
                 <InputIcon className="pi pi-search" />
                 <InputText type="search" placeholder="Buscar..." onInput={(e) => { const target = e.target as HTMLInputElement; setGlobalFilter(target.value); }} />
