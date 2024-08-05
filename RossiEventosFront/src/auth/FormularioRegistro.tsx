@@ -47,8 +47,7 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
                             <Form>
                                 <FormGroupText label="Nombre"
                                     campo='nombre'
-                                    type="text"
-                                    witdh="300px" />
+                                    type="text" />
                                 <FormGroupText label="Apellido"
                                     campo='apellido'
                                     type="text" />
