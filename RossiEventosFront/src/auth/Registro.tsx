@@ -21,7 +21,7 @@ export default function Registro() {
             guardarTokenLocalStorage(respuesta.data);
             actualizar(obtenerClaims());
             console.log(respuesta.data)
-            navigate("/");
+            navigate("/producto");
         } catch (error: any) {
             setErrores(error.response.data);
         }
