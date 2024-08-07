@@ -416,13 +416,13 @@ export default function FormularioProducto() {
                     <Calendar id="anio" value={fecha} readOnlyInput onChange={(e) => onChangeCalendar(e)} dateFormat="dd/mm/yy" />
                     {submitted && !product.anio && <small className="p-error">El año es requerido.</small>}
                 </div>
-                <div className="field col">
+                <div className="field">
                     <label htmlFor="precio" className="font-bold">
                         Precio
                     </label>
                     <InputNumber id="precio" value={product.precio} onValueChange={(e) => onInputNumberChange(e, 'precio')} mode="currency" currency="USD" locale="en-US" />
                 </div>
-                <div className="field col">
+                <div className="field">
                     <label htmlFor="calidad" className="font-bold">
                         Calidad del producto
                     </label>
@@ -431,7 +431,7 @@ export default function FormularioProducto() {
                         value={product.calidadId}
                     />
                 </div>
-                <div className="field col">
+                <div className="field">
                     <label htmlFor="tipoProductos" className="font-bold">
                         Tipos de Productos
                     </label>
@@ -440,7 +440,7 @@ export default function FormularioProducto() {
                         value={product.tipoProductoId}
                     />
                 </div>
-                <div className="field co">
+                <div className="field">
                     <label htmlFor="habilitado" className="font-bold">
                         Habilitado
                     </label>
