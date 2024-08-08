@@ -13,6 +13,7 @@ export interface transportistaDTO{
     fechaVencLicencia: Date;
     licencia: string;
     habilitado: bool;
+    apellidoNombreLicencia: string;
 }
 
 export interface creacionTransportistaDTO{
