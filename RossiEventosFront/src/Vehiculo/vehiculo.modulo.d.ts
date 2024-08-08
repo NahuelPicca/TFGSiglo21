@@ -7,6 +7,7 @@ export interface vehiculoDTO{
     nroPoliza: string;
     titularId: number;
     habilitado: bool;
+    patenteModelo: string;
 }
 
 export interface creacionVehiculoDTO{
