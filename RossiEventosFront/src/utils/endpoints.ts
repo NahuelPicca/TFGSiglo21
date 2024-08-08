@@ -1,5 +1,6 @@
 const apiURL = import.meta.env.VITE_APP_API_URL
 
+export const urlAsignacion = `${apiURL}/asignacionVehicTransp`
 export const urlCalidad = `${apiURL}/calidad`
 export const urlCategoria = `${apiURL}/categoria`
 export const urlDeposito = `${apiURL}/deposito`
