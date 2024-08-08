@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RossiEventos.Entidades;
@@ -24,10 +23,36 @@ namespace RossiEventos.Controllers
             this.mapper = mapper;
         }
 
-        void HidrataPropFaltante(CUAsignacionVehicTranspDto asigDto, AsignacionVehicTransp asig)
+        async Task<ActionResult<List<CUAsignacionVehicTranspDto>>> GetAsignaciones()
         {
-            var transp = context.Transportista.FirstOrDefault(t => t.Id == asigDto.TransportitaId);
-            var vehiculo = context.Vehiculo.FirstOrDefault(v => v.Id == asigDto.VehiculoId);
+            logger.LogInformation("Lista de asignaciones");
+            var listaFinal = new List<CUAsignacionVehicTranspDto>();
+            var listAsignacion = await context.AsignacionVehicTransp
+                                  .Include("Vehiculo")
+                                  .Include("Transportista")
+                                  .ToListAsync();
+            foreach (var asignacion in listAsignacion)
+            {
+                var asign = new CUAsignacionVehicTranspDto
+                {
+                    Id = asignacion.Id,
+                    Patente = asignacion.Vehiculo.Patente,
+                    Modelo = asignacion.Vehiculo.Modelo,
+                    NombreTransportista = asignacion.Transportista.Nombre,
+                    ApellidoTransportista = asignacion.Transportista.Apellido,
+                    Licencia = asignacion.Transportista.Licencia,
+                    TransportitaId = asignacion.TransportitaId,
+                    VehiculoId = asignacion.VehiculoId
+                };
+                listaFinal.Add(asign);
+            }
+            return listaFinal;
+        }
+
+        void HidrataPropFaltante(AsignacionVehicTransp asig)
+        {
+            var transp = context.Transportista.FirstOrDefault(t => t.Id == asig.TransportitaId);
+            var vehiculo = context.Vehiculo.FirstOrDefault(v => v.Id == asig.VehiculoId);
             asig.Transportista = transp;
             asig.Vehiculo = vehiculo;
             if (asig.Id > 0)
@@ -44,13 +69,36 @@ namespace RossiEventos.Controllers
             if (asignacion != null)
             {
                 var mensaje = $"Se eliminó OK la asignación entre " +
-              $"el Transportista {asignacion.Transportista.Nombre} {asignacion.Transportista.Apellido}" +
-              $"y el Vehiculo {asignacion.Vehiculo.Marca} Modelo {asignacion.Vehiculo.Modelo}";
+                              $"el Transportista {asignacion.Transportista.Nombre} {asignacion.Transportista.Apellido}" +
+                              $"y el Vehiculo {asignacion.Vehiculo.Marca} Modelo {asignacion.Vehiculo.Modelo}";
                 context.AsignacionVehicTransp.Remove(asignacion);
                 context.SaveChanges();
                 return Ok(mensaje);
             }
             return NotFound($"No se encontró el Vehiculo con el Id: {id}");
+        }
+
+        [HttpDelete()]
+        public async Task<ActionResult> DeleteAsigRango([FromBody] List<DeleteAsignacionVehicTranspDto> lista)
+        {
+            var cantidadRegistros = lista.Count;
+            var contador = 0;
+            foreach (var item in lista)
+            {
+                var asig = await context.AsignacionVehicTransp
+                                        .FirstOrDefaultAsync(u => u.Id == item.Id);
+                contador++;
+                if (asig != null)
+                {
+                    context.AsignacionVehicTransp.Remove(asig);
+                    if (contador == cantidadRegistros)
+                    {
+                        context.SaveChanges();
+                        return Ok($"Se eliminó la vinculación de Vehículo y Transportista.");
+                    }
+                }
+            }
+            return NotFound($"No se pudo borrar el rango de vinculaciones de Vehículo y Transportista.");
         }
 
         [HttpGet("{id:int}")]
@@ -67,23 +115,24 @@ namespace RossiEventos.Controllers
         }
 
         [HttpGet()]
-        public async Task<ActionResult<List<AsignacionVehicTranspDto>>> GetListAsigDto()
+        public async Task<ActionResult<List<CUAsignacionVehicTranspDto>>> GetListAsigDto()
         {
-            logger.LogInformation("Lista de asignaciones");
-            var listAsignacion = await context.AsignacionVehicTransp
-                                              .Include("Vehiculo")
-                                              .Include("Transportista")
-                                              .ToListAsync();
-            return mapper.Map<List<AsignacionVehicTranspDto>>(listAsignacion);
+            return await GetAsignaciones();
         }
 
-        [HttpPost()]
-        public async Task<ActionResult> PostVehiculoDto([FromBody] CUAsignacionVehicTranspDto create)
+        [HttpGet("todos")]
+        public async Task<ActionResult<List<CUAsignacionVehicTranspDto>>> GetListAsigDtoTodos()
+        {
+            return await GetAsignaciones();
+        }
+
+        [HttpPost("crear")]
+        public async Task<ActionResult> PostVehiculoDto([FromBody] AsignacionVehicTranspCreacionDto create)
         {
             try
             {
                 var asig = mapper.Map<AsignacionVehicTransp>(create);
-                HidrataPropFaltante(create, asig);
+                HidrataPropFaltante(asig);
                 context.Add(asig);
                 var cambios = await context.SaveChangesAsync();
                 return Ok(cambios);
@@ -95,13 +144,13 @@ namespace RossiEventos.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(int id, [FromBody] CUAsignacionVehicTranspDto create)
+        public async Task<ActionResult> Put(int id, [FromBody] AsignacionVehicTranspCreacionDto create)
         {
             try
             {
                 var asignDb = context.AsignacionVehicTransp.FirstOrDefault(c => c.Id == id);
-                var asign = mapper.Map<CUAsignacionVehicTranspDto, AsignacionVehicTransp>(create, asignDb);
-                HidrataPropFaltante(create, asign);
+                var asign = mapper.Map<AsignacionVehicTranspCreacionDto, AsignacionVehicTransp>(create, asignDb);
+                HidrataPropFaltante(asign);
                 var aa = await context.SaveChangesAsync();
                 return Ok(aa);
             }
