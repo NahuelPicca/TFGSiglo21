@@ -97,7 +97,7 @@ export default function Menu() {
                         <li><a className="dropdown-item" href="/categoria">Categoría</a></li>
                         <li><a className="dropdown-item" href="/vehiculo">Vehiculos</a></li>
                         <li><a className="dropdown-item" href="/transportista">Transportista</a></li>
-                        <li><a className="dropdown-item" href="">Asig. vehículo</a></li>
+                        <li><a className="dropdown-item" href="/asignacionVehicTransp">Asig. vehículo</a></li>
                         <li><a className="dropdown-item" href="">Usuarios</a></li>
                       </ul>
                     </li>
