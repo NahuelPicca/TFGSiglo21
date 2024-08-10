@@ -74,10 +74,6 @@ namespace RossiEventos
                        .HasIndex(d => d.Codigo)
                        .IsUnique();
 
-            modelBuilder.Entity<Ubicacion>()
-                       .HasIndex(d => d.Codigo)
-                       .IsUnique();
-
             //FIN Creación de Índices
 
             //INICIO ForeingKeys
