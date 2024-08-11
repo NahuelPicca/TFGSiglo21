@@ -270,20 +270,20 @@ export default function FormularioAsigVehiculoTransportista() {
     );
     const asignacionDialogFooter = (
         <React.Fragment>
-            <Button label="Cancelar" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Guardar" icon="pi pi-check" onClick={saveAsignacion} />
+            <Button className="button-secundario-cancelar" label="Cancelar" outlined onClick={hideDialog} />
+            <Button className="button-secundario-guardar" label="Guardar" onClick={saveAsignacion} />
         </React.Fragment>
     );
     const deleteAsignacionDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteAsignacionDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteAsignacion} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteAsignacionDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteAsignacion} />
         </React.Fragment>
     );
     const deleteAsignacionsDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteAsignacionesDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedAsignacioness} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteAsignacionesDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteSelectedAsignacioness} />
         </React.Fragment>
     );
 
@@ -315,6 +315,7 @@ export default function FormularioAsigVehiculoTransportista() {
             </div>
 
             <Dialog visible={asignacionDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle de vinculación" modal className="p-fluid" footer={asignacionDialogFooter} onHide={hideDialog}>
+                <hr className="violet-line" />
                 <div className="field">
                     <label htmlFor="vehículo" className="font-bold">
                         Vehículo
@@ -333,6 +334,7 @@ export default function FormularioAsigVehiculoTransportista() {
                         value={asignacion.transportitaId}
                     />
                 </div>
+                <hr className="violet-line" />
             </Dialog>
 
             <Dialog visible={deleteAsignacionDialog} style={{ width: '32rem' }}
