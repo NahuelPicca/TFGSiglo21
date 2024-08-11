@@ -34,7 +34,8 @@ export default function FormularioTransportista() {
         fechaNacimiento: new Date(),
         fechaVencLicencia: new Date(),
         licencia: '',
-        habilitado: true
+        habilitado: true,
+        apellidoNombreLicencia: ''
     };
 
     const [errores, setErrores] = useState<string[]>([]);
@@ -285,20 +286,20 @@ export default function FormularioTransportista() {
     );
     const productDialogFooter = (
         <React.Fragment>
-            <Button label="Cancelar" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Guardar" icon="pi pi-check" onClick={saveTransportista} />
+            <Button className="button-secundario-cancelar" label="Cancelar" outlined onClick={hideDialog} />
+            <Button className="button-secundario-guardar" label="Guardar" onClick={saveTransportista} />
         </React.Fragment>
     );
     const deleteProductDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteTransportista} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteProductDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteTransportista} />
         </React.Fragment>
     );
     const deleteProductsDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductsDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedTransportistas} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteProductsDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteSelectedTransportistas} />
         </React.Fragment>
     );
 
@@ -328,6 +329,7 @@ export default function FormularioTransportista() {
             </div>
 
             <Dialog visible={transportistaDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle del transportista" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+                <hr className="violet-line" />
                 <div className="field">
                     <label htmlFor="nombre" className="font-bold">
                         Nombre
@@ -397,12 +399,13 @@ export default function FormularioTransportista() {
                     </label>
                     <InputText id="licencia" value={transportista.licencia} onChange={(e) => onInputChange(e, 'licencia')} required autoFocus className={classNames({ 'p-invalid': submitted && !transportista.licencia })} />
                 </div>
-                <div className="field co">
-                    <label htmlFor="habilitado" className="font-bold">
+                <div className="field" style={{ marginTop: "10px", marginBottom: "10px" }}>
+                    <label htmlFor="habilitado" className="font-bold" style={{ marginRight: '5px' }}>
                         Habilitado
                     </label>
                     <Checkbox name="habilitado" onChange={e => onCheckBoxChangeHabilitado(e)} checked={transportista.habilitado} />
                 </div>
+                <hr className="violet-line" />
             </Dialog>
 
             <Dialog visible={deleteTransportistaDialog} style={{ width: '32rem' }}
