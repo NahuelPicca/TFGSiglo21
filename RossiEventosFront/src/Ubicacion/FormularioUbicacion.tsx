@@ -261,20 +261,20 @@ export default function FormularioUbicacion() {
     );
     const ubicacionDialogFooter = (
         <React.Fragment>
-            <Button label="Cancelar" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Guardar" icon="pi pi-check" onClick={saveUbicacion} />
+            <Button className="button-secundario-cancelar" label="Cancelar" outlined onClick={hideDialog} />
+            <Button className="button-secundario-guardar" label="Guardar" onClick={saveUbicacion} />
         </React.Fragment>
     );
     const deleteUbicacionDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteUbicacionDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteUbicacion} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteUbicacionDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteUbicacion} />
         </React.Fragment>
     );
     const deleteUbicacionesDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteUbicacionesDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedUbicaciones} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteUbicacionesDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteSelectedUbicaciones} />
         </React.Fragment>
     );
 
@@ -303,6 +303,7 @@ export default function FormularioUbicacion() {
                 </DataTable>
             </div>
             <Dialog visible={ubicacioneDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle de ubicación" modal className="p-fluid" footer={ubicacionDialogFooter} onHide={hideDialog}>
+                <hr className="violet-line" />
                 <div className="field">
                     <label htmlFor="codigo" className="font-bold">
                         Código
@@ -335,12 +336,13 @@ export default function FormularioUbicacion() {
                     </label>
                     <InputText id="fila" value={ubicacion.fila} onChange={(e) => onInputChange(e, 'fila')} required autoFocus className={classNames({ 'p-invalid': submitted && !ubicacion.fila })} />
                 </div>
-                <div className="field co">
-                    <label htmlFor="habilitado" className="font-bold">
+                <div className="field" style={{ marginTop: "10px", marginBottom: "10px" }}>
+                    <label htmlFor="habilitado" className="font-bold" style={{ marginRight: '5px' }}>
                         Habilitado
                     </label>
                     <Checkbox name="habilitado" onChange={e => onCheckBoxChangeHabilitado(e)} checked={ubicacion.habilitado} />
                 </div>
+                <hr className="violet-line" />
             </Dialog>
 
             <Dialog visible={deleteUbicacionDialog} style={{ width: '32rem' }}
