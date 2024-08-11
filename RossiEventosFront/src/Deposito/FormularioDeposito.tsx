@@ -267,20 +267,20 @@ export default function FormularioDeposito() {
     );
     const depositoDialogFooter = (
         <React.Fragment>
-            <Button label="Cancelar" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Guardar" icon="pi pi-check" onClick={saveDeposito} />
+            <Button className="button-secundario-cancelar" label="Cancelar" outlined onClick={hideDialog} />
+            <Button className="button-secundario-guardar" label="Guardar" onClick={saveDeposito} />
         </React.Fragment>
     );
     const deleteDepositoDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteDeposito} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteProductDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteDeposito} />
         </React.Fragment>
     );
     const deleteDepositosDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductsDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedDepositos} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteProductsDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteSelectedDepositos} />
         </React.Fragment>
     );
 
@@ -310,6 +310,7 @@ export default function FormularioDeposito() {
                     </DataTable>
                 </div>
                 <Dialog visible={depositoDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle del deposito" modal className="p-fluid" footer={depositoDialogFooter} onHide={hideDialog}>
+                    <hr className="violet-line" />
                     <div className="field">
                         <label htmlFor="codigo" className="font-bold">
                             Código
@@ -341,12 +342,13 @@ export default function FormularioDeposito() {
                         </label>
                         <InputText id="provincia" value={deposito.provincia} onChange={(e) => onInputChange(e, 'provincia')} required autoFocus className={classNames({ 'p-invalid': submitted && !deposito.provincia })} />
                     </div>
-                    <div className="field co">
-                        <label htmlFor="habilitado" className="font-bold">
+                    <div className="field" style={{ marginTop: "10px", marginBottom: "10px" }}>
+                        <label htmlFor="habilitado" className="font-bold" style={{ marginRight: '5px' }}>
                             Habilitado
                         </label>
                         <Checkbox name="habilitado" onChange={e => onCheckBoxChangeHabilitado(e)} checked={deposito.habilitado} />
                     </div>
+                    <hr className="violet-line" />
                 </Dialog>
 
                 <Dialog visible={deleteDepositoDialog} style={{ width: '32rem' }}
