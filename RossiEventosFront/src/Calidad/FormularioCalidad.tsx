@@ -250,20 +250,20 @@ export default function FormularioCalidad() {
     );
     const calidadDialogFooter = (
         <React.Fragment>
-            <Button label="Cancelar" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Guardar" icon="pi pi-check" onClick={saveCalidad} />
+            <Button className="button-secundario-cancelar" label="Cancelar" outlined onClick={hideDialog} />
+            <Button className="button-secundario-guardar" label="Guardar" onClick={saveCalidad} />
         </React.Fragment>
     );
     const deleteCalidadDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteCalidadDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteCalidad} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteCalidadDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteCalidad} />
         </React.Fragment>
     );
     const deleteCalidadsDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteCalidadsDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedCalidads} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteCalidadsDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteSelectedCalidads} />
         </React.Fragment>
     );
 
@@ -292,6 +292,7 @@ export default function FormularioCalidad() {
             </div>
 
             <Dialog visible={productDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle de tipo de calidad" modal className="p-fluid" footer={calidadDialogFooter} onHide={hideDialog}>
+                <hr className="violet-line" />
                 <div className="field">
                     <label htmlFor="codigo" className="font-bold">
                         Código
@@ -311,6 +312,7 @@ export default function FormularioCalidad() {
                     </label>
                     <InputTextarea id="descripcion" value={calidad.descripcion} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onInputTextAreaChange(e, 'descripcion')} required rows={3} cols={20} />
                 </div>
+                <hr className="violet-line" />
             </Dialog>
 
             <Dialog visible={deleteCalidadDialog} style={{ width: '32rem' }}
