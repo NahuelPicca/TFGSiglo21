@@ -246,20 +246,20 @@ export default function FormularioCategoria() {
     );
     const categoriaDialogFooter = (
         <React.Fragment>
-            <Button label="Cancelar" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Guardar" icon="pi pi-check" onClick={saveCategoria} />
+            <Button className="button-secundario-cancelar" label="Cancelar" outlined onClick={hideDialog} />
+            <Button className="button-secundario-guardar" label="Guardar" onClick={saveCategoria} />
         </React.Fragment>
     );
     const deleteCategoriaDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteCategoriaDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteCategoria} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteCategoriaDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteCategoria} />
         </React.Fragment>
     );
     const deleteCategoriasDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteCategoriasDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedCategorias} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteCategoriasDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteSelectedCategorias} />
         </React.Fragment>
     );
 
@@ -288,6 +288,7 @@ export default function FormularioCategoria() {
             </div>
 
             <Dialog visible={categoriaDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle de categoría" modal className="p-fluid" footer={categoriaDialogFooter} onHide={hideDialog}>
+                <hr className="violet-line" />
                 <div className="field">
                     <label htmlFor="nombre" className="font-bold">
                         Nombre
@@ -300,6 +301,7 @@ export default function FormularioCategoria() {
                     </label>
                     <InputTextarea id="descripcion" value={categoria.descripcion} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onInputTextAreaChange(e, 'descripcion')} required rows={3} cols={20} />
                 </div>
+                <hr className="violet-line" />
             </Dialog>
 
             <Dialog visible={deleteCategoriaDialog} style={{ width: '32rem' }}
