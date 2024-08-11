@@ -236,3 +236,45 @@ footer {
 .custom-icon {
   font-size: 23px; /* Ajusta el tamaño según tus necesidades */
 }
+
+/*
+Botón cancelar y guardar en las pantallas secundarias
+*/
+.button-secundario-guardar {
+  color: #ffffff;
+  background: #79de9b;
+  border: 1px solid #79de9b;
+  /*padding: 0.75rem 1.25rem;*/
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+  border-radius: 6px;
+  margin-right: 19px;
+}
+
+.button-secundario-cancelar {
+  color: #ffffff;
+  background: #f25d81;
+  border: 1px solid #f25d81;
+  /*padding: 0.75rem 1.25rem;*/
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+  border-radius: 6px;
+  margin-right: 5px;
+}
+
+/*Línea violeta en formularios secundarios */
+.violet-line {
+  border: 30px;
+  height: 5px;
+  color: #8c30f5;
+  background-color: #8c30f5;
+  opacity: 1;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.p-dialog .p-dialog-header {
+  padding: 10px !important;
+}
