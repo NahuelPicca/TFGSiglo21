@@ -32,6 +32,7 @@ export default function FormularioVehiculo() {
         nroPoliza: '',
         titularId: 0,
         habilitado: false,
+        patenteModelo: ''
     };
 
     const [errores, setErrores] = useState<string[]>([]);
@@ -310,20 +311,20 @@ export default function FormularioVehiculo() {
     );
     const vehiculoDialogFooter = (
         <React.Fragment>
-            <Button label="Cancelar" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Guardar" icon="pi pi-check" onClick={saveVehiculo} />
+            <Button className="button-secundario-cancelar" label="Cancelar" outlined onClick={hideDialog} />
+            <Button className="button-secundario-guardar" label="Guardar" onClick={saveVehiculo} />
         </React.Fragment>
     );
     const vehiculoProductDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteVehiculoDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteVehiculo} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteVehiculoDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteVehiculo} />
         </React.Fragment>
     );
     const deleteVehiculosDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteVehiculosDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedVehiculos} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteVehiculosDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteSelectedVehiculos} />
         </React.Fragment>
     );
 
@@ -353,6 +354,7 @@ export default function FormularioVehiculo() {
             </div>
 
             <Dialog visible={vehiculoDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle del vehiculo" modal className="p-fluid" footer={vehiculoDialogFooter} onHide={hideDialog}>
+                <hr className="violet-line" />
                 <div className="field">
                     <label htmlFor="patente" className="font-bold">
                         Patente
@@ -397,12 +399,13 @@ export default function FormularioVehiculo() {
                         value={vehiculo.titularId}
                     />
                 </div>
-                <div className="field co">
-                    <label htmlFor="habilitado" className="font-bold">
+                <div className="field" style={{ marginTop: "10px", marginBottom: "10px" }}>
+                    <label htmlFor="habilitado" className="font-bold" style={{ marginRight: '5px' }}>
                         Habilitado
                     </label>
                     <Checkbox name="habilitado" onChange={e => onCheckBoxChangeHabilitado(e)} checked={vehiculo.habilitado} />
                 </div>
+                <hr className="violet-line" />
             </Dialog>
 
             <Dialog visible={deleteVehiculoDialog} style={{ width: '32rem' }}
