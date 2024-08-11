@@ -346,20 +346,20 @@ export default function FormularioProducto() {
     );
     const productDialogFooter = (
         <React.Fragment>
-            <Button label="Cancelar" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Guardar" icon="pi pi-check" onClick={saveProduct} />
+            <Button className="button-secundario-cancelar" label="Cancelar" outlined onClick={hideDialog} />
+            <Button className="button-secundario-guardar" label="Guardar" onClick={saveProduct} />
         </React.Fragment>
     );
     const deleteProductDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteProduct} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteProductDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteProduct} />
         </React.Fragment>
     );
     const deleteProductsDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteProductsDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedProducts} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteProductsDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteSelectedProducts} />
         </React.Fragment>
     );
 
@@ -390,6 +390,7 @@ export default function FormularioProducto() {
             </div>
 
             <Dialog visible={productDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle del producto" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+                <hr className="violet-line" />
                 <div className="field">
                     <label htmlFor="codigo" className="font-bold">
                         Código
@@ -441,12 +442,13 @@ export default function FormularioProducto() {
                     </label>
                     <InputNumber id="precio" value={product.precio} onValueChange={(e) => onInputNumberChange(e, 'precio')} mode="currency" currency="USD" locale="en-US" />
                 </div>
-                <div className="field">
-                    <label htmlFor="habilitado" className="font-bold">
+                <div className="field" style={{ marginTop: "10px", marginBottom: "10px" }}>
+                    <label htmlFor="habilitado" className="font-bold" style={{ marginRight: '5px' }}>
                         Habilitado
                     </label>
                     <Checkbox name="habilitado" onChange={e => onCheckBoxChangeHabilitado(e)} checked={product.habilitado} />
                 </div>
+                <hr className="violet-line" />
             </Dialog>
 
             <Dialog visible={deleteProductDialog} style={{ width: '32rem' }}
