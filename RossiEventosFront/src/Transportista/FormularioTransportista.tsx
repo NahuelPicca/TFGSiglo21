@@ -314,7 +314,7 @@ export default function FormularioTransportista() {
                             setSelectedTransportistas(e.value);
                         }
                     }}
-                    dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+                    dataKey="id" paginator rows={5} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} transportistas" globalFilter={globalFilter} header={header}
                     selectionMode="multiple"

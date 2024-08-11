@@ -339,7 +339,7 @@ export default function FormularioVehiculo() {
                             setSelectedVehiculos(e.value);
                         }
                     }}
-                    dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+                    dataKey="id" paginator rows={5} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} vehiculos" globalFilter={globalFilter} header={header}
                     selectionMode="multiple"
@@ -388,7 +388,7 @@ export default function FormularioVehiculo() {
                     <InputText id="nroPoliza" value={vehiculo.nroPoliza} onChange={(e) => onInputChange(e, 'nroPoliza')} required autoFocus className={classNames({ 'p-invalid': submitted && !vehiculo.nroPoliza })} />
                     {submitted && !vehiculo.nroPoliza && <small className="p-error">El número de póliza es requerida.</small>}
                 </div>
-                <div className="field col">
+                <div className="field">
                     <label htmlFor="titularId" className="font-bold">
                         Titular
                     </label>

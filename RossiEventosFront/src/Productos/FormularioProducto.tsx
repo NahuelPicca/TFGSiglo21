@@ -375,15 +375,16 @@ export default function FormularioProducto() {
                             setSelectedProducts(e.value);
                         }
                     }}
-                    dataKey="id" paginator rows={10} rowsPerPageOptions={[5, 10, 25]}
+                    dataKey="id" paginator rows={5} rowsPerPageOptions={[5, 10, 25]}
                     paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
                     currentPageReportTemplate="Mostrando {first} de {last} de un total de {totalRecords} productos" globalFilter={globalFilter} header={header}
                     selectionMode="multiple"
                 >
                     <Column selectionMode="multiple" exportable={false}></Column>
-                    <Column field="codigo" header="Código" sortable style={{ minWidth: '12rem' }}></Column>
-                    <Column field="marca" header="Marca" sortable style={{ minWidth: '16rem' }}></Column>
-                    <Column field="precio" header="Precio" body={priceBodyTemplate} sortable style={{ minWidth: '8rem' }}></Column>
+                    <Column field="codigo" header="Código" sortable style={{ minWidth: '6rem' }}></Column>
+                    <Column field="descripcion" header="Descripción" sortable style={{ minWidth: '16rem' }}></Column>
+                    <Column field="marca" header="Marca" sortable style={{ minWidth: '10rem' }}></Column>
+                    <Column field="precio" header="Precio" body={priceBodyTemplate} sortable style={{ minWidth: '6rem' }}></Column>
                     <Column body={actionBodyTemplate} exportable={false} style={{ minWidth: '12rem' }}></Column>
                 </DataTable>
             </div>
@@ -401,6 +402,24 @@ export default function FormularioProducto() {
                         Descripcion
                     </label>
                     <InputTextarea id="descripcion" value={product.descripcion} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onInputTextAreaChange(e, 'descripcion')} required rows={3} cols={20} />
+                </div>
+                <div className="field">
+                    <label htmlFor="calidad" className="font-bold">
+                        Calidad del producto
+                    </label>
+                    <Dropdown id="calidadId" onChange={(e: any) => onInputChange(e, 'calidadId')}
+                        options={calidades} optionLabel="nombre" optionValue='id' placeholder="Seleccione la calidad del producto"
+                        value={product.calidadId}
+                    />
+                </div>
+                <div className="field">
+                    <label htmlFor="tipoProductos" className="font-bold">
+                        Tipos de Productos
+                    </label>
+                    <Dropdown id="tipoProductoId" onChange={(e: any) => onInputChange(e, 'tipoProductoId')}
+                        options={tiposProductos} optionLabel="nombre" optionValue='id' placeholder="Seleccione el tipo de producto"
+                        value={product.tipoProductoId}
+                    />
                 </div>
                 <div className="field">
                     <label htmlFor="marca" className="font-bold">
@@ -421,24 +440,6 @@ export default function FormularioProducto() {
                         Precio
                     </label>
                     <InputNumber id="precio" value={product.precio} onValueChange={(e) => onInputNumberChange(e, 'precio')} mode="currency" currency="USD" locale="en-US" />
-                </div>
-                <div className="field">
-                    <label htmlFor="calidad" className="font-bold">
-                        Calidad del producto
-                    </label>
-                    <Dropdown id="calidadId" onChange={(e: any) => onInputChange(e, 'calidadId')}
-                        options={calidades} optionLabel="nombre" optionValue='id' placeholder="Seleccione la calidad del producto"
-                        value={product.calidadId}
-                    />
-                </div>
-                <div className="field">
-                    <label htmlFor="tipoProductos" className="font-bold">
-                        Tipos de Productos
-                    </label>
-                    <Dropdown id="tipoProductoId" onChange={(e: any) => onInputChange(e, 'tipoProductoId')}
-                        options={tiposProductos} optionLabel="nombre" optionValue='id' placeholder="Seleccione el tipo de producto"
-                        value={product.tipoProductoId}
-                    />
                 </div>
                 <div className="field">
                     <label htmlFor="habilitado" className="font-bold">
