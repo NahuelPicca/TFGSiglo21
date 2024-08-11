@@ -257,20 +257,20 @@ export default function FormularioTipoProducto() {
     );
     const tipoProdDialogFooter = (
         <React.Fragment>
-            <Button label="Cancelar" icon="pi pi-times" outlined onClick={hideDialog} />
-            <Button label="Guardar" icon="pi pi-check" onClick={saveTipoProducto} />
+            <Button className="button-secundario-cancelar" label="Cancelar" outlined onClick={hideDialog} />
+            <Button className="button-secundario-guardar" label="Guardar" onClick={saveTipoProducto} />
         </React.Fragment>
     );
     const deleteTipoProdDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteTipoProdDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteTipoProducto} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteTipoProdDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteTipoProducto} />
         </React.Fragment>
     );
     const deleteTiposProductosDialogFooter = (
         <React.Fragment>
-            <Button label="No" icon="pi pi-times" outlined onClick={hideDeleteTipoProductoDialog} />
-            <Button label="Yes" icon="pi pi-check" severity="danger" onClick={deleteSelectedTiposProductos} />
+            <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteTipoProductoDialog} />
+            <Button className="button-secundario-guardar" label="Yes" severity="danger" onClick={deleteSelectedTiposProductos} />
         </React.Fragment>
     );
 
@@ -299,6 +299,7 @@ export default function FormularioTipoProducto() {
             </div>
 
             <Dialog visible={tipoProductoDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle de tipo de producto" modal className="p-fluid" footer={tipoProdDialogFooter} onHide={hideDialog}>
+                <hr className="violet-line" />
                 <div className="field">
                     <label htmlFor="nombre" className="font-bold">
                         Nombre
@@ -320,6 +321,7 @@ export default function FormularioTipoProducto() {
                         value={tipoProducto.categoriaId}
                     />
                 </div>
+                <hr className="violet-line" />
             </Dialog>
 
             <Dialog visible={deleteTipoProductoDialog} style={{ width: '32rem' }}
