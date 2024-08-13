@@ -39,6 +39,7 @@ export default function FormularioAsigVehiculoTransportista() {
     const [globalFilter, setGlobalFilter] = useState<string>('');
     const [vehiculos, setVehiculos] = useState<vehiculoDTO[]>([]);
     const [transportistas, setTransportistas] = useState<transportistaDTO[]>([]);
+
     const toast = useRef<Toast>(null);
     const dt = useRef<DataTable<asigVehiculoTransportistaDTO[]>>(null);
 
@@ -200,8 +201,8 @@ export default function FormularioAsigVehiculoTransportista() {
         return id;
     };
 
-    const exportCSV = () => {
-        dt.current?.exportCSV();
+    const IdentificaQr = () => {
+        //setIdentificaQrDialog(true);
     };
 
     const confirmDeleteSelected = () => {
@@ -240,14 +241,14 @@ export default function FormularioAsigVehiculoTransportista() {
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button label="Nuevo" icon="pi pi-plus" severity="success" onClick={openNew} />
-                <Button label="Borrar" icon="pi pi-trash" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedAsignaciones || !selectedAsignaciones.length} />
+                <Button className="button-secundario-guardar" label="Nuevo" severity="success" onClick={openNew} />
+                <Button className="button-secundario-cancelar" label="Borrar" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedAsignaciones || !selectedAsignaciones.length} />
             </div>
         );
     };
 
     const rightToolbarTemplate = () => {
-        return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
+        return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={IdentificaQr} />;
     };
 
     const actionBodyTemplate = (rowData: asigVehiculoTransportistaDTO) => {
