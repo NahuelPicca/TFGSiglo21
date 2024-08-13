@@ -216,8 +216,8 @@ export default function FormularioCategoria() {
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button label="Nuevo" icon="pi pi-plus" severity="success" onClick={openNew} />
-                <Button label="Borrar" icon="pi pi-trash" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedCategorias || !selectedCategorias.length} />
+                <Button className="button-secundario-guardar" label="Nuevo" severity="success" onClick={openNew} />
+                <Button className="button-secundario-cancelar" label="Borrar" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedCategorias || !selectedCategorias.length} />
             </div>
         );
     };
