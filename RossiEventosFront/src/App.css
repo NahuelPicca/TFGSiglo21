@@ -278,3 +278,15 @@ Botón cancelar y guardar en las pantallas secundarias
 .p-dialog .p-dialog-header {
   padding: 10px !important;
 }
+
+.mb-4 .button-adicionales {
+  color: #ffffff !important;
+  background: #54b00b !important;
+  border: 1px solid #54b00b !important;
+  /*padding: 0.75rem 1.25rem;*/
+  font-size: 1rem !important;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s !important;
+  border-radius: 6px !important;
+  margin-right: 19px !important;
+}
