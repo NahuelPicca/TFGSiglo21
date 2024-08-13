@@ -18,6 +18,8 @@ import { Checkbox, CheckboxChangeEvent } from 'primereact/checkbox';
 import { FormEvent } from 'primereact/ts-helpers';
 import { creacionTransportistaDTO, deleteTransportistaDTO, transportistaDTO } from './transportista.modulo';
 import { convierteFormatoFecha } from '../utils/Comunes';
+import QRCode from 'react-qr-code';
+import PrintQRCode from '../utils/PrintQRCode';
 
 export default function FormularioTransportista() {
     let emptyProduct: transportistaDTO = {
@@ -51,6 +53,9 @@ export default function FormularioTransportista() {
     const dt = useRef<DataTable<transportistaDTO[]>>(null);
     const [fechaNacimiento, setFechaNacimiento] = useState<Date>(new Date("10/10/2000"));
     const [fechaVencLicencia, setFechaVencLicencia] = useState<Date>(new Date("10/10/2025"));
+    const [identificaQrDialog, setIdentificaQrDialog] = useState<boolean>(false);
+    const [textoQr, setTextoQr] = useState<string>('');
+
 
     useEffect(() => {
         try {
@@ -110,7 +115,7 @@ export default function FormularioTransportista() {
         }
     }
 
-    async function getTransportista(id: number) {
+    async function getTransportista(id?: number) {
         axios.get(`${urlTransportista}/${id}`)
             .then((respuesta: AxiosResponse<transportistaDTO>) => {
                 setTransportista(respuesta.data);
@@ -126,6 +131,11 @@ export default function FormularioTransportista() {
     const hideDialog = () => {
         setSubmitted(false);
         setTransportistaDialog(false);
+    };
+
+    const hideIdentificacionQrDialog = () => {
+        //setSubmitted(false);
+        setIdentificaQrDialog(false);
     };
 
     const hideDeleteProductDialog = () => {
@@ -205,8 +215,29 @@ export default function FormularioTransportista() {
         return id;
     };
 
-    const exportCSV = () => {
-        dt.current?.exportCSV();
+    // const getSelectedTransportistaId = (): number | undefined => {
+    //     const selected = selectedTransportistas.find(transportista => transportista.id !== undefined &&
+    //         transportista.id !== null);
+    //     return selected?.id;
+    // };
+
+    const IdentificaQr = () => {
+        //const transportistaLocal = { ...transportista };
+        //const id = getSelectedTransportistaId()
+        //getTransportista(id)
+        setTextoQr(textoQrLoc(transportista))
+        setIdentificaQrDialog(true);
+    };
+
+    const textoQrLoc = (transportista: transportistaDTO) => {
+        var texto = ''
+        texto = `
+Hola, llegó tu pedido!!
+Acompañado del conductor ${transportista.nombre}
+(${transportista.nroDni.toString()}).
+
+Que disfrutes tu evento!`
+        return texto;
     };
 
     const confirmDeleteSelected = () => {
@@ -252,18 +283,51 @@ export default function FormularioTransportista() {
         setTransportista(_transportista);
     };
 
+    const handlePrint = () => {
+        const printWindow = window.open('', '', 'height=600,width=800');
+        if (printWindow) {
+            printWindow.document.open();
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>Imprimir QR desde Rossi Eventos App</title>
+                        <style>
+                            body {text - align: center; font-family: Arial, sans-serif; }
+                            #qr-code {margin: 20px; }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>QR de ${transportista.apellido}, ${transportista.nombre}</h1>
+                        <div id="qr-code">
+                            ${document.getElementById('qr-code-to-print')?.innerHTML || ''}
+                        </div>
+                        <script>
+                            window.onload = function() {
+                                window.print();
+                            }
+                        </script>
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+        }
+    };
 
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button label="Nuevo" icon="pi pi-plus" severity="success" onClick={openNew} />
-                <Button label="Borrar" icon="pi pi-trash" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedTransportistas || !selectedTransportistas.length} />
+                <Button className="button-secundario-guardar" label="Nuevo" severity="success" onClick={openNew} />
+                <Button className="button-secundario-cancelar" label="Borrar" severity="danger"
+                    onClick={confirmDeleteSelected}
+                    disabled={!selectedTransportistas || !selectedTransportistas.length} />
             </div>
         );
     };
 
     const rightToolbarTemplate = () => {
-        return <Button label="Export" icon="pi pi-upload" className="p-button-help" onClick={exportCSV} />;
+        return <Button className="button-adicionales" label="Identidad Qr"
+            disabled={!selectedTransportistas || !selectedTransportistas.length}
+            onClick={IdentificaQr} />;
     };
 
     const actionBodyTemplate = (rowData: transportistaDTO) => {
@@ -284,12 +348,20 @@ export default function FormularioTransportista() {
             </IconField>
         </div>
     );
-    const productDialogFooter = (
+    const transportistaDialogFooter = (
         <React.Fragment>
             <Button className="button-secundario-cancelar" label="Cancelar" outlined onClick={hideDialog} />
             <Button className="button-secundario-guardar" label="Guardar" onClick={saveTransportista} />
         </React.Fragment>
     );
+
+    const identificacionQrDialogFooter = (
+        <React.Fragment>
+            <Button className="button-secundario-cancelar" label="Cancelar" outlined onClick={hideIdentificacionQrDialog} />
+            <Button className="button-secundario-guardar" label="Imprimir" onClick={handlePrint} />
+        </React.Fragment>
+    );
+
     const deleteProductDialogFooter = (
         <React.Fragment>
             <Button className="button-secundario-cancelar" label="No" outlined onClick={hideDeleteProductDialog} />
@@ -308,11 +380,12 @@ export default function FormularioTransportista() {
             <MostrarErrores errores={errores} />
             <Toast ref={toast} />
             <div className="card">
-                <Toolbar className="mb-4" left={leftToolbarTemplate}></Toolbar>
+                <Toolbar className="mb-4" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
                 <DataTable ref={dt} value={transportistas} selection={selectedTransportistas}
                     onSelectionChange={(e) => {
                         if (Array.isArray(e.value)) {
                             setSelectedTransportistas(e.value);
+                            getTransportista(e.value[0].id);
                         }
                     }}
                     dataKey="id" paginator rows={5} rowsPerPageOptions={[5, 10, 25]}
@@ -328,7 +401,7 @@ export default function FormularioTransportista() {
                 </DataTable>
             </div>
 
-            <Dialog visible={transportistaDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle del transportista" modal className="p-fluid" footer={productDialogFooter} onHide={hideDialog}>
+            <Dialog visible={transportistaDialog} style={{ width: '32rem' }} breakpoints={{ '960px': '75vw', '641px': '90vw' }} header="Detalle del transportista" modal className="p-fluid" footer={transportistaDialogFooter} onHide={hideDialog}>
                 <hr className="violet-line" />
                 <div className="field">
                     <label htmlFor="nombre" className="font-bold">
@@ -430,6 +503,21 @@ export default function FormularioTransportista() {
                     <i className="pi pi-exclamation-triangle mr-3" style={{ fontSize: '2rem' }} />
                     {transportista && <span>¿Quieres borrar los transportista seleccionados?</span>}
                 </div>
+            </Dialog>
+
+            <Dialog visible={identificaQrDialog} style={{ width: '19em' }}
+                breakpoints={{ '960px': '75vw', '641px': '90vw' }}
+                header="QR del transportista" modal className="p-fluid"
+                footer={identificacionQrDialogFooter} onHide={hideIdentificacionQrDialog}>
+                <hr className="violet-line" />
+                {textoQr ?
+                    <>
+                        <QRCode value={textoQr} />
+                        <PrintQRCode value={textoQr} />
+                    </>
+                    : <p>No hay datos para mostrar el QR</p>}
+
+                <hr className="violet-line" />
             </Dialog>
         </div >
     );
