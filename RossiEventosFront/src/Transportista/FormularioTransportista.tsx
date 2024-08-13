@@ -215,16 +215,8 @@ export default function FormularioTransportista() {
         return id;
     };
 
-    // const getSelectedTransportistaId = (): number | undefined => {
-    //     const selected = selectedTransportistas.find(transportista => transportista.id !== undefined &&
-    //         transportista.id !== null);
-    //     return selected?.id;
-    // };
 
     const IdentificaQr = () => {
-        //const transportistaLocal = { ...transportista };
-        //const id = getSelectedTransportistaId()
-        //getTransportista(id)
         setTextoQr(textoQrLoc(transportista))
         setIdentificaQrDialog(true);
     };
