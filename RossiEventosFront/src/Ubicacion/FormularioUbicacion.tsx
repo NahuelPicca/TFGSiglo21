@@ -231,8 +231,8 @@ export default function FormularioUbicacion() {
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">
-                <Button label="Nuevo" icon="pi pi-plus" severity="success" onClick={openNew} />
-                <Button label="Borrar" icon="pi pi-trash" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedUbicaciones || !selectedUbicaciones.length} />
+                <Button className="button-secundario-guardar" label="Nuevo" severity="success" onClick={openNew} />
+                <Button className="button-secundario-cancelar" label="Borrar" severity="danger" onClick={confirmDeleteSelected} disabled={!selectedUbicaciones || !selectedUbicaciones.length} />
             </div>
         );
     };
