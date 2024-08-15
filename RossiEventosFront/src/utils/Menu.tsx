@@ -99,6 +99,7 @@ export default function Menu() {
                         <li><a className="dropdown-item" href="/transportista">Transportista</a></li>
                         <li><a className="dropdown-item" href="/asignacionVehicTransp">Asig. vehículo</a></li>
                         <li><a className="dropdown-item" href="">Usuarios</a></li>
+                        <li><a className="dropdown-item" href="">Comprobantes</a></li>
                       </ul>
                     </li>
                   </>
@@ -123,8 +124,8 @@ export default function Menu() {
                     </button>
                     <p className="dropdown-subtitle">(Administrador)</p>
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      {/* <li><a className="dropdown-item" href="/.">Mis datos</a></li>
-                      <li><a className="dropdown-item" href="/.">Pedidos</a></li> */}
+                      <li><a className="dropdown-item" href="/.">Mis datos</a></li>
+                      <li><a className="dropdown-item" href="/.">Pedidos</a></li>
                       <li><a className="dropdown-item" href="/." onClick={logout}>Cerrar sesión</a></li>
                     </ul>
                   </div>
