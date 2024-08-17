@@ -63,16 +63,21 @@ function App() {
 
                         </Route> */}
           </Routes >
+          <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div >
         <footer className="bg-black text-light py-4">
           <div className="container">
             <div className="row">
-              <div className="col-md-4 text-center">
+              <div className="col-md-5 text-center">
                 <p>2024 Rossi Eventos. Todos los derechos reservados.</p>
               </div>
 
 
-              <div className="col-md-4 d-flex gap-1 text-center">
+              <div className="col-md-3 d-flex gap-1 text-center">
                 <img src="/img/rossilogoblack.png" width="25" height="25" />
                 <p>Rossi eventos</p>
               </div>
