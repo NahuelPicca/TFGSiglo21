@@ -63,11 +63,6 @@ function App() {
 
                         </Route> */}
           </Routes >
-          <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
         </div >
         <footer className="bg-black text-light py-4">
           <div className="container">

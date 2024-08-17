@@ -84,10 +84,8 @@ footer {
   background-repeat: no-repeat; /* Evita la repetición de la imagen */
 }
 
-
 /* Estilos para tabletas y pantallas más grandes */
 @media (min-width: 768px) {
-
   /*Imagen de la derecha de portada*/
   .background-image.right {
     right: -300px;
@@ -99,7 +97,7 @@ footer {
     background-size: contain;
   }
 
-  .circuloImagen{
+  .circuloImagen {
     background-image: url("/img/circulo.png"); /* Ruta de la imagen de fondo */
     background-size: cover;
     background-position: revert;
@@ -112,7 +110,6 @@ footer {
 }
 
 @media (min-width: 1024px) {
-
   .background-image.right {
     right: -200px;
     top: 330px;
@@ -134,7 +131,7 @@ footer {
     background-size: contain;
   }
 
-  .circuloImagen{
+  .circuloImagen {
     background-image: url("/img/circulo.png"); /* Ruta de la imagen de fondo */
     background-size: cover;
     background-position: revert;
@@ -146,6 +143,39 @@ footer {
   }
 }
 
+@media (min-width: 1920px) {
+  .background-image.right {
+    right: -320px;
+    top: 350px;
+    background-image: url("/img/evento-sociales.jpeg"); /* URL de la segunda imagen */
+    transform: rotate(354deg);
+    height: 600px;
+    width: 600px;
+    background-size: contain;
+  }
+
+  /*Imagen de la izquierda de portada*/
+  .background-image.left {
+    top: 350px;
+    right: 480px;
+    background-image: url("/img/copadevino.jpg");
+    transform: rotate(354deg);
+    height: 400px;
+    width: 400px;
+    background-size: contain;
+  }
+
+  .circuloImagen {
+    background-image: url("/img/circulo.png"); /* Ruta de la imagen de fondo */
+    background-size: cover;
+    background-position: revert;
+    background-repeat: no-repeat;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 300px;
+  }
+}
 
 .footer-with-circle {
   position: relative;
