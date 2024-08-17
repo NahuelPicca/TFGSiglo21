@@ -2,7 +2,7 @@ export function LandingPage() {
   return (
 
     <div className="background-images">
-      <div className="nahuel"></div>
+      <div className="circuloImagen"></div>
       <div className="container2 text-center contendorpadre">
         <div className="row">
           <div className="col">
