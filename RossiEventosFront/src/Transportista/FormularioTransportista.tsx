@@ -511,6 +511,11 @@ Que disfrutes tu evento!`
 
                 <hr className="violet-line" />
             </Dialog>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div >
     );
 }

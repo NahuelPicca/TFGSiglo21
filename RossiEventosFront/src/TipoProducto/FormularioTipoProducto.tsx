@@ -347,6 +347,11 @@ export default function FormularioTipoProducto() {
                     {tipoProducto && <span>¿Quieres borrar los tipos seleccionados?</span>}
                 </div>
             </Dialog>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div >
     );
 }

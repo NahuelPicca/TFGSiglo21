@@ -374,6 +374,11 @@ export default function FormularioDeposito() {
                         {deposito && <span>¿Quieres borrar los depositos seleccionados?</span>}
                     </div>
                 </Dialog>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
             </div >
         </>
     );

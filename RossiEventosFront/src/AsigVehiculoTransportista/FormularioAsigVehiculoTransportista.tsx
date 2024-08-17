@@ -359,6 +359,11 @@ export default function FormularioAsigVehiculoTransportista() {
                     {asignacion && <span>¿Quieres borrar las asignaciones seleccionados?</span>}
                 </div>
             </Dialog>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div >
     );
 }

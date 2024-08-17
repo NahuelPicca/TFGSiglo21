@@ -338,6 +338,11 @@ export default function FormularioCalidad() {
                     {calidad && <span>¿Quieres borrar los tipos de calidades seleccionados?</span>}
                 </div>
             </Dialog>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div >
     );
 }

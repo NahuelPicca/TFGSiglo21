@@ -327,6 +327,11 @@ export default function FormularioCategoria() {
                     {categoria && <span>¿Quieres borrar las categorias seleccionadas?</span>}
                 </div>
             </Dialog>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div >
     );
 }

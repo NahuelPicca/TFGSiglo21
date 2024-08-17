@@ -368,6 +368,11 @@ export default function FormularioUbicacion() {
                     {ubicacion && <span>¿Quieres borrar las ubicaciones seleccionadas?</span>}
                 </div>
             </Dialog>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div >
     );
 }

@@ -431,6 +431,11 @@ export default function FormularioVehiculo() {
                     {vehiculo && <span>¿Quieres borrar los vehiculos seleccionados?</span>}
                 </div>
             </Dialog>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
         </div >
     );
 }

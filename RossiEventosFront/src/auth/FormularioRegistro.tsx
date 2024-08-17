@@ -86,6 +86,11 @@ export default function FormularioRegistro(props: formularioRegistroProps) {
                                     type="submit" className="boton-violeta-IniSReg">
                                     Continuar
                                 </Button>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
+                                <br></br>
                             </Form>
                         </div>
                     </>
