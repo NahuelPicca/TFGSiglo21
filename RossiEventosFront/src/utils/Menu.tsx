@@ -2,7 +2,7 @@ import { Link, NavLink, Navigate, useLocation, useNavigate } from "react-router-
 //import Autorizado from "../auth/Autorizado";
 import { useEffect, useState } from "react";
 import Autorizado from "../auth/Autorizado";
-import { logout } from "../auth/manejadorLogin";
+//import { logout } from "../auth/manejadorLogin";
 
 //mport { logout } from "../auth/manejadorJWT";
 //import { useContext } from "react";
@@ -103,7 +103,6 @@ export default function Menu() {
                       </ul>
                     </li>
                   </>
-                  {/* } /> */}
                 </>
               )}
             </ul>
@@ -126,7 +125,7 @@ export default function Menu() {
                     <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                       <li><a className="dropdown-item" href="/.">Mis datos</a></li>
                       <li><a className="dropdown-item" href="/.">Pedidos</a></li>
-                      <li><a className="dropdown-item" href="/." onClick={logout}>Cerrar sesión</a></li>
+                      <li><a className="dropdown-item" href="/.">Cerrar sesión</a></li>
                     </ul>
                   </div>
                 </div>
@@ -137,25 +136,5 @@ export default function Menu() {
       </div>
     </>
   )
-  // return (
-  //     <>
-  //         <ul classNameNameNameNameName="nav justify-content-end">
-  //             <li classNameNameNameNameName="nav-item">
-  //                 <a classNameNameNameNameName="nav-link active" href="#">Active</a>
-  //             </li>
-  //             <li classNameNameNameNameName="nav-item">
-  //                 <a classNameNameNameNameName="nav-link" href="#">Link</a>
-  //             </li>
-  //             <li classNameNameNameNameName="nav-item">
-  //                 <a classNameNameNameNameName="nav-link" href="#">Link</a>
-  //             </li>
-  //             <li classNameNameNameNameName="nav-item">
-  //                 <a classNameNameNameNameName="nav-link disabled" href="#">Disabled</a>
-  //             </li>
-  //         </ul>
-  //     </>
-
-  // )
 }
-//activeclassNameNameNameNameName = {}
 
